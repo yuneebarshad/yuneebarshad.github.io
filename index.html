@@ -110,49 +110,43 @@
       <p class="section-eyebrow">// currently building</p>
       <h2 class="section-title">Two games, both in active development</h2>
 
-      <div class="scene-grid">
+      <div class="project-window">
+        <div class="pw-titlebar">
+          <span class="pw-breadcrumb">Assets <span class="pw-sep">/</span> Projects</span>
+          <span class="pw-count">2 items</span>
+        </div>
+        <div class="pw-toolbar">
+          <span class="pw-search">Search Projects</span>
+          <span class="pw-view">▦ Tiles</span>
+        </div>
 
-        <a href="projects/ashen-tide.html" class="scene-card scene-ashen">
-          <div class="scene-thumb scene-thumb-ashen">
-            <span class="scene-thumb-label">Ashen Tide</span>
-          </div>
-          <div class="scene-head">
-            <span class="scene-status">In Development</span>
-            <h3>Ashen Tide</h3>
-            <p class="scene-tagline">Subnautica-inspired underwater survival, set on a post-apocalyptic Earth.</p>
-          </div>
-          <div class="scene-body">
-            <p>A full GDD covers narrative, core survival loop, and five distinct ocean depth zones — each with its own pressure, light, and threat profile.</p>
-            <ul class="tag-list">
-              <li>Narrative Design</li>
-              <li>Systems Design</li>
-              <li>Unity3D</li>
-            </ul>
-            <span class="scene-cta">View project <span class="arrow">→</span></span>
-          </div>
-        </a>
+        <div class="pw-grid">
 
-        <a href="projects/celebrity-studio.html" class="scene-card scene-celeb">
-          <div class="scene-thumb scene-thumb-celeb">
-            <span class="scene-thumb-label">Celebrity Studio</span>
-          </div>
-          <div class="scene-head">
-            <span class="scene-status">In Development</span>
-            <h3>Celebrity Studio</h3>
-            <p class="scene-tagline">An influencer &amp; content-creator management sim.</p>
-          </div>
-          <div class="scene-body">
-            <p>Players build and run fictional social platforms — <strong>TokTik</strong> and <strong>Instaglam</strong> — through a full isometric room-upgrade progression.</p>
-            <ul class="tag-list">
-              <li>Progression Systems</li>
-              <li>UI/UX</li>
-              <li>Unity3D</li>
-            </ul>
-            <span class="scene-cta">View project <span class="arrow">→</span></span>
-          </div>
-        </a>
+          <a href="projects/ashen-tide.html" class="pw-tile">
+            <div class="pw-thumb pw-thumb-ashen">
+              <span class="pw-dirty">●</span>
+            </div>
+            <div class="pw-name">AshenTide<span class="pw-ext">.scene</span></div>
+            <div class="pw-tag">In Development</div>
+          </a>
 
+          <a href="projects/celebrity-studio.html" class="pw-tile">
+            <div class="pw-thumb pw-thumb-celeb">
+              <span class="pw-dirty">●</span>
+            </div>
+            <div class="pw-name">CelebrityStudio<span class="pw-ext">.scene</span></div>
+            <div class="pw-tag">In Development</div>
+          </a>
 
+          <div class="pw-tile pw-tile-add">
+            <div class="pw-thumb pw-thumb-add">
+              <span>+</span>
+            </div>
+            <div class="pw-name pw-name-muted">NextProject</div>
+            <div class="pw-tag">Coming soon</div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -246,34 +240,74 @@
       <p class="section-eyebrow">// packages</p>
       <h2 class="section-title">Skills, grouped like dependencies</h2>
 
-      <div class="pkg-grid">
-        <div class="pkg">
-          <div class="pkg-head"><span class="pkg-dot"></span>Programming &amp; Tools</div>
-          <ul>
-            <li>C#</li><li>Unity3D</li><li>Editor Scripting</li>
-            <li>DOTS / ECS</li><li>Addressables</li><li>Git</li>
-          </ul>
+      <div class="package-manager">
+        <div class="pm-header">
+          <span class="pm-tab pm-tab-active">In Project</span>
+          <span class="pm-search">Search packages</span>
         </div>
-        <div class="pkg">
-          <div class="pkg-head"><span class="pkg-dot"></span>Gameplay Systems</div>
-          <ul>
-            <li>Physics Simulation</li><li>Gameplay Architecture</li>
-            <li>Performance Profiling</li><li>Multiplayer Networking</li>
-          </ul>
-        </div>
-        <div class="pkg">
-          <div class="pkg-head"><span class="pkg-dot"></span>UI / UX</div>
-          <ul>
-            <li>UI Framework Implementation</li><li>UX Research</li>
-            <li>Performance Optimization</li>
-          </ul>
-        </div>
-        <div class="pkg">
-          <div class="pkg-head"><span class="pkg-dot"></span>AI &amp; Automation</div>
-          <ul>
-            <li>ML Integration</li><li>Behaviour Tree Systems</li>
-            <li>Test Automation</li><li>Continuous Integration</li>
-          </ul>
+
+        <div class="pm-list">
+
+          <div class="pm-package">
+            <div class="pm-package-head">
+              <span class="pm-icon">◆</span>
+              <div class="pm-titles">
+                <div class="pm-name">Programming &amp; Tools</div>
+                <div class="pm-version">6.0.2</div>
+              </div>
+              <span class="pm-badge">Installed</span>
+            </div>
+            <ul class="pm-deps">
+              <li>C#</li><li>Unity3D</li><li>Editor Scripting</li>
+              <li>DOTS / ECS</li><li>Addressables</li><li>Git</li>
+            </ul>
+          </div>
+
+          <div class="pm-package">
+            <div class="pm-package-head">
+              <span class="pm-icon">◆</span>
+              <div class="pm-titles">
+                <div class="pm-name">Gameplay Systems</div>
+                <div class="pm-version">4.1.0</div>
+              </div>
+              <span class="pm-badge">Installed</span>
+            </div>
+            <ul class="pm-deps">
+              <li>Physics Simulation</li><li>Gameplay Architecture</li>
+              <li>Performance Profiling</li><li>Multiplayer Networking</li>
+            </ul>
+          </div>
+
+          <div class="pm-package">
+            <div class="pm-package-head">
+              <span class="pm-icon">◆</span>
+              <div class="pm-titles">
+                <div class="pm-name">UI / UX</div>
+                <div class="pm-version">3.2.1</div>
+              </div>
+              <span class="pm-badge">Installed</span>
+            </div>
+            <ul class="pm-deps">
+              <li>UI Framework Implementation</li><li>UX Research</li>
+              <li>Performance Optimization</li>
+            </ul>
+          </div>
+
+          <div class="pm-package">
+            <div class="pm-package-head">
+              <span class="pm-icon">◆</span>
+              <div class="pm-titles">
+                <div class="pm-name">AI &amp; Automation</div>
+                <div class="pm-version">2.4.0</div>
+              </div>
+              <span class="pm-badge">Installed</span>
+            </div>
+            <ul class="pm-deps">
+              <li>ML Integration</li><li>Behaviour Tree Systems</li>
+              <li>Test Automation</li><li>Continuous Integration</li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
