@@ -483,6 +483,127 @@ a{ color: inherit; }
   .project-body{ grid-template-columns: 1fr; }
 }
 
+/* ===== Project window (Work section) ===== */
+.project-window{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pw-titlebar{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--panel-alt);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 0.8rem;
+}
+.pw-breadcrumb{ color: var(--text); }
+.pw-sep{ color: var(--text-dim); margin: 0 2px; }
+.pw-count{ color: var(--text-dim); font-size: 0.75rem; }
+.pw-toolbar{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.pw-search{
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);
+  border: 1px solid var(--border-soft); border-radius: 5px;
+  padding: 5px 12px;
+}
+.pw-view{ font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); }
+
+.pw-grid{
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px; padding: 24px;
+}
+.pw-tile{
+  display: block; text-decoration: none; color: inherit;
+  border-radius: 6px; padding: 10px 10px 14px;
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.pw-tile:hover, .pw-tile:focus-visible{
+  background: var(--panel-alt); border-color: var(--border);
+}
+.pw-thumb{
+  aspect-ratio: 1; border-radius: 6px;
+  display: flex; align-items: flex-start; justify-content: flex-end;
+  padding: 8px; margin-bottom: 10px;
+  position: relative;
+}
+.pw-thumb-ashen{ background: linear-gradient(135deg, #0F2E28, #163B33 60%, #1F5C42); }
+.pw-thumb-celeb{ background: linear-gradient(135deg, #2E1526, #4A1F38 60%, #7A2E52); }
+.pw-thumb-add{
+  background: transparent; border: 1px dashed var(--border);
+  align-items: center; justify-content: center;
+}
+.pw-thumb-add span{ font-size: 1.8rem; color: var(--text-dim); }
+.pw-dirty{ color: var(--amber); font-size: 0.6rem; }
+.pw-name{
+  font-family: var(--font-mono); font-weight: 600; font-size: 0.85rem;
+  color: var(--text); text-align: center; word-break: break-word;
+}
+.pw-name-muted{ color: var(--text-dim); }
+.pw-ext{ color: var(--text-dim); font-weight: 400; }
+.pw-tag{
+  text-align: center; font-family: var(--font-mono); font-size: 0.68rem;
+  color: var(--text-dim); margin-top: 4px;
+}
+.pw-tile-add{ cursor: default; }
+
+/* ===== Package Manager (Skills section) ===== */
+.package-manager{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pm-header{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--panel-alt);
+  border-bottom: 1px solid var(--border);
+}
+.pm-tab{
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim);
+  padding: 4px 10px; border-radius: 4px;
+}
+.pm-tab-active{ background: var(--border-soft); color: var(--text); }
+.pm-search{
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);
+  border: 1px solid var(--border-soft); border-radius: 5px;
+  padding: 5px 12px;
+}
+
+.pm-list{ padding: 6px 0; }
+.pm-package{
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.pm-package:last-child{ border-bottom: none; }
+.pm-package-head{
+  display: flex; align-items: center; gap: 12px;
+}
+.pm-icon{ color: var(--teal); font-size: 0.9rem; flex-shrink: 0; }
+.pm-titles{ flex: 1; }
+.pm-name{ font-weight: 600; font-size: 0.95rem; }
+.pm-version{ font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+.pm-badge{
+  font-family: var(--font-mono); font-size: 0.65rem;
+  color: var(--teal); background: var(--teal-dim);
+  padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+}
+.pm-deps{
+  list-style: none; padding: 0; margin: 12px 0 0 32px;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.pm-deps li{
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--panel-alt); border: 1px solid var(--border-soft);
+  padding: 4px 10px; border-radius: 5px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 880px){
   .hero{ grid-template-columns: 1fr; padding-top: 48px; }
@@ -491,6 +612,7 @@ a{ color: inherit; }
 }
 
 @media (max-width: 640px){
+  .pm-deps{ margin-left: 0; }
   .logo{ font-size: 0.95rem; }
   .nav{
     position: absolute; top: 64px; left: 0; right: 0;
