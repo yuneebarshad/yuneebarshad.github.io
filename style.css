@@ -72,7 +72,67 @@ a{ color: inherit; }
   text-decoration: none; color: var(--text);
   letter-spacing: 0.02em;
 }
-.logo-dot{ color: var(--teal); }
+
+/* ===== Game View (hero photo panel) ===== */
+.gameview{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 28px;
+  max-width: 360px;
+}
+.gameview-tabs{
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 12px;
+  background: var(--panel-alt);
+  border-bottom: 1px solid var(--border);
+}
+.gameview-tab{
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: var(--text-dim); padding: 4px 10px; border-radius: 4px;
+}
+.gameview-tab-active{ background: var(--border-soft); color: var(--text); }
+.gameview-res{
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 0.68rem;
+  color: var(--text-dim);
+}
+.gameview-viewport{
+  aspect-ratio: 4 / 3;
+  background:
+    linear-gradient(45deg, #1A1E21 25%, transparent 25%) 0 0/16px 16px,
+    linear-gradient(-45deg, #1A1E21 25%, transparent 25%) 0 0/16px 16px,
+    linear-gradient(45deg, transparent 75%, #1A1E21 75%) 0 0/16px 16px,
+    linear-gradient(-45deg, transparent 75%, #1A1E21 75%) 0 0/16px 16px,
+    #14171A;
+  position: relative;
+  overflow: hidden;
+}
+.gameview-viewport img{
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.gameview-fallback{
+  position: absolute; inset: 0;
+  display: none; align-items: center; justify-content: center;
+  text-align: center; padding: 20px;
+}
+.gameview-fallback span{
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim);
+  border: 1px dashed var(--border); border-radius: 6px; padding: 14px 18px;
+}
+.gameview-fallback code{ color: var(--teal); }
+.gameview-toolbar{
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 12px;
+  background: var(--panel-alt);
+  border-top: 1px solid var(--border);
+}
+.gv-dot{ width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
+.gv-label{
+  margin-left: auto;
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim);
+}
 .nav{ display: flex; gap: 28px; }
 .nav a{
   text-decoration: none; color: var(--text-muted);
