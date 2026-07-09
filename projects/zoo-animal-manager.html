@@ -124,6 +124,20 @@
   .field-value a{ color: var(--blue); text-decoration:none; font-weight:600; }
   .field-value a:hover{ text-decoration:underline; }
 
+  .back-pill{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--text-muted); text-decoration: none;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 20px;
+    margin-bottom: 32px;
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .back-pill:hover{
+    color: var(--text); border-color: var(--teal);
+    transform: translateX(-2px);
+  }
+
   .inspector-cta{
     padding: 18px 16px 20px;
     display: flex; justify-content: center;
@@ -257,12 +271,8 @@
 </header>
 <div class="wrap">
 
-  <div class="topbar">
-    <a href="../index.html">&larr; back to portfolio</a>
-    <span><span class="dot">●</span> case_study/zoo-animal-manager.html</span>
-  </div>
+  <a href="../index.html#work" class="back-pill">&larr; Back to portfolio</a>
 
-  <div class="eyebrow">BUILD STATUS — SHIPPED &amp; LIVE</div>
   <h1>Zoo Animal Manager</h1>
   <p class="subtitle">
     A complete Unity Android zoo management simulation built from scratch, focused on
@@ -467,7 +477,7 @@
   </details>
 
   <div class="cta-row">
-    <a class="btn btn-ghost" href="../index.html">Back to portfolio</a>
+    <a class="btn btn-ghost" href="../index.html#work">Back to portfolio</a>
   </div>
 
   <footer>
