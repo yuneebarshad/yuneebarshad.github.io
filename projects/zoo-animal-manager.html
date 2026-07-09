@@ -124,6 +124,12 @@
   .field-value a{ color: var(--blue); text-decoration:none; font-weight:600; }
   .field-value a:hover{ text-decoration:underline; }
 
+  .inspector-cta{
+    padding: 18px 16px 20px;
+    display: flex; justify-content: center;
+    border-top: 1px solid var(--border);
+  }
+
   .tags{ display:flex; flex-wrap:wrap; gap:8px; }
   .tag{
     font-family: var(--mono); font-size: 12px;
@@ -290,10 +296,6 @@
         <span class="field-value">Android</span>
       </div>
       <div class="field-row">
-        <span class="field-label">Store Link</span>
-        <span class="field-value"><a href="https://play.google.com/store/apps/details?id=com.mini.zoo2.happy.animal.park.tycoon.games" target="_blank" rel="noopener">play.google.com &rarr;</a></span>
-      </div>
-      <div class="field-row">
         <span class="field-label">Tags</span>
         <span class="field-value">
           <div class="tags">
@@ -308,6 +310,9 @@
             <span class="tag">JSON Save System</span>
           </div>
         </span>
+      </div>
+      <div class="inspector-cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mini.zoo2.happy.animal.park.tycoon.games" target="_blank" rel="noopener">View on Google Play</a>
       </div>
     </div>
   </div>
@@ -448,7 +453,6 @@
   </details>
 
   <div class="cta-row">
-    <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mini.zoo2.happy.animal.park.tycoon.games" target="_blank" rel="noopener">View on Google Play</a>
     <a class="btn btn-ghost" href="../index.html">Back to portfolio</a>
   </div>
 
