@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoo Animal Manager — Yuneeb Arshad</title>
+<meta name="description" content="Zoo Animal Manager — a shipped Unity Android zoo management sim, live on Google Play with 1M+ downloads. Project by Yuneeb Arshad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="../index.html" class="logo">Yuneeb Arshad</a>
+    <nav class="nav" id="siteNav">
+      <a href="../index.html#work">All Work</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-hero scene-thumb-zoo">
+    <div class="wrap">
+      <a href="../index.html#work" class="back-link">&larr; All projects</a>
+      <span class="scene-status scene-status-live">Live on Google Play</span>
+      <h1>Zoo Animal Manager</h1>
+      <p class="project-tagline">A complete Unity Android zoo management simulation, built from scratch — from core gameplay loop through production monetization.</p>
+      <ul class="tag-list">
+        <li>Unity3D</li>
+        <li>C#</li>
+        <li>Android</li>
+        <li>NavMesh</li>
+        <li>Firebase</li>
+        <li>AppLovin MAX</li>
+        <li>Unity IAP</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap project-body">
+
+      <div class="project-main">
+
+        <div class="component">
+          <div class="component-head">Overview <span class="badge badge-role">Role: Senior Game Developer — architecture &amp; core systems</span></div>
+          <p class="project-text">A full-scale Unity Android zoo management simulation featuring exhibit expansion, animal purchasing, animal care, visitor AI, quest progression, economy systems, and mobile monetization. Players unlock zoo areas, buy and feed animals, complete tasks, earn currency, and grow their zoo through a structured progression loop.</p>
+          <p class="project-text">The project also includes production mobile integrations: Unity IAP, AppLovin MAX ads, Firebase Analytics, Remote Config, Google Play plugins, rewarded ads, interstitials, banners, and purchase/restore flows.</p>
+        </div>
+
+        <div class="component">
+          <div class="component-head">Gameplay Loop</div>
+          <div class="loop-flow">
+            <span class="loop-step">Earn currency</span>
+            <span class="loop-arrow">&rarr;</span>
+            <span class="loop-step">Unlock exhibit</span>
+            <span class="loop-arrow">&rarr;</span>
+            <span class="loop-step">Buy animal</span>
+            <span class="loop-arrow">&rarr;</span>
+            <span class="loop-step">Feed &amp; care</span>
+            <span class="loop-arrow">&rarr;</span>
+            <span class="loop-step">Complete quest</span>
+            <span class="loop-arrow">&rarr;</span>
+            <span class="loop-step">Expand zoo</span>
+          </div>
+        </div>
+
+        <div class="component">
+          <div class="component-head">Key Highlights</div>
+          <ul class="detail-list detail-list-check">
+            <li>Built the complete gameplay loop from scratch in Unity.</li>
+            <li>Implemented animal management, exhibit unlocking, feeding, and care systems.</li>
+            <li>Developed AI-driven animals with hunger, survival, and food-detection behavior.</li>
+            <li>Created NavMesh-based visitor NPC movement and animation logic.</li>
+            <li>Built quest, level, shop, currency, ticket, and progression systems.</li>
+            <li>Added physics-based food throwing with projectile arc aiming.</li>
+            <li>Integrated Unity IAP, AppLovin MAX, Firebase Analytics, and Remote Config.</li>
+            <li>Optimized Android performance with device-memory-based quality scaling.</li>
+          </ul>
+        </div>
+
+        <div class="component">
+          <div class="component-head">Core Systems</div>
+
+          <details class="sys-detail" open>
+            <summary>Exhibit &amp; Animal Management</summary>
+            <p class="project-text">Handles unlocking exhibits, purchasing animals, and spawning them into the correct enclosure.</p>
+            <ul class="detail-list">
+              <li>Loads unlock and purchase state from saved JSON on session start</li>
+              <li>Swaps locked-area prefabs for active arena prefabs at runtime</li>
+              <li>Wires each unlocked exhibit to animal spawn points, food points, and cutscene triggers</li>
+            </ul>
+          </details>
+
+          <details class="sys-detail">
+            <summary>Feeding &amp; Animal AI</summary>
+            <p class="project-text">A physics-based feeding mechanic paired with hunger-driven animal behavior, rather than a tap-to-feed button.</p>
+            <ul class="detail-list">
+              <li>Projectile arc aiming and Rigidbody-based food throwing, with per-exhibit active food tracking</li>
+              <li>Hunger and survival values ticking down per animal, with food-target detection when food lands</li>
+              <li>Feed state and remaining food count persist across sessions</li>
+            </ul>
+          </details>
+
+          <details class="sys-detail">
+            <summary>NPC Visitor System</summary>
+            <p class="project-text">Populates the zoo with visitors that make it feel alive rather than static.</p>
+            <ul class="detail-list">
+              <li>NavMeshAgent-driven pathing between destinations</li>
+              <li>Animation state triggers for walk/idle transitions</li>
+              <li>Obstacle avoidance tuning and stuck/collision recovery</li>
+            </ul>
+          </details>
+
+          <details class="sys-detail">
+            <summary>Quest, Economy &amp; Progression</summary>
+            <p class="project-text">Ties currency, quests, and levels together into the loop that keeps players moving forward.</p>
+            <ul class="detail-list">
+              <li>Quest tracking across feeding, cleaning, and exhibit-unlock tasks</li>
+              <li>Shop, ticket, and currency systems with a level gate on new content</li>
+              <li>Tutorial flow and minimap support for onboarding and navigation</li>
+            </ul>
+          </details>
+
+          <details class="sys-detail">
+            <summary>Monetization &amp; Live Ops</summary>
+            <p class="project-text">The production layer that turns a finished build into a live, revenue-generating app.</p>
+            <ul class="detail-list">
+              <li>Unity IAP for in-game purchase flows</li>
+              <li>AppLovin MAX — rewarded, interstitial, and banner ads</li>
+              <li>Firebase Analytics and Remote Config for event tracking and live-tunable values</li>
+              <li>Google Play plugin integration for store-side services</li>
+            </ul>
+          </details>
+
+          <details class="sys-detail">
+            <summary>Save System &amp; Android Optimization</summary>
+            <p class="project-text">The framework layer underneath the whole game — what makes it a mobile game framework, not a prototype.</p>
+            <ul class="detail-list">
+              <li>Persistent JSON-based save system spanning animals, coins, food, quests, levels, and exhibit unlocks</li>
+              <li>Device-memory-aware quality scaling — camera far clip and LOD bias tuned per device tier</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="component">
+          <div class="component-head">Gallery</div>
+          <div class="gallery-placeholder">
+            <p>Add screenshots from your Play Store listing or a short gameplay clip here — this is your strongest visual proof point since the game is live.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <aside class="project-side">
+        <div class="component">
+          <div class="component-head">Details</div>
+          <div class="component-row"><span>Status</span><span>Live</span></div>
+          <div class="component-row"><span>Downloads</span><span>1,000,000+</span></div>
+          <div class="component-row"><span>Rating</span><span>3.7 ★</span></div>
+          <div class="component-row"><span>Engine</span><span>Unity 2022.3</span></div>
+          <div class="component-row"><span>Platform</span><span>Android</span></div>
+        </div>
+        <a href="https://play.google.com/store/apps/details?id=com.mini.zoo2.happy.animal.park.tycoon.games" target="_blank" rel="noopener" class="btn btn-primary store-btn">View on Google Play</a>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>&copy; 2026 Yuneeb Arshad</span>
+    <a href="../index.html#work">Back to all work &rarr;</a>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
