@@ -255,6 +255,44 @@
   @media (max-width: 560px){
     .field-row{ grid-template-columns: 1fr; gap: 3px; }
   }
+  .gallery-video{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .gallery-video iframe{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  .gallery-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .gallery-grid img{
+    width: 100%; height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: block;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .gallery-grid img:hover{
+    transform: translateY(-2px);
+    border-color: var(--teal);
+  }
+  @media (min-width: 720px){
+    .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
+  }
+
 </style>
 </head>
 <body>
@@ -282,7 +320,7 @@
   <div class="inspector">
     <div class="inspector-header">
       <span class="script-icon"></span>
-      AnimalTycoonZooCraft.cs (MonoBehaviour)
+      Animal Tycoon - Zoo Craft Game — Details
     </div>
     <div class="inspector-body">
       <div class="field-row">
@@ -478,6 +516,25 @@
 
   <div class="cta-row">
     <a class="btn btn-ghost" href="../index.html#work">Back to portfolio</a>
+  </div>
+
+  <h2>Gallery</h2>
+
+  <div class="gallery-video">
+    <iframe
+      src="https://www.youtube.com/embed/wSvXRz4s8z4"
+      title="Animal Tycoon - Zoo Craft Game gameplay"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="gallery-grid">
+    <img src="images/zoo-1.png" alt="Giraffe exhibit with visitor family feeding animals">
+    <img src="images/zoo-2.png" alt="Panda enclosure with a group of visitors watching">
+    <img src="images/zoo-3.png" alt="Guided tour vehicle driving past the zebra exhibit">
+    <img src="images/zoo-4.png" alt="First-person view of the elephant pond exhibit">
   </div>
 
   <footer>
