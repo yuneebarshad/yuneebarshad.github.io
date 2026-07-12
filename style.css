@@ -585,6 +585,7 @@ a{ color: inherit; }
 .pw-thumb-ashen{ background: linear-gradient(135deg, #0F2E28, #163B33 60%, #1F5C42); }
 .pw-thumb-celeb{ background: linear-gradient(135deg, #2E1526, #4A1F38 60%, #7A2E52); }
 .pw-thumb-zoo{ background: linear-gradient(135deg, #16301F, #1F4A2C 60%, #2E7D42); }
+.pw-thumb-cafe{ background: linear-gradient(135deg, #1A2233, #24304A 60%, #33466B); }
 .pw-dirty-live{ color: var(--teal); font-size: 0.7rem; }
 .pw-thumb-add{
   background: transparent; border: 1px dashed var(--border);
