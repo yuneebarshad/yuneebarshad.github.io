@@ -472,15 +472,33 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Monetization: Rewarded Video &amp; IAP
+      Rewarded Video System
       <span class="comp-suffix">(Third-Party Integration)</span>
     </summary>
     <div class="component-body">
-      <p>Production monetization covering both ad-based and paid revenue paths.</p>
+      <p>A rotating, ownership-aware rewarded ad system rather than a single generic "watch ad" button.</p>
       <ul>
-        <li>Rewarded video system with rotating spawn points, cooldowns, and offers spanning cash boxes, vehicle trials, surprise rewards, and bouncer unlocks</li>
-        <li>Unity IAP integration with product catalog, purchase tracking, restore-purchase flow, and permanent unlock handling</li>
-        <li>Premium/no-ads logic and reward granting tied into both ad and purchase flows</li>
+        <li>Built a rotating rewarded-item pool spawning around unlocked areas, with cooldown handling so the same offer doesn't repeat back-to-back</li>
+        <li>Reward variety spans cash boxes, surprise boxes, vehicle trials, and bouncer unlocks, alongside standard upgrade and level-up bonuses</li>
+        <li>Implemented ownership-aware rotation logic — once a player has purchased an item outright, it's automatically removed from the ad rotation instead of continuing to offer something they already own</li>
+        <li>Rewarded ads also power daily reward doubling, tying the ad system directly into the retention loop</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      In-App Purchases
+      <span class="comp-suffix">(Third-Party Integration)</span>
+    </summary>
+    <div class="component-body">
+      <p>The paid-revenue path, built alongside — not instead of — the ad system above.</p>
+      <ul>
+        <li>Integrated Unity IAP with a full product catalog, covering consumable and permanent purchase types</li>
+        <li>Built restore-purchase handling so returning players don't lose access to prior purchases on a new device or reinstall</li>
+        <li>Implemented purchase tracking and reward granting, connecting each completed purchase to the correct in-game unlock</li>
+        <li>Added premium/no-ads logic as a distinct purchase path, separate from the consumable packs</li>
       </ul>
     </div>
   </details>
@@ -507,10 +525,12 @@
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>Protects existing players from broken progress whenever core level or quest structures change.</p>
+      <p>A safety net built specifically to protect players who were already mid-progression when level 2 and level 3 were reworked — this is the kind of system that matters most in a live game, since breaking existing players' saves is one of the fastest ways to tank retention and reviews.</p>
       <ul>
-        <li>Maps legacy save and quest completion data into the reworked level structure</li>
-        <li>Prevents progression loss for existing users after level 2/3 content updates</li>
+        <li>Reads a player's existing save on load and maps legacy quest completion and level-progress data into the reworked level 2/3 structure, instead of resetting or overwriting what they'd already earned</li>
+        <li>Preserves already-unlocked rooms, completed quests, and currency progress across the restructuring, so returning players don't lose progress they'd already made before the update shipped</li>
+        <li>Handles save fields that didn't exist in the old data structure gracefully, so older saves don't break or crash against the new format</li>
+        <li>Runs as a one-time check per save file rather than repeating on every session, keeping it lightweight after the initial migration</li>
       </ul>
     </div>
   </details>
