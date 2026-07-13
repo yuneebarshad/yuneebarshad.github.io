@@ -293,6 +293,43 @@
     .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
   }
 
+  .gallery-grid img{ cursor: zoom-in; }
+
+  .lightbox-overlay{
+    position: fixed; inset: 0; background: rgba(8,9,12,0.94);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; flex-direction: column;
+  }
+  .lightbox-overlay.active{ display: flex; }
+  .lightbox-img{
+    max-width: 88vw; max-height: 78vh;
+    border-radius: 8px; border: 1px solid var(--border);
+  }
+  .lightbox-close{
+    position: absolute; top: 20px; right: 28px;
+    font-size: 32px; line-height: 1; color: #fff;
+    background: none; border: none; cursor: pointer;
+  }
+  .lightbox-nav{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-nav:hover{ background: rgba(255,255,255,0.16); }
+  .lightbox-prev{ left: 20px; }
+  .lightbox-next{ right: 20px; }
+  .lightbox-counter{
+    margin-top: 14px; color: rgba(255,255,255,0.6);
+    font-family: var(--mono); font-size: 13px;
+  }
+  @media (max-width: 640px){
+    .lightbox-nav{ width: 38px; height: 38px; font-size: 16px; }
+    .lightbox-prev{ left: 8px; }
+    .lightbox-next{ right: 8px; }
+  }
+
 </style>
 </head>
 <body>
@@ -543,5 +580,59 @@
   </footer>
 
 </div>
+
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+(function(){
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
+  if(!imgs.length) return;
+  var overlay = document.getElementById('lightboxOverlay');
+  var imgEl = document.getElementById('lightboxImg');
+  var counter = document.getElementById('lightboxCounter');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+  var current = 0;
+
+  function show(i){
+    current = (i + imgs.length) % imgs.length;
+    imgEl.src = imgs[current].src;
+    imgEl.alt = imgs[current].alt;
+    counter.textContent = (current + 1) + ' / ' + imgs.length;
+  }
+  function open(i){
+    show(i);
+    overlay.classList.add('active');
+  }
+  function close(){
+    overlay.classList.remove('active');
+  }
+
+  imgs.forEach(function(img, i){
+    img.addEventListener('click', function(){ open(i); });
+  });
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function(){ show(current - 1); });
+  nextBtn.addEventListener('click', function(){ show(current + 1); });
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) close();
+  });
+  document.addEventListener('keydown', function(e){
+    if(!overlay.classList.contains('active')) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowLeft') show(current - 1);
+    if(e.key === 'ArrowRight') show(current + 1);
+  });
+})();
+</script>
+
 </body>
 </html>
