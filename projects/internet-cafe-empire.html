@@ -62,20 +62,19 @@
     .sitehead-nav{ display: none; }
   }
 
-  .topbar{
-    display:flex; align-items:center; justify-content:space-between;
-    font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
-    margin-bottom: 40px; flex-wrap: wrap; gap:10px;
+  .back-pill{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--text-muted); text-decoration: none;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 20px;
+    margin-bottom: 32px;
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
   }
-  .topbar a{ color: var(--blue); text-decoration:none; }
-  .topbar a:hover{ text-decoration:underline; }
-  .dot{ color: var(--teal); }
-
-  .eyebrow{
-    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
-    color: var(--teal); margin-bottom: 14px; display:flex; align-items:center; gap:8px;
+  .back-pill:hover{
+    color: var(--text); border-color: var(--teal);
+    transform: translateX(-2px);
   }
-  .eyebrow::before{ content:"●"; font-size: 9px; }
 
   h1{
     font-size: clamp(28px, 5vw, 42px);
@@ -124,26 +123,11 @@
   .field-value a{ color: var(--blue); text-decoration:none; font-weight:600; }
   .field-value a:hover{ text-decoration:underline; }
 
-  .back-pill{
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 13px; font-weight: 600;
-    color: var(--text-muted); text-decoration: none;
-    background: var(--bg-panel); border: 1px solid var(--border);
-    padding: 8px 16px; border-radius: 20px;
-    margin-bottom: 32px;
-    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-  }
-  .back-pill:hover{
-    color: var(--text); border-color: var(--teal);
-    transform: translateX(-2px);
-  }
-
   .inspector-cta{
     padding: 18px 16px 20px;
-    display: flex; justify-content: center;
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
     border-top: 1px solid var(--border);
   }
-  .inspector-cta-dual{ gap: 12px; flex-wrap: wrap; }
 
   .tags{ display:flex; flex-wrap:wrap; gap:8px; }
   .tag{
@@ -230,12 +214,6 @@
     flex-shrink:0; margin-top:1px;
   }
 
-  .callout{
-    background: var(--bg-panel); border:1px solid var(--border); border-left: 3px solid var(--blue);
-    border-radius: 6px; padding: 16px 18px; margin-top: 10px;
-  }
-  .callout p{ margin:0; color: var(--text); }
-
   .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 40px; }
   .btn{
     font-family: var(--mono); font-size: 13.5px; font-weight:600;
@@ -252,24 +230,6 @@
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
   }
   footer a{ color: var(--text-dim); }
-
-  @media (max-width: 560px){
-    .field-row{ grid-template-columns: 1fr; gap: 3px; }
-  }
-  .gallery-video{
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-  }
-  .gallery-video iframe{
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    border: 0;
-  }
 
   .gallery-grid{
     display: grid;
@@ -294,6 +254,9 @@
     .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
   }
 
+  @media (max-width: 560px){
+    .field-row{ grid-template-columns: 1fr; gap: 3px; }
+  }
 </style>
 </head>
 <body>
@@ -315,8 +278,7 @@
   <h1>Internet Cafe Empire</h1>
   <p class="subtitle">
     A mobile idle tycoon game where players build, upgrade, and manage a growing
-    internet cafe through room progression, staff systems, quests, monetization,
-    and live gameplay events.
+    internet cafe — live on both Android and iOS.
   </p>
 
   <div class="inspector">
@@ -330,8 +292,12 @@
         <span class="field-value live">Live on Android &amp; iOS</span>
       </div>
       <div class="field-row">
-        <span class="field-label">Role</span>
-        <span class="field-value">Senior Unity Developer — Production Systems</span>
+        <span class="field-label">Downloads</span>
+        <span class="field-value">10,000+ (Android)</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Rating</span>
+        <span class="field-value">New release — not yet rated</span>
       </div>
       <div class="field-row">
         <span class="field-label">Engine</span>
@@ -359,23 +325,20 @@
           </div>
         </span>
       </div>
-      <div class="inspector-cta inspector-cta-dual">
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.internet.cafe.simulator.games.free&amp;hl=en" target="_blank" rel="noopener">View on Google Play</a>
-        <a class="btn btn-primary" href="https://apps.apple.com/us/app/internet-cafe-empire/id6751887337" target="_blank" rel="noopener">View on App Store</a>
+      <div class="inspector-cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.internet.cafe.simulator.games.free&hl=en" target="_blank" rel="noopener">View on Google Play</a>
+        <a class="btn btn-ghost" href="https://apps.apple.com/us/app/internet-cafe-empire/id6751887337" target="_blank" rel="noopener">View on App Store</a>
       </div>
     </div>
   </div>
 
   <h2>Gallery</h2>
 
-  <div class="gallery-video">
-    <iframe
-      src="https://www.youtube.com/embed/sB79duEJvvc"
-      title="Internet Cafe Empire gameplay"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+  <div class="gallery-grid">
+    <img src="images/cafe-1.png" alt="Internet Cafe Empire gameplay screenshot 1">
+    <img src="images/cafe-2.png" alt="Internet Cafe Empire gameplay screenshot 2">
+    <img src="images/cafe-3.png" alt="Internet Cafe Empire gameplay screenshot 3">
+    <img src="images/cafe-4.png" alt="Internet Cafe Empire gameplay screenshot 4">
   </div>
 
   <h2>Overview</h2>
@@ -393,9 +356,9 @@
 
   <h2>Gameplay Loop</h2>
   <div class="loop">
-    <span class="step">Collect income</span><span class="arrow">→</span>
-    <span class="step">Upgrade &amp; unlock rooms</span><span class="arrow">→</span>
-    <span class="step">Hire staff</span><span class="arrow">→</span>
+    <span class="step">Earn cash</span><span class="arrow">→</span>
+    <span class="step">Unlock room</span><span class="arrow">→</span>
+    <span class="step">Upgrade &amp; hire staff</span><span class="arrow">→</span>
     <span class="step">Complete quest</span><span class="arrow">→</span>
     <span class="step">Handle live event</span><span class="arrow">→</span>
     <span class="step">Expand cafe</span>
@@ -403,9 +366,9 @@
 
   <h2>Key Contributions</h2>
   <ul class="contrib-list">
-    <li>Reworked level 2 and level 3 progression, adding new arcade rooms, racing rooms, token loaders, utility flows, and area-unlock milestones.</li>
-    <li>Built a level-based quest system with persistent progress tracking, guided objectives, camera focus, quest sequencing, and runtime-injected quests for thief and feedback events.</li>
-    <li>Implemented rewarded video systems across upgrade bonuses, level-up rewards, daily reward doubling, cash boxes, vehicle trials, surprise rewards, and bouncer unlocks — including rotating spawn points and cooldown handling.</li>
+    <li>Reworked level 2 and level 3 progression, adding new arcade rooms, racing rooms, utilities, token loaders, and area-unlock milestones.</li>
+    <li>Built a level-based quest system with persistent progress tracking, guided objectives, camera focus, and runtime-injected quests for thief and feedback events.</li>
+    <li>Implemented rewarded video systems across upgrade bonuses, level-up rewards, daily reward doubling, cash boxes, vehicle trials, and bouncer unlocks, including rotating spawn points and cooldown handling.</li>
     <li>Integrated Unity IAP with product catalog support, purchase tracking, restore-purchase flow, reward granting, permanent unlocks, and premium/no-ads logic.</li>
     <li>Added Firebase Analytics across sessions, progression, ad events, IAP offers, purchases, and gameplay milestones.</li>
     <li>Developed migration systems that safely map legacy save and quest data into the reworked level structure, preventing broken progression for existing players.</li>
@@ -421,10 +384,10 @@
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>Reworked how players move through level 2 and level 3 content as the game's scope grew.</p>
+      <p>Reworked the game's mid-to-late progression to support new content without breaking existing player state.</p>
       <ul>
-        <li>Added arcade room, racing room, and token-loader progression paths with new unlock and upgrade milestones</li>
-        <li>Restructured later-level quest and room mappings so existing saves continued to function correctly</li>
+        <li>Reworked level 2 and level 3 progression, adding arcade rooms, racing rooms, token loaders, and utility flows</li>
+        <li>Updated room and area unlock milestones tied to the new progression structure</li>
       </ul>
     </div>
   </details>
@@ -436,10 +399,10 @@
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>A level-based quest system that guides players toward their next useful action.</p>
+      <p>Guides players toward their next useful action and keeps progress persistent across sessions.</p>
       <ul>
-        <li>Persistent quest progress tracking with camera focus on the current objective</li>
-        <li>Runtime-injected special quests for events like thief and feedback encounters</li>
+        <li>Level-based quest loading with persistent progress tracking and camera focus on the active objective</li>
+        <li>Runtime-injected quests for live events such as thief and feedback encounters</li>
       </ul>
     </div>
   </details>
@@ -447,15 +410,15 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Rewarded Video &amp; Monetization
+      Monetization: Rewarded Video &amp; IAP
       <span class="comp-suffix">(Third-Party Integration)</span>
     </summary>
     <div class="component-body">
-      <p>Rotating rewarded-ad offers layered across the whole progression loop, not just a single "watch ad" button.</p>
+      <p>Production monetization covering both ad-based and paid revenue paths.</p>
       <ul>
-        <li>Rotating rewarded item spawns around unlocked areas, with cooldowns and removal of already-purchased vehicles from rotation</li>
-        <li>Unity IAP integration with purchase tracking, restore-purchase flow, reward granting, and premium/no-ads logic</li>
-        <li>Firebase Analytics wired across ad impressions, IAP offers, purchases, and progression milestones</li>
+        <li>Rewarded video system with rotating spawn points, cooldowns, and offers spanning cash boxes, vehicle trials, surprise rewards, and bouncer unlocks</li>
+        <li>Unity IAP integration with product catalog, purchase tracking, restore-purchase flow, and permanent unlock handling</li>
+        <li>Premium/no-ads logic and reward granting tied into both ad and purchase flows</li>
       </ul>
     </div>
   </details>
@@ -463,14 +426,14 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Save Migration
-      <span class="comp-suffix">(Script)</span>
+      Analytics &amp; Attribution
+      <span class="comp-suffix">(Third-Party Integration)</span>
     </summary>
     <div class="component-body">
-      <p>Protected existing players from broken progress when the level and quest structure changed underneath them.</p>
+      <p>Tracks player behavior and monetization performance across the live game.</p>
       <ul>
-        <li>Mapped legacy save and quest-completion data into the reworked level/progression structure</li>
-        <li>Prevented lost or corrupted progress for players updating from earlier versions</li>
+        <li>Firebase Analytics covering sessions, progression, ad events, IAP offers, purchases, and gameplay milestones</li>
+        <li>Tenjin attribution integrated alongside Firebase for install and campaign tracking</li>
       </ul>
     </div>
   </details>
@@ -478,15 +441,30 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Retention &amp; Live Events
+      Migration System
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>The systems that keep players coming back day to day, beyond the core upgrade loop.</p>
+      <p>Protects existing players from broken progress whenever core level or quest structures change.</p>
+      <ul>
+        <li>Maps legacy save and quest completion data into the reworked level structure</li>
+        <li>Prevents progression loss for existing users after level 2/3 content updates</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Retention &amp; Player Experience
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>The layer of systems that brings players back and keeps the game feeling alive session to session.</p>
       <ul>
         <li>Daily reward calendar with double-claim through gems or rewarded ads</li>
         <li>Character/skin selection with paid and permanent unlocks</li>
-        <li>Live gameplay events — feedback repairs, garbage man interruptions, and thief encounters</li>
+        <li>UI polish, utility interactions, and event-driven gameplay for feedback, garbage man, and thief encounters</li>
       </ul>
     </div>
   </details>
