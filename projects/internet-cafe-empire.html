@@ -446,10 +446,11 @@
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>Reworked the game's mid-to-late progression to support new content without breaking existing player state.</p>
+      <p>Reworked the game's mid-to-late progression to support new content without breaking existing player state — this is where the groundwork for the Migration System below was laid.</p>
       <ul>
-        <li>Reworked level 2 and level 3 progression, adding arcade rooms, racing rooms, token loaders, and utility flows</li>
-        <li>Updated room and area unlock milestones tied to the new progression structure</li>
+        <li>Reworked Level 2 progression, adding arcade rooms, racing rooms, a token loader, and the related unlock and upgrade milestones tied to that new content</li>
+        <li>Adjusted Level 3 quest and room mappings specifically so that players with existing saves would continue correctly once the new structure shipped, rather than treating backward compatibility as an afterthought</li>
+        <li>Updated area and room unlock milestones across both levels to align with the reworked progression pacing</li>
       </ul>
     </div>
   </details>
@@ -465,6 +466,7 @@
       <ul>
         <li>Level-based quest loading with persistent progress tracking and camera focus on the active objective</li>
         <li>Runtime-injected quests for live events such as thief and feedback encounters</li>
+        <li>Quest sequencing that surfaces one clear next objective at a time, rather than presenting an open, unordered task list</li>
       </ul>
     </div>
   </details>
@@ -499,6 +501,22 @@
         <li>Built restore-purchase handling so returning players don't lose access to prior purchases on a new device or reinstall</li>
         <li>Implemented purchase tracking and reward granting, connecting each completed purchase to the correct in-game unlock</li>
         <li>Added premium/no-ads logic as a distinct purchase path, separate from the consumable packs</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Character Selection
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>A distinct paid-content system, separate from the core IAP catalog above — this is unlock/ownership logic tied to cosmetic choice, not consumable currency.</p>
+      <ul>
+        <li>Built a character/skin selection system offering multiple playable character options beyond the default</li>
+        <li>Implemented both paid and permanent unlock paths, so a purchased character stays owned across sessions rather than being a temporary or consumable unlock</li>
+        <li>Tied character selection into the same ownership-tracking logic used elsewhere in the game's ad and purchase systems, keeping unlock state consistent across systems</li>
       </ul>
     </div>
   </details>
@@ -542,11 +560,11 @@
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>The layer of systems that brings players back and keeps the game feeling alive session to session.</p>
+      <p>The layer of engagement systems that brings players back and keeps sessions feeling fresh, without relying on paid unlocks.</p>
       <ul>
         <li>Daily reward calendar with double-claim through gems or rewarded ads</li>
-        <li>Character/skin selection with paid and permanent unlocks</li>
-        <li>UI polish, utility interactions, and event-driven gameplay for feedback, garbage man, and thief encounters</li>
+        <li>UI polish and utility interactions supporting the core loop</li>
+        <li>Event-driven gameplay for feedback, garbage man, and thief encounters, keeping sessions from feeling repetitive</li>
       </ul>
     </div>
   </details>
