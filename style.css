@@ -587,6 +587,15 @@ a{ color: inherit; }
 .pw-thumb-zoo{ background: linear-gradient(135deg, #16301F, #1F4A2C 60%, #2E7D42); }
 .pw-thumb-cafe{ background: linear-gradient(135deg, #1A2233, #24304A 60%, #33466B); }
 .pw-dirty-live{ color: var(--teal); font-size: 0.7rem; }
+.pw-icon{
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56%; aspect-ratio: 1;
+  border-radius: 22%;
+  object-fit: cover;
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.12);
+}
 .pw-thumb-add{
   background: transparent; border: 1px dashed var(--border);
   align-items: center; justify-content: center;
