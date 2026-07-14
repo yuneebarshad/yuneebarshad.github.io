@@ -271,18 +271,28 @@
   }
 
   .gallery-grid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     gap: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
+  .gallery-grid::-webkit-scrollbar{ height: 6px; }
+  .gallery-grid::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 3px; }
   .gallery-grid img{
-    width: 100%; height: 100%;
+    flex: 0 0 auto;
+    width: 78%;
+    max-width: 320px;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid var(--border);
     display: block;
+    scroll-snap-align: start;
     transition: transform 0.15s ease, border-color 0.15s ease;
   }
   .gallery-grid img:hover{
@@ -290,7 +300,12 @@
     border-color: var(--teal);
   }
   @media (min-width: 720px){
-    .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
+    .gallery-grid img{ width: 280px; }
+  }
+
+  .gallery-hint{
+    font-family: var(--mono); font-size: 12px; color: var(--text-dim);
+    margin-bottom: 32px;
   }
 
   .gallery-grid img{ cursor: zoom-in; }
@@ -411,7 +426,9 @@
     <img src="images/gang-2.png" alt="Gang Mafia Shooting Crime Game combat screenshot 2">
     <img src="images/gang-3.png" alt="Gang Mafia Shooting Crime Game combat screenshot 3">
     <img src="images/gang-4.png" alt="Gang Mafia Shooting Crime Game combat screenshot 4">
+    <img src="images/gang-5.png" alt="Gang Mafia Shooting Crime Game combat screenshot 5">
   </div>
+  <p class="gallery-hint">&larr; scroll or drag to see more &rarr;</p>
 
   <h2>Overview</h2>
   <p class="role-line">ROLE: Senior Game Developer — gameplay architecture, progression &amp; monetization</p>
