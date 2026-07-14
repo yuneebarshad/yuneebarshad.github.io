@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gang Mafia Shooting Crime Game — Case Study — Yuneeb Arshad</title>
+<style>
+  :root{
+    --bg: #14151a;
+    --bg-panel: #1b1d24;
+    --bg-panel-header: #22252d;
+    --bg-field: #191b21;
+    --border: #2b2e37;
+    --text: #e9eaee;
+    --text-muted: #8b8f9c;
+    --text-dim: #5c6070;
+    --amber: #f2a33c;
+    --teal: #4fc9a8;
+    --blue: #6c9ef8;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+    --sans: -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(108,158,248,0.06), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(242,163,60,0.05), transparent 40%);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+  }
+
+  .wrap{ max-width: 860px; margin: 0 auto; padding: 48px 24px 100px; }
+
+  .sitehead{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(20,21,26,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .sitehead-inner{
+    max-width: 860px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .sitehead-logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+  }
+  .sitehead-nav{ display: flex; gap: 24px; }
+  .sitehead-nav a{
+    color: var(--text-muted); text-decoration: none;
+    font-family: var(--sans); font-size: 0.9rem; font-weight: 500;
+  }
+  .sitehead-nav a:hover{ color: var(--text); }
+  @media (max-width: 560px){
+    .sitehead-nav{ display: none; }
+  }
+
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
+    margin-bottom: 40px; flex-wrap: wrap; gap:10px;
+  }
+  .topbar a{ color: var(--blue); text-decoration:none; }
+  .topbar a:hover{ text-decoration:underline; }
+  .dot{ color: var(--teal); }
+
+  .eyebrow{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
+    color: var(--teal); margin-bottom: 14px; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{ content:"●"; font-size: 9px; }
+
+  h1{
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+  }
+  .subtitle{
+    color: var(--text-muted);
+    font-size: 16.5px;
+    max-width: 62ch;
+    margin: 0 0 28px;
+  }
+
+  .inspector{
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .inspector-header{
+    background: var(--bg-panel-header);
+    padding: 12px 16px;
+    display:flex; align-items:center; gap:10px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 13px; color: var(--text-muted);
+  }
+  .script-icon{
+    width:14px; height:14px; border-radius:3px;
+    background: linear-gradient(135deg, var(--blue), #4a6fd4);
+    flex-shrink:0;
+  }
+  .inspector-body{ padding: 4px 0; }
+  .field-row{
+    display:grid; grid-template-columns: 130px 1fr;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .field-row:last-child{ border-bottom:none; }
+  .field-label{ font-family: var(--mono); color: var(--text-dim); font-size: 12.5px; padding-top:1px; }
+  .field-value{ color: var(--text); font-weight: 600; }
+  .field-value.live{ color: var(--teal); }
+  .field-value.live::before{ content:"✓ "; }
+  .field-value a{ color: var(--blue); text-decoration:none; font-weight:600; }
+  .field-value a:hover{ text-decoration:underline; }
+
+  .back-pill{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--text-muted); text-decoration: none;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 20px;
+    margin-bottom: 32px;
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .back-pill:hover{
+    color: var(--text); border-color: var(--teal);
+    transform: translateX(-2px);
+  }
+
+  .inspector-cta{
+    padding: 18px 16px 20px;
+    display: flex; justify-content: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family: var(--mono); font-size: 12px;
+    background: var(--bg-field); border: 1px solid var(--border);
+    color: var(--text-muted); padding: 3px 9px; border-radius: 4px;
+  }
+
+  h2{
+    font-size: 13px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin: 56px 0 16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  h2::after{ content:""; flex:1; height:1px; background: var(--border); }
+
+  p{ color: var(--text); font-size: 15.5px; }
+  p.muted{ color: var(--text-muted); }
+
+  .role-line{
+    font-family: var(--mono); font-size: 12.5px; color: var(--amber);
+    background: rgba(242,163,60,0.08); border: 1px solid rgba(242,163,60,0.25);
+    display:inline-block; padding: 3px 9px; border-radius: 4px; margin-bottom: 14px;
+  }
+
+  .loop{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    font-family: var(--mono); font-size: 13px;
+    background: var(--bg-panel); border:1px solid var(--border);
+    border-radius: 8px; padding: 18px; margin: 8px 0 0;
+  }
+  .loop span.step{ color: var(--text); background: var(--bg-field); border:1px solid var(--border); padding:5px 10px; border-radius:5px; }
+  .loop span.arrow{ color: var(--text-dim); margin: 0 2px; }
+
+  details.component{
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  details.component summary{
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    display:flex; align-items:center; gap:10px;
+    background: var(--bg-panel-header);
+    font-weight: 700;
+    font-size: 14.5px;
+  }
+  details.component summary::-webkit-details-marker{ display:none; }
+  details.component summary::before{
+    content:"▸";
+    color: var(--text-dim);
+    font-size: 11px;
+    transition: transform 0.15s ease;
+    width: 10px;
+  }
+  details.component[open] summary::before{ transform: rotate(90deg); }
+  .comp-check{
+    width:14px; height:14px; border:1.5px solid var(--teal); border-radius:3px;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--teal); font-size: 10px; flex-shrink:0;
+  }
+  .comp-suffix{ color: var(--text-dim); font-weight: 400; font-family: var(--mono); font-size: 12px; margin-left: auto; }
+
+  .component-body{ padding: 16px 18px 20px; border-top: 1px solid var(--border); }
+  .component-body p{ margin: 0 0 12px; color: var(--text-muted); font-size: 14.5px; }
+  .component-body ul{ margin: 0; padding-left: 18px; }
+  .component-body li{ color: var(--text); font-size: 14.5px; margin-bottom: 6px; }
+
+  .contrib-list{ margin: 8px 0 0; padding-left: 0; list-style:none; }
+  .contrib-list li{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size: 14.5px; color: var(--text); margin-bottom: 12px;
+    background: var(--bg-panel); border:1px solid var(--border);
+    border-radius: 7px; padding: 12px 14px;
+  }
+  .contrib-list li::before{
+    content:"✓"; color: var(--teal); font-family: var(--mono); font-weight:700;
+    flex-shrink:0; margin-top:1px;
+  }
+
+  .callout{
+    background: var(--bg-panel); border:1px solid var(--border); border-left: 3px solid var(--blue);
+    border-radius: 6px; padding: 16px 18px; margin-top: 10px;
+  }
+  .callout p{ margin:0; color: var(--text); }
+
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 40px; }
+  .btn{
+    font-family: var(--mono); font-size: 13.5px; font-weight:600;
+    padding: 11px 20px; border-radius: 6px; text-decoration:none;
+    border:1px solid var(--border);
+  }
+  .btn-primary{ background: var(--teal); color: #0d1a17; border-color: var(--teal); }
+  .btn-ghost{ color: var(--text); background: transparent; }
+  .btn-ghost:hover{ background: var(--bg-panel); }
+
+  footer{
+    margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 12px; color: var(--text-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+  footer a{ color: var(--text-dim); }
+
+  @media (max-width: 560px){
+    .field-row{ grid-template-columns: 1fr; gap: 3px; }
+  }
+  .gallery-video{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .gallery-video iframe{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  .gallery-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .gallery-grid img{
+    width: 100%; height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: block;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .gallery-grid img:hover{
+    transform: translateY(-2px);
+    border-color: var(--teal);
+  }
+  @media (min-width: 720px){
+    .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .gallery-grid img{ cursor: zoom-in; }
+
+  .lightbox-overlay{
+    position: fixed; inset: 0; background: rgba(8,9,12,0.94);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; flex-direction: column;
+  }
+  .lightbox-overlay.active{ display: flex; }
+  .lightbox-img{
+    max-width: 88vw; max-height: 78vh;
+    border-radius: 8px; border: 1px solid var(--border);
+  }
+  .lightbox-close{
+    position: absolute; top: 20px; right: 28px;
+    font-size: 32px; line-height: 1; color: #fff;
+    background: none; border: none; cursor: pointer;
+  }
+  .lightbox-nav{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-nav:hover{ background: rgba(255,255,255,0.16); }
+  .lightbox-prev{ left: 20px; }
+  .lightbox-next{ right: 20px; }
+  .lightbox-counter{
+    margin-top: 14px; color: rgba(255,255,255,0.6);
+    font-family: var(--mono); font-size: 13px;
+  }
+  @media (max-width: 640px){
+    .lightbox-nav{ width: 38px; height: 38px; font-size: 16px; }
+    .lightbox-prev{ left: 8px; }
+    .lightbox-next{ right: 8px; }
+  }
+
+</style>
+</head>
+<body>
+<header class="sitehead">
+  <div class="sitehead-inner">
+    <a href="../index.html" class="sitehead-logo">Yuneeb Arshad</a>
+    <nav class="sitehead-nav">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#log">Experience</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+
+  <a href="../index.html#work" class="back-pill">&larr; Back to portfolio</a>
+
+  <h1>Gang Mafia Shooting Crime Game</h1>
+  <p class="subtitle">
+    A mobile third-person action shooter built in Unity, centered on gang territory
+    control — live on Android.
+  </p>
+
+  <div class="inspector">
+    <div class="inspector-header">
+      <span class="script-icon"></span>
+      Gang Mafia Shooting Crime Game — Details
+    </div>
+    <div class="inspector-body">
+      <div class="field-row">
+        <span class="field-label">Status</span>
+        <span class="field-value live">Live on Google Play</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Downloads</span>
+        <span class="field-value">10,000+</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Rating</span>
+        <span class="field-value">New release — not yet rated</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Engine</span>
+        <span class="field-value">Unity 2022.3 LTS</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Platform</span>
+        <span class="field-value">Android</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Tags</span>
+        <span class="field-value">
+          <div class="tags">
+            <span class="tag">Unity3D</span>
+            <span class="tag">C#</span>
+            <span class="tag">Android</span>
+            <span class="tag">Invector Framework</span>
+            <span class="tag">Unity Addressables</span>
+            <span class="tag">Cinemachine</span>
+            <span class="tag">AI Navigation</span>
+            <span class="tag">Firebase Analytics</span>
+            <span class="tag">AppLovin MAX</span>
+            <span class="tag">ScriptableObjects</span>
+            <span class="tag">JSON Save Data</span>
+          </div>
+        </span>
+      </div>
+      <div class="inspector-cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.infinity.gang.wars.city.gangster.shooting.crime" target="_blank" rel="noopener">View on Google Play</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>Gallery</h2>
+
+  <div class="gallery-grid">
+    <img src="images/gang-1.png" alt="Gang Mafia Shooting Crime Game combat screenshot 1">
+    <img src="images/gang-2.png" alt="Gang Mafia Shooting Crime Game combat screenshot 2">
+    <img src="images/gang-3.png" alt="Gang Mafia Shooting Crime Game combat screenshot 3">
+    <img src="images/gang-4.png" alt="Gang Mafia Shooting Crime Game combat screenshot 4">
+  </div>
+
+  <h2>Overview</h2>
+  <p class="role-line">ROLE: Senior Game Developer — gameplay architecture, progression &amp; monetization</p>
+  <p>
+    Gang Mafia Shooting Crime Game is a mobile third-person action shooter centered on
+    gang territory control. Players create their gang, fight through rival-controlled
+    city areas, complete objective-driven combat missions, recruit gang members,
+    upgrade weapons, defeat bosses, and capture new territory through a map-based
+    progression system. I built the game's full system layer on top of the Invector
+    third-person controller framework — combat tuning, mission and territory
+    progression, weapon and recruitment systems, the in-game economy, save
+    persistence, and mobile monetization — and prepared the project for iOS release
+    alongside its Android launch. The game shipped on Android; its iOS listing was
+    released and has since been suspended.
+  </p>
+
+  <h2>Gameplay Loop</h2>
+  <div class="loop">
+    <span class="step">Select mission</span><span class="arrow">→</span>
+    <span class="step">Fight enemy waves</span><span class="arrow">→</span>
+    <span class="step">Complete objective</span><span class="arrow">→</span>
+    <span class="step">Earn XP &amp; cash</span><span class="arrow">→</span>
+    <span class="step">Upgrade &amp; recruit</span><span class="arrow">→</span>
+    <span class="step">Capture territory</span>
+  </div>
+
+  <h2>Key Contributions</h2>
+  <ul class="contrib-list">
+    <li>Built the game's full system layer on top of the Invector third-person framework, including combat tuning, aiming, shooting, reload logic, and ragdoll hit reactions.</li>
+    <li>Designed a territory-based progression system across 3 rival gangs, with named locations, boss levels, and locked/unlocked area states.</li>
+    <li>Implemented multiple mission types — attack waves, survival objectives, capture-point missions, boss fights, and vehicle-style gameplay — rather than one repeated mission structure.</li>
+    <li>Built a weapon system covering multiple gun categories with individual damage, magazine size, reload time, fire rate, and upgrade costs.</li>
+    <li>Designed a gang member recruitment system with named, recruitable characters, each with distinct stats and level-based unlock requirements.</li>
+    <li>Added JSON and PlayerPrefs-based save systems covering levels, weapons, gang members, economy, and onboarding progress.</li>
+    <li>Used Unity Addressables to dynamically load UI screens — map, gun selection, pause menu, level complete, boss eliminated, and capture success/failure.</li>
+    <li>Integrated AppLovin MAX mediation for banner, interstitial, rewarded, and app-open ads, alongside Firebase Analytics for ad impression and revenue tracking.</li>
+    <li>Prepared and shipped an iOS build (version 1.1.4) alongside the Android release; the iOS listing is currently suspended.</li>
+  </ul>
+
+  <h2>Core Systems</h2>
+
+  <details class="component" open>
+    <summary>
+      <span class="comp-check">✓</span>
+      Combat System
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>Built on top of the Invector third-person controller framework, tuned and extended for this game's specific combat feel.</p>
+      <ul>
+        <li>Player aiming, shooting, reload logic, and ammo handling, with weapon switching across multiple gun types</li>
+        <li>Camera/FOV shake and slow-motion tuning layered on top of the base Invector controller</li>
+        <li>Ragdoll hit reactions on enemies for physical, responsive combat feedback</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Territory &amp; Mission Progression
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>A map-based structure where progress is measured in territory captured, not just levels cleared.</p>
+      <ul>
+        <li>Three rival gang territories, each with named locations and a distinct boss level</li>
+        <li>Locked/unlocked area states tracked per territory, gating progression as areas are captured</li>
+        <li>Mission rewards and capture states tied directly into the overall progression structure</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Mission Variety
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>Multiple distinct mission structures rather than one repeated combat loop reskinned across levels.</p>
+      <ul>
+        <li>Attack-wave missions and survival objectives with escalating enemy pressure</li>
+        <li>Capture-point missions with win/loss states tied to holding territory</li>
+        <li>Boss fights and vehicle-style missions for structural variety across the territory map</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Weapon System
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>A named, statted weapon roster rather than a single generic "damage number" per gun.</p>
+      <ul>
+        <li>Multiple gun categories — SMGs, assault rifles, pistols, and shotguns — each with individual damage, magazine size, reload time, and fire rate</li>
+        <li>Per-weapon upgrade costs and progression, tied into the game's overall economy</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Gang Member Recruitment
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>Recruitable characters with their own identity and stats, not a single interchangeable "hire crew" button.</p>
+      <ul>
+        <li>Named recruitable gang members, each with distinct damage and accuracy stats</li>
+        <li>Level-gated unlock requirements per recruit, with persistent recruit state saved across sessions</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Save &amp; Persistence
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>Keeps territory progress, weapon upgrades, and recruited gang members intact across sessions.</p>
+      <ul>
+        <li>JSON-based save data covering completed, locked, and unlocked levels per territory</li>
+        <li>PlayerPrefs-based persistence for weapons, gang members, economy, and onboarding state</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Addressables UI Loading
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>Dynamic UI loading rather than baking every screen into a single upfront build.</p>
+      <ul>
+        <li>Unity Addressables used to load map, gun selection, and pause menu screens on demand</li>
+        <li>Level complete, boss eliminated, and capture success/failure screens loaded the same way, keeping the UI layer decoupled from the core build</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Monetization &amp; Analytics
+      <span class="comp-suffix">(Third-Party Integration)</span>
+    </summary>
+    <div class="component-body">
+      <p>Production ad monetization paired with revenue tracking, not just ads bolted on without visibility into performance.</p>
+      <ul>
+        <li>AppLovin MAX mediation across banner, interstitial, rewarded, and app-open ad formats</li>
+        <li>Firebase Analytics connected for ad impression and revenue event tracking</li>
+      </ul>
+    </div>
+  </details>
+
+
+  <div class="cta-row">
+    <a class="btn btn-ghost" href="../index.html#work">Back to portfolio</a>
+  </div>
+
+  <footer>
+    <span>Yuneeb Arshad — Senior Unity Developer</span>
+    <span>Lahore, Pakistan</span>
+  </footer>
+
+</div>
+
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+(function(){
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
+  if(!imgs.length) return;
+  var overlay = document.getElementById('lightboxOverlay');
+  var imgEl = document.getElementById('lightboxImg');
+  var counter = document.getElementById('lightboxCounter');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+  var current = 0;
+
+  function show(i){
+    current = (i + imgs.length) % imgs.length;
+    imgEl.src = imgs[current].src;
+    imgEl.alt = imgs[current].alt;
+    counter.textContent = (current + 1) + ' / ' + imgs.length;
+  }
+  function open(i){
+    show(i);
+    overlay.classList.add('active');
+  }
+  function close(){
+    overlay.classList.remove('active');
+  }
+
+  imgs.forEach(function(img, i){
+    img.addEventListener('click', function(){ open(i); });
+  });
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function(){ show(current - 1); });
+  nextBtn.addEventListener('click', function(){ show(current + 1); });
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) close();
+  });
+  document.addEventListener('keydown', function(e){
+    if(!overlay.classList.contains('active')) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowLeft') show(current - 1);
+    if(e.key === 'ArrowRight') show(current + 1);
+  });
+})();
+</script>
+
+</body>
+</html>
