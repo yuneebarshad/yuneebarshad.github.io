@@ -516,7 +516,7 @@
       <ul>
         <li>Quest tracking across feeding, cleaning, and exhibit-unlock tasks</li>
         <li>Level-gated content unlocks for new exhibits, animals, and features</li>
-        <li>Tutorial flow and minimap support for onboarding and navigation</li>
+        <li>Tutorial flow, an always-on gameplay minimap, and a separate full-screen map for a wider environment overview</li>
       </ul>
     </div>
   </details>
@@ -541,16 +541,15 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Monetization &amp; Live Ops
-      <span class="comp-suffix">(Third-Party Integration)</span>
+      Buggy/Vehicle System
+      <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>The production layer that turns a finished build into a live, revenue-generating app.</p>
+      <p>A visitor transport feature with its own gameplay presence and a dedicated purchase path — not just background scenery.</p>
       <ul>
-        <li>AppLovin MAX integration — rewarded, interstitial, banner, and app-open ad formats, with exponential backoff retry logic on failed requests</li>
-        <li>Unity IAP for consumable currency packs and non-consumable purchases, including restore-purchase handling</li>
-        <li>Firebase Analytics and Remote Config for event tracking, ad revenue impression logging, and remotely-tunable gameplay values</li>
-        <li>Google Play plugin integration for store-side services</li>
+        <li>Built a drivable/rideable buggy that carries visitors through the zoo, giving players a way to move through and experience the environment beyond walking</li>
+        <li>Implemented as a non-consumable purchase — a one-time unlock rather than a repeatable or currency-based item</li>
+        <li>Integrated into the same Unity IAP and restore-purchase flow used elsewhere in the game, so ownership persists across sessions and devices</li>
       </ul>
     </div>
   </details>
@@ -558,14 +557,74 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Save System &amp; Android Optimization
+      Ads System
+      <span class="comp-suffix">(Third-Party Integration)</span>
+    </summary>
+    <div class="component-body">
+      <p>The ad-revenue path, kept distinct from the purchase and analytics systems below.</p>
+      <ul>
+        <li>AppLovin MAX integration across rewarded, interstitial, banner, and app-open ad formats</li>
+        <li>Exponential backoff retry logic on failed ad requests, rather than silently failing or hammering the network on every retry</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      In-App Purchases
+      <span class="comp-suffix">(Third-Party Integration)</span>
+    </summary>
+    <div class="component-body">
+      <p>The paid-unlock path, covering both consumable currency and permanent, one-time purchases.</p>
+      <ul>
+        <li>Unity IAP integration for consumable currency packs</li>
+        <li>Non-consumable purchases including the buggy/vehicle unlock, with restore-purchase handling so ownership isn't lost on reinstall or device change</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Analytics &amp; Remote Config
+      <span class="comp-suffix">(Third-Party Integration)</span>
+    </summary>
+    <div class="component-body">
+      <p>Tracking and live-tunability layered on top of the core game, without touching gameplay code directly.</p>
+      <ul>
+        <li>Firebase Analytics for event tracking and ad revenue impression logging</li>
+        <li>Remote Config for remotely-tunable gameplay and monetization values, and Google Play plugin integration for store-side services</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Save System
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>The framework layer underneath the whole game: what makes it a mobile game framework, not a prototype.</p>
+      <p>The persistence layer underneath the whole game — what makes it a real mobile game framework rather than a prototype with no memory.</p>
       <ul>
         <li>Persistent JSON-based save system spanning animals, coins, food, quests, levels, and exhibit unlocks</li>
-        <li>Device-memory-aware quality scaling — shorter camera far clip on 3GB devices, extended range on 4GB+, with LOD bias tuned per device tier</li>
+        <li>Structured to load and reconstruct full game state on session start, rather than treating save data as a flat backup file</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Android Optimization
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>Performance and platform-support work that goes beyond a single target device.</p>
+      <ul>
+        <li>Device-memory-aware quality scaling on Android — shorter camera far clip on 3GB devices, extended range on 4GB+, with LOD bias tuned per device tier</li>
+        <li>Also released on iOS, with App Tracking Transparency compliance and safe-area handling built for notched devices; the iOS listing is currently suspended</li>
       </ul>
     </div>
   </details>
