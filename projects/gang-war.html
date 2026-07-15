@@ -171,6 +171,21 @@
     display:inline-block; padding: 3px 9px; border-radius: 4px; margin-bottom: 14px;
   }
 
+  .framework-note{
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    border-radius: 6px; padding: 14px 18px;
+    margin: 18px 0 8px;
+  }
+  .framework-note-icon{
+    font-size: 15px; line-height: 1; margin-top: 2px; flex-shrink: 0;
+  }
+  .framework-note p{
+    margin: 0; font-size: 13.5px; color: var(--text-dim); line-height: 1.6;
+  }
+  .framework-note strong{ color: var(--text); }
+
   .loop{
     display:flex; flex-wrap:wrap; gap:8px; align-items:center;
     font-family: var(--mono); font-size: 13px;
@@ -463,6 +478,11 @@
     alongside its Android launch. The game shipped on Android; its iOS listing was
     released and has since been suspended.
   </p>
+
+  <div class="framework-note">
+    <span class="framework-note-icon">⚙</span>
+    <p><strong>Note on frameworks:</strong> the third-person shooter/controller foundation uses the Invector asset, customized for this project's combat and camera behavior. Everything else — progression, missions, economy, monetization, and save systems — was built from scratch for this game, including Android release build preparation.</p>
+  </div>
 
   <h2>Gameplay Loop</h2>
   <div class="loop">
