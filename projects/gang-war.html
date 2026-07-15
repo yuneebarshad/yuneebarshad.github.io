@@ -303,9 +303,25 @@
     .gallery-grid img{ width: 280px; }
   }
 
-  .gallery-hint{
-    font-family: var(--mono); font-size: 12px; color: var(--text-dim);
+  .gallery-slider-wrap{
+    position: relative;
     margin-bottom: 32px;
+  }
+  .gallery-nav{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(10,11,14,0.75); border: 1px solid var(--border);
+    color: #fff; font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2; transition: opacity 0.15s ease, background 0.15s ease;
+  }
+  .gallery-nav:hover{ background: rgba(10,11,14,0.92); }
+  .gallery-nav.is-hidden{ opacity: 0; pointer-events: none; }
+  .gallery-prev{ left: -6px; }
+  .gallery-next{ right: -6px; }
+  @media (max-width: 640px){
+    .gallery-prev{ left: 2px; }
+    .gallery-next{ right: 2px; }
   }
 
   .gallery-grid img{ cursor: zoom-in; }
@@ -421,14 +437,17 @@
 
   <h2>Gallery</h2>
 
-  <div class="gallery-grid">
-    <img src="images/gang-1.png" alt="Gang Mafia Shooting Crime Game combat screenshot 1">
-    <img src="images/gang-2.png" alt="Gang Mafia Shooting Crime Game combat screenshot 2">
-    <img src="images/gang-3.png" alt="Gang Mafia Shooting Crime Game combat screenshot 3">
-    <img src="images/gang-4.png" alt="Gang Mafia Shooting Crime Game combat screenshot 4">
-    <img src="images/gang-5.png" alt="Gang Mafia Shooting Crime Game combat screenshot 5">
+  <div class="gallery-slider-wrap">
+    <button class="gallery-nav gallery-prev is-hidden" id="galleryPrev" aria-label="Scroll to previous images">&#10094;</button>
+    <div class="gallery-grid" id="galleryGrid">
+      <img src="images/gang-1.png" alt="Gang Mafia Shooting Crime Game combat screenshot 1">
+      <img src="images/gang-2.png" alt="Gang Mafia Shooting Crime Game combat screenshot 2">
+      <img src="images/gang-3.png" alt="Gang Mafia Shooting Crime Game combat screenshot 3">
+      <img src="images/gang-4.png" alt="Gang Mafia Shooting Crime Game combat screenshot 4">
+      <img src="images/gang-5.png" alt="Gang Mafia Shooting Crime Game combat screenshot 5">
+    </div>
+    <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Scroll to next images">&#10095;</button>
   </div>
-  <p class="gallery-hint">&larr; scroll or drag to see more &rarr;</p>
 
   <h2>Overview</h2>
   <p class="role-line">ROLE: Senior Game Developer — gameplay architecture, progression &amp; monetization</p>
@@ -655,6 +674,37 @@
     if(e.key === 'ArrowLeft') show(current - 1);
     if(e.key === 'ArrowRight') show(current + 1);
   });
+})();
+</script>
+
+<script>
+(function(){
+  var grid = document.getElementById('galleryGrid');
+  var prevBtn = document.getElementById('galleryPrev');
+  var nextBtn = document.getElementById('galleryNext');
+  if(!grid || !prevBtn || !nextBtn) return;
+
+  function scrollAmount(){
+    var firstImg = grid.querySelector('img');
+    return firstImg ? firstImg.getBoundingClientRect().width + 16 : 300;
+  }
+
+  function updateButtons(){
+    var maxScroll = grid.scrollWidth - grid.clientWidth;
+    prevBtn.classList.toggle('is-hidden', grid.scrollLeft <= 4);
+    nextBtn.classList.toggle('is-hidden', grid.scrollLeft >= maxScroll - 4);
+  }
+
+  prevBtn.addEventListener('click', function(){
+    grid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+  });
+  nextBtn.addEventListener('click', function(){
+    grid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+  });
+
+  grid.addEventListener('scroll', updateButtons);
+  window.addEventListener('resize', updateButtons);
+  updateButtons();
 })();
 </script>
 
