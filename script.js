@@ -22,16 +22,32 @@ const companyInspectors = document.querySelectorAll('.company-inspector[data-com
 const careerInspector = document.getElementById('careerInspector');
 
 function selectCompany(companyId, shouldFocusInspector = false) {
+  const selectedItem = Array.from(hierarchyItems).find(
+    (item) => item.dataset.company === companyId
+  );
+  const activePanel = Array.from(companyInspectors).find(
+    (panel) => panel.dataset.companyPanel === companyId
+  );
+
+  if (!selectedItem || !activePanel) return;
+
   hierarchyItems.forEach((item) => {
-    const isSelected = item.dataset.company === companyId;
+    const isSelected = item === selectedItem;
     item.classList.toggle('is-selected', isSelected);
     item.setAttribute('aria-selected', isSelected ? 'true' : 'false');
   });
 
   companyInspectors.forEach((panel) => {
-    const isActive = panel.dataset.companyPanel === companyId;
-    panel.hidden = !isActive;
+    panel.hidden = panel !== activePanel;
+    panel.classList.remove('inspector-reveal');
   });
+
+  // Replay a short, restrained reveal only after a deliberate company change.
+  if (shouldFocusInspector && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.requestAnimationFrame(() => {
+      activePanel.classList.add('inspector-reveal');
+    });
+  }
 
   // On mobile, the Hierarchy and Inspector stack vertically. Scroll to the
   // selected Inspector only after the visitor deliberately changes company.
