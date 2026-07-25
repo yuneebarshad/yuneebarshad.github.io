@@ -564,16 +564,20 @@ a{ color: inherit; }
 .pw-view{ font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); }
 
 .pw-grid{
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px; padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 210px));
+  justify-content: start;
+  gap: 18px;
+  padding: 20px 22px 22px;
 }
 .pw-tile{
   display: block; text-decoration: none; color: inherit;
-  border-radius: 6px; padding: 10px 10px 14px;
+  border-radius: 6px; padding: 8px 8px 12px;
   border: 1px solid transparent;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
-.pw-tile:hover, .pw-tile:focus-visible{
+.pw-tile:not(.pw-tile-add):hover,
+.pw-tile:not(.pw-tile-add):focus-visible{
   background: var(--panel-alt); border-color: var(--border);
 }
 .pw-thumb{
@@ -591,7 +595,7 @@ a{ color: inherit; }
 .pw-icon{
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 56%; aspect-ratio: 1;
+  width: 62%; aspect-ratio: 1;
   border-radius: 22%;
   object-fit: cover;
   box-shadow: 0 8px 20px -6px rgba(0,0,0,0.5);
@@ -604,8 +608,16 @@ a{ color: inherit; }
 .pw-thumb-add span{ font-size: 1.8rem; color: var(--text-dim); }
 .pw-dirty{ color: var(--amber); font-size: 0.6rem; }
 .pw-name{
+  min-height: 2.7em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   font-family: var(--font-mono); font-weight: 600; font-size: 0.85rem;
-  color: var(--text); text-align: center; word-break: break-word;
+  line-height: 1.35;
+  color: var(--text); text-align: center;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 .pw-name-muted{ color: var(--text-dim); }
 .pw-ext{ color: var(--text-dim); font-weight: 400; }
@@ -613,7 +625,17 @@ a{ color: inherit; }
   text-align: center; font-family: var(--font-mono); font-size: 0.68rem;
   color: var(--text-dim); margin-top: 4px;
 }
-.pw-tile-add{ cursor: default; }
+.pw-tile-add{
+  cursor: default;
+  pointer-events: none;
+}
+
+
+@media (max-width: 520px){
+  .pw-grid{
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ===== Package Manager (Skills section) ===== */
 .package-manager{
