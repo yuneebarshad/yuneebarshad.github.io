@@ -625,9 +625,29 @@ a{ color: inherit; }
   text-align: center; font-family: var(--font-mono); font-size: 0.68rem;
   color: var(--text-dim); margin-top: 4px;
 }
-.pw-tile-add{
-  cursor: default;
+.pw-tile-add,
+.pw-tile-add:hover,
+.pw-tile-add:focus,
+.pw-tile-add:focus-visible,
+.pw-tile-add:active{
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  cursor: default !important;
   pointer-events: none;
+  outline: none !important;
+  user-select: none;
+}
+
+.pw-tile-add .pw-thumb-add,
+.pw-tile-add:hover .pw-thumb-add,
+.pw-tile-add:focus .pw-thumb-add,
+.pw-tile-add:active .pw-thumb-add{
+  background: transparent !important;
+  border-color: var(--border) !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 
