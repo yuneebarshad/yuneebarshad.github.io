@@ -1,356 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yuneeb Arshad — Senior Unity Developer</title>
-<meta name="description" content="Yuneeb Arshad — Senior Unity Game Developer, 6+ years shipping mobile games. C#, DOTS/ECS, gameplay systems, AI-driven behaviour.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuneeb Arshad — Senior Unity Developer</title>
+  <meta name="description" content="Yuneeb Arshad — Senior Unity Game Developer with 8 years of experience shipping mobile games. C#, DOTS/ECS, gameplay systems, AI-driven behaviour and monetization.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
 
-<div class="grain" aria-hidden="true"></div>
-
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <a href="#top" class="logo">Yuneeb Arshad</a>
-    <nav class="nav" id="siteNav">
-      <a href="#work">Work</a>
-      <a href="#log">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero wrap">
-    <div class="hero-copy">
-      <div class="gameview">
-        <div class="gameview-tabs">
-          <span class="gameview-tab">Scene</span>
-          <span class="gameview-tab gameview-tab-active">Game</span>
-          <span class="gameview-res">Free Aspect</span>
-        </div>
-        <div class="gameview-viewport">
-          <img src="profile.jpg" alt="Yuneeb Arshad" onerror="this.style.display='none'; this.parentElement.querySelector('.gameview-fallback').style.display='flex';">
-          <div class="gameview-fallback">
-            <span>Drop <code>profile.jpg</code> in the project root</span>
-          </div>
-        </div>
-        <div class="gameview-toolbar">
-          <span class="gv-dot"></span><span class="gv-dot"></span><span class="gv-dot"></span>
-          <span class="gv-label">Maximize on Play</span>
-        </div>
-      </div>
-
-      <p class="eyebrow">// senior unity developer</p>
-      <h1>Yuneeb Arshad</h1>
-      <p class="hero-sub">I build performant, scalable mobile games — from AI-driven NPC systems to monetization pipelines that moved real revenue. 6+ years, four studios, systems that shipped.</p>
-      <div class="hero-actions">
-        <a href="#work" class="btn btn-primary">View current builds</a>
-        <a href="Yuneeb_Arshad_CV.pdf" class="btn btn-ghost" download>Download CV</a>
-      </div>
-      <div class="hero-stats">
-        <div><span class="num">6+</span><span class="lbl">years shipping</span></div>
-        <div><span class="num">4</span><span class="lbl">studios</span></div>
-        <div><span class="num">30%</span><span class="lbl">revenue lift, best case</span></div>
-      </div>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#top" class="logo">Yuneeb Arshad</a>
+      <nav class="nav" id="siteNav" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <div class="inspector" role="img" aria-label="Mock Unity Inspector panel describing Yuneeb Arshad">
-      <div class="inspector-titlebar">
-        <span class="inspector-dot"></span>
-        <span class="inspector-dot"></span>
-        <span class="inspector-dot"></span>
-        <span class="inspector-title">Inspector</span>
-      </div>
-      <div class="inspector-object">
-        <div>
-          <div class="inspector-object-name">YuneebArshad.prefab</div>
-          <div class="inspector-object-tag">Tag: SeniorDeveloper &nbsp;|&nbsp; Layer: GameDev</div>
-        </div>
-      </div>
-
-      <div class="component">
-        <div class="component-head">Transform</div>
-        <div class="component-row"><span>Location</span><span>Lahore, Pakistan</span></div>
-        <div class="component-row"><span>Focus</span><span>Mobile · Unity3D</span></div>
-      </div>
-
-      <div class="component">
-        <div class="component-head">UnityDeveloper.cs <span class="badge badge-on">On</span></div>
-        <div class="component-row"><span>Experience</span><span>8 Years</span></div>
-        <div class="component-row"><span>Language</span><span>C#</span></div>
-        <div class="component-row"><span>Architecture</span><span>DOTS / ECS</span></div>
-        <div class="component-row"><span>Shipped Projects</span><span>3 Live</span></div>
-      </div>
-
-      <div class="component">
-        <div class="component-head">Education</div>
-        <div class="component-row"><span>M.Sc. IT</span><span>Univ. of Sargodha</span></div>
-        <div class="component-row"><span>B.Sc. CS</span><span>Govt. Degree College</span></div>
-      </div>
-
-      <button class="add-component" type="button" tabindex="-1">+ Add Component</button>
-    </div>
-  </section>
-
-  <!-- CURRENTLY BUILDING -->
-  <section id="work" class="section">
-    <div class="wrap">
-      <p class="section-eyebrow">// currently building</p>
-      <h2 class="section-title">Shipped work and active builds</h2>
-
-      <div class="project-window">
-        <div class="pw-titlebar">
-          <span class="pw-breadcrumb">Assets <span class="pw-sep">/</span> Projects</span>
-          <span class="pw-count">3 items</span>
-        </div>
-        <div class="pw-toolbar">
-          <span class="pw-search">Search Projects</span>
-          <span class="pw-view">▦ Tiles</span>
-        </div>
-
-        <div class="pw-grid">
-
-          <a href="projects/zoo-animal-manager.html" class="pw-tile">
-            <div class="pw-thumb pw-thumb-zoo">
-              <img class="pw-icon" src="images/zoo-icon.png" alt="Animal Tycoon - Zoo Craft Game icon" onerror="this.style.display='none';">
-              <span class="pw-dirty pw-dirty-live">✓</span>
+  <main id="top">
+    <!-- HERO: GAME VIEW + INSPECTOR -->
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="gameview">
+          <div class="gameview-tabs">
+            <span class="gameview-tab">Scene</span>
+            <span class="gameview-tab gameview-tab-active">Game</span>
+            <span class="gameview-res">Free Aspect</span>
+          </div>
+          <div class="gameview-viewport">
+            <img src="profile.jpg" alt="Yuneeb Arshad" onerror="this.style.display='none'; this.parentElement.querySelector('.gameview-fallback').style.display='flex';">
+            <div class="gameview-fallback">
+              <span>Drop <code>profile.jpg</code> in the project root</span>
             </div>
-            <div class="pw-name">AnimalTycoonZooCraft<span class="pw-ext">.scene</span></div>
-            <div class="pw-tag">Live · 1M+ downloads</div>
-          </a>
-
-          <a href="projects/internet-cafe-empire.html" class="pw-tile">
-            <div class="pw-thumb pw-thumb-cafe">
-              <img class="pw-icon" src="images/cafe-icon.png" alt="Internet Cafe Empire icon" onerror="this.style.display='none';">
-              <span class="pw-dirty pw-dirty-live">✓</span>
-            </div>
-            <div class="pw-name">InternetCafeEmpire<span class="pw-ext">.scene</span></div>
-            <div class="pw-tag">Live · Android &amp; iOS</div>
-          </a>
-
-          <a href="projects/gang-war.html" class="pw-tile">
-            <div class="pw-thumb pw-thumb-gang">
-              <img class="pw-icon" src="images/gang-icon.png" alt="Gang Mafia Shooting Crime Game icon" onerror="this.style.display='none';">
-              <span class="pw-dirty pw-dirty-live">✓</span>
-            </div>
-            <div class="pw-name">GangMafiaShootingCrime<span class="pw-ext">.scene</span></div>
-            <div class="pw-tag">Live · 10K+ downloads</div>
-          </a>
-
-          <div class="pw-tile pw-tile-add">
-            <div class="pw-thumb pw-thumb-add">
-              <span>+</span>
-            </div>
-            <div class="pw-name pw-name-muted">NextProject</div>
-            <div class="pw-tag">Coming soon</div>
           </div>
+          <div class="gameview-toolbar">
+            <span class="gv-dot"></span><span class="gv-dot"></span><span class="gv-dot"></span>
+            <span class="gv-label">Maximize on Play</span>
+          </div>
+        </div>
 
+        <p class="eyebrow">// senior unity developer</p>
+        <h1>Yuneeb Arshad</h1>
+        <p class="hero-sub">I build performant, scalable mobile games — from AI-driven NPC systems to monetization pipelines that moved real revenue. Eight years, four studios, systems that shipped.</p>
+
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">View current builds</a>
+          <a href="Yuneeb_Arshad_CV.pdf" class="btn btn-ghost" download>Download CV</a>
+        </div>
+
+        <div class="hero-stats">
+          <div><span class="num">8</span><span class="lbl">years developing</span></div>
+          <div><span class="num">4</span><span class="lbl">studios</span></div>
+          <div><span class="num">3</span><span class="lbl">live projects</span></div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- EXPERIENCE / COMMIT LOG -->
-  <section id="log" class="section section-alt">
-    <div class="wrap">
-      <p class="section-eyebrow">// build log</p>
-      <h2 class="section-title">Professional experience</h2>
-
-      <div class="commit-log">
-
-        <div class="commit">
-          <div class="commit-line">
-            <span class="commit-msg">AI-driven NPC behaviour &amp; performance overhaul</span>
-          </div>
-          <div class="commit-meta">
-            <span class="commit-company">Invouge Technology</span>
-            <span class="commit-role">Sr. Unity 3D Game Developer</span>
-            <span class="commit-date">Jun 2022 — Present</span>
-          </div>
-          <ul class="diff-stats">
-            <li class="diff-plus">+25% faster load times, iOS &amp; Android</li>
-            <li class="diff-plus">+30% in-game revenue via SDK integrations</li>
-            <li class="diff-plus">+20% faster feature delivery, new code framework</li>
-            <li class="diff-plus">-15% production bugs via code review process</li>
-            <li class="diff-plus">Engineered NPC behaviour systems using AI models</li>
-          </ul>
+      <div class="inspector" role="img" aria-label="Mock Unity Inspector panel describing Yuneeb Arshad">
+        <div class="inspector-titlebar">
+          <span class="inspector-dot"></span>
+          <span class="inspector-dot"></span>
+          <span class="inspector-dot"></span>
+          <span class="inspector-title">Inspector</span>
         </div>
-
-        <div class="commit">
-          <div class="commit-line">
-            <span class="commit-msg">Custom ads module &amp; player retention features</span>
+        <div class="inspector-object">
+          <div>
+            <div class="inspector-object-name">YuneebArshad.prefab</div>
+            <div class="inspector-object-tag">Tag: SeniorDeveloper &nbsp;|&nbsp; Layer: GameDev</div>
           </div>
-          <div class="commit-meta">
-            <span class="commit-company">HighBit Technology</span>
-            <span class="commit-role">Sr. Unity 3D Game Developer</span>
-            <span class="commit-date">Aug 2021 — Jun 2022</span>
-          </div>
-          <ul class="diff-stats">
-            <li class="diff-plus">+20% player retention, new feature design</li>
-            <li class="diff-plus">-25% crash rate, led team of 5 through 50+ fixes</li>
-            <li class="diff-plus">+15% ad revenue via custom Ads modules</li>
-            <li class="diff-plus">Built AI-driven systems for dynamic difficulty</li>
-          </ul>
         </div>
-
-        <div class="commit">
-          <div class="commit-line">
-            <span class="commit-msg">Two titles shipped end-to-end</span>
-          </div>
-          <div class="commit-meta">
-            <span class="commit-company">BraceSol Game Studio</span>
-            <span class="commit-role">Unity 3D Game Developer</span>
-            <span class="commit-date">Mar 2021 — Aug 2021</span>
-          </div>
-          <ul class="diff-stats">
-            <li class="diff-plus">+20% app stability via ANR &amp; bug management</li>
-            <li class="diff-plus">+30% code maintainability, new coding standards</li>
-            <li class="diff-plus">+10% engagement via Ads integration</li>
-          </ul>
+        <div class="component">
+          <div class="component-head">Transform</div>
+          <div class="component-row"><span>Location</span><span>Lahore, Pakistan</span></div>
+          <div class="component-row"><span>Focus</span><span>Mobile · Unity3D</span></div>
         </div>
-
-        <div class="commit">
-          <div class="commit-line">
-            <span class="commit-msg">Multiple original game concepts released</span>
-          </div>
-          <div class="commit-meta">
-            <span class="commit-company">Echno IT Solution</span>
-            <span class="commit-role">Unity 3D Game Developer</span>
-            <span class="commit-date">Mar 2018 — Mar 2021</span>
-          </div>
-          <ul class="diff-stats">
-            <li class="diff-plus">-15% account/upload downtime via process fixes</li>
-            <li class="diff-plus">+10% monetization via Ads solutions</li>
-            <li class="diff-plus">Cross-platform testing across releases</li>
-          </ul>
+        <div class="component">
+          <div class="component-head">UnityDeveloper.cs <span class="badge badge-on">On</span></div>
+          <div class="component-row"><span>Experience</span><span>8 Years</span></div>
+          <div class="component-row"><span>Language</span><span>C#</span></div>
+          <div class="component-row"><span>Architecture</span><span>DOTS / ECS</span></div>
+          <div class="component-row"><span>Shipped Projects</span><span>3 Live</span></div>
         </div>
-
+        <div class="component">
+          <div class="component-head">Education</div>
+          <div class="component-row"><span>M.Sc. IT</span><span>Univ. of Sargodha</span></div>
+          <div class="component-row"><span>B.Sc. CS</span><span>Govt. Degree College</span></div>
+        </div>
+        <button class="add-component" type="button" tabindex="-1">+ Add Component</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="section">
-    <div class="wrap">
-      <p class="section-eyebrow">// packages</p>
-      <h2 class="section-title">Skills, grouped like dependencies</h2>
+    <!-- PROJECT WINDOW -->
+    <section id="work" class="section">
+      <div class="wrap">
+        <p class="section-eyebrow">// project window</p>
+        <h2 class="section-title">Shipped work and active builds</h2>
 
-      <div class="package-manager">
-        <div class="pm-header">
-          <span class="pm-tab pm-tab-active">In Project</span>
-          <span class="pm-search">Search packages</span>
-        </div>
-
-        <div class="pm-list">
-
-          <div class="pm-package">
-            <div class="pm-package-head">
-              <span class="pm-icon">◆</span>
-              <div class="pm-titles">
-                <div class="pm-name">Programming &amp; Tools</div>
-                <div class="pm-version">6.0.2</div>
+        <div class="project-window">
+          <div class="pw-titlebar">
+            <span class="pw-breadcrumb">Assets <span class="pw-sep">/</span> Projects</span>
+            <span class="pw-count">3 items</span>
+          </div>
+          <div class="pw-toolbar">
+            <span class="pw-search">Search Projects</span>
+            <span class="pw-view">▦ Tiles</span>
+          </div>
+          <div class="pw-grid">
+            <a href="projects/zoo-animal-manager.html" class="pw-tile">
+              <div class="pw-thumb pw-thumb-zoo">
+                <img class="pw-icon" src="images/zoo-icon.png" alt="Animal Tycoon - Zoo Craft Game icon" onerror="this.style.display='none';">
+                <span class="pw-dirty pw-dirty-live">✓</span>
               </div>
-              <span class="pm-badge">Installed</span>
-            </div>
-            <ul class="pm-deps">
-              <li>C#</li><li>Unity3D</li><li>Editor Scripting</li>
-              <li>DOTS / ECS</li><li>Addressables</li><li>Git</li>
-            </ul>
-          </div>
+              <div class="pw-name">AnimalTycoonZooCraft<span class="pw-ext">.scene</span></div>
+              <div class="pw-tag">Live · 1M+ downloads</div>
+            </a>
 
-          <div class="pm-package">
-            <div class="pm-package-head">
-              <span class="pm-icon">◆</span>
-              <div class="pm-titles">
-                <div class="pm-name">Gameplay Systems</div>
-                <div class="pm-version">4.1.0</div>
+            <a href="projects/internet-cafe-empire.html" class="pw-tile">
+              <div class="pw-thumb pw-thumb-cafe">
+                <img class="pw-icon" src="images/cafe-icon.png" alt="Internet Cafe Empire icon" onerror="this.style.display='none';">
+                <span class="pw-dirty pw-dirty-live">✓</span>
               </div>
-              <span class="pm-badge">Installed</span>
-            </div>
-            <ul class="pm-deps">
-              <li>Physics Simulation</li><li>Gameplay Architecture</li>
-              <li>Performance Profiling</li><li>Multiplayer Networking</li>
-            </ul>
-          </div>
+              <div class="pw-name">InternetCafeEmpire<span class="pw-ext">.scene</span></div>
+              <div class="pw-tag">Live · Android &amp; iOS</div>
+            </a>
 
-          <div class="pm-package">
-            <div class="pm-package-head">
-              <span class="pm-icon">◆</span>
-              <div class="pm-titles">
-                <div class="pm-name">UI / UX</div>
-                <div class="pm-version">3.2.1</div>
+            <a href="projects/gang-war.html" class="pw-tile">
+              <div class="pw-thumb pw-thumb-gang">
+                <img class="pw-icon" src="images/gang-icon.png" alt="Gang Mafia Shooting Crime Game icon" onerror="this.style.display='none';">
+                <span class="pw-dirty pw-dirty-live">✓</span>
               </div>
-              <span class="pm-badge">Installed</span>
-            </div>
-            <ul class="pm-deps">
-              <li>UI Framework Implementation</li><li>UX Research</li>
-              <li>Performance Optimization</li>
-            </ul>
-          </div>
+              <div class="pw-name">GangMafiaShootingCrime<span class="pw-ext">.scene</span></div>
+              <div class="pw-tag">Live · 10K+ downloads</div>
+            </a>
 
-          <div class="pm-package">
-            <div class="pm-package-head">
-              <span class="pm-icon">◆</span>
-              <div class="pm-titles">
-                <div class="pm-name">AI &amp; Automation</div>
-                <div class="pm-version">2.4.0</div>
-              </div>
-              <span class="pm-badge">Installed</span>
+            <div class="pw-tile pw-tile-add">
+              <div class="pw-thumb pw-thumb-add"><span>+</span></div>
+              <div class="pw-name pw-name-muted">NextProject</div>
+              <div class="pw-tag">Coming soon</div>
             </div>
-            <ul class="pm-deps">
-              <li>ML Integration</li><li>Behaviour Tree Systems</li>
-              <li>Test Automation</li><li>Continuous Integration</li>
-            </ul>
           </div>
-
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section section-alt">
-    <div class="wrap">
-      <p class="section-eyebrow">// console</p>
-      <h2 class="section-title">Get in touch</h2>
+    <!-- EXPERIENCE: HIERARCHY + INSPECTOR -->
+    <section id="experience" class="section section-alt">
+      <div class="wrap">
+        <p class="section-eyebrow">// hierarchy + inspector</p>
+        <h2 class="section-title">Professional experience</h2>
 
-      <div class="terminal">
-        <div class="terminal-titlebar">
-          <span class="inspector-dot"></span><span class="inspector-dot"></span><span class="inspector-dot"></span>
-          <span class="inspector-title">contact.sh</span>
-        </div>
-        <div class="terminal-body">
-          <p><span class="prompt">yuneeb@portfolio:~$</span> contact --list</p>
-          <p class="term-line">email &nbsp;&nbsp;&nbsp; <a href="mailto:yuneebarshad@gmail.com">yuneebarshad@gmail.com</a></p>
-          <p class="term-line">phone &nbsp;&nbsp;&nbsp; +92-324-4557068</p>
-          <p class="term-line">linkedin &nbsp; <a href="https://www.linkedin.com/in/yuneebarshad/" target="_blank" rel="noopener">linkedin.com/in/yuneebarshad</a></p>
-          <p><span class="prompt">yuneeb@portfolio:~$</span> <span class="cursor">&nbsp;</span></p>
+        <div class="unity-experience-window">
+          <div class="experience-layout">
+            <aside class="hierarchy-panel" aria-label="Professional experience companies">
+              <div class="unity-panel-titlebar">Hierarchy</div>
+              <div class="hierarchy-tree">
+                <div class="hierarchy-root"><span class="tree-arrow">▾</span><span class="scene-cube">◆</span> ProfessionalExperience</div>
+
+                <button class="hierarchy-item is-selected" type="button" data-company="invouge" aria-selected="true" aria-controls="company-invouge">
+                  <span class="tree-indent"></span><span class="tree-cube">◆</span>
+                  <span class="hierarchy-company-name">Invouge Technology</span>
+                  <span class="hierarchy-open-icon" aria-hidden="true">›</span>
+                </button>
+
+                <button class="hierarchy-item" type="button" data-company="highbit" aria-selected="false" aria-controls="company-highbit">
+                  <span class="tree-indent"></span><span class="tree-cube">◆</span>
+                  <span class="hierarchy-company-name">HighBit Technology</span>
+                  <span class="hierarchy-open-icon" aria-hidden="true">›</span>
+                </button>
+
+                <button class="hierarchy-item" type="button" data-company="bracesol" aria-selected="false" aria-controls="company-bracesol">
+                  <span class="tree-indent"></span><span class="tree-cube">◆</span>
+                  <span class="hierarchy-company-name">BraceSol Game Studio</span>
+                  <span class="hierarchy-open-icon" aria-hidden="true">›</span>
+                </button>
+
+                <button class="hierarchy-item" type="button" data-company="echno" aria-selected="false" aria-controls="company-echno">
+                  <span class="tree-indent"></span><span class="tree-cube">◆</span>
+                  <span class="hierarchy-company-name">Echno IT Solution</span>
+                  <span class="hierarchy-open-icon" aria-hidden="true">›</span>
+                </button>
+              </div>
+            </aside>
+
+            <div class="career-inspector-panel" id="careerInspector" aria-live="polite">
+              <div class="unity-panel-titlebar">Inspector</div>
+
+              <article class="company-inspector is-active" id="company-invouge" data-company-panel="invouge">
+                <div class="career-object-header">
+                  <span class="career-object-icon">IT</span>
+                  <div>
+                    <h3>InvougeTechnology.prefab</h3>
+                    <p>Tag: Employer &nbsp;|&nbsp; Layer: ProfessionalExperience</p>
+                  </div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> Transform</div>
+                  <div class="career-property"><span>Company</span><strong>Invouge Technology</strong></div>
+                  <div class="career-property"><span>Role</span><strong>Sr. Unity 3D Game Developer</strong></div>
+                  <div class="career-property"><span>Duration</span><strong>Jun 2022 — Present</strong></div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> CareerExperience.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements">
+                    <li>Developed and maintained mobile game features across iOS and Android</li>
+                    <li>Engineered AI-driven NPC behaviour systems</li>
+                    <li>Integrated monetization SDKs and third-party services</li>
+                    <li>Introduced reusable architecture and a structured code-review workflow</li>
+                  </ul>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> SystemsDeveloped.cs <span class="component-enabled">✓</span></div>
+                  <div class="career-tags"><span>NPC AI</span><span>SDK Integration</span><span>Optimization</span><span>Architecture</span></div>
+                </div>
+                <div class="career-component career-results-component">
+                  <div class="career-component-head"><span>▾</span> ResultsAndImpact.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements career-results">
+                    <li><span class="achievement-value">25%</span> faster load times across iOS and Android</li>
+                    <li><span class="achievement-value">30%</span> increase in in-game revenue through SDK integrations</li>
+                    <li><span class="achievement-value">20%</span> faster feature delivery through a new code framework</li>
+                    <li><span class="achievement-value">15%</span> reduction in production bugs through code review</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="company-inspector" id="company-highbit" data-company-panel="highbit" hidden>
+                <div class="career-object-header">
+                  <span class="career-object-icon">HB</span>
+                  <div>
+                    <h3>HighBitTechnology.prefab</h3>
+                    <p>Tag: Employer &nbsp;|&nbsp; Layer: ProfessionalExperience</p>
+                  </div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> Transform</div>
+                  <div class="career-property"><span>Company</span><strong>HighBit Technology</strong></div>
+                  <div class="career-property"><span>Role</span><strong>Sr. Unity 3D Game Developer</strong></div>
+                  <div class="career-property"><span>Duration</span><strong>Aug 2021 — Jun 2022</strong></div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> CareerExperience.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements">
+                    <li>Designed and implemented features focused on player retention</li>
+                    <li>Led a five-person team through more than 50 production fixes</li>
+                    <li>Built AI-driven systems for dynamic difficulty</li>
+                    <li>Developed custom advertising modules</li>
+                  </ul>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> SystemsDeveloped.cs <span class="component-enabled">✓</span></div>
+                  <div class="career-tags"><span>Retention</span><span>Ads Module</span><span>Team Leadership</span><span>Dynamic Difficulty</span></div>
+                </div>
+                <div class="career-component career-results-component">
+                  <div class="career-component-head"><span>▾</span> ResultsAndImpact.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements career-results">
+                    <li><span class="achievement-value">20%</span> improvement in player retention through new feature design</li>
+                    <li><span class="achievement-value">25%</span> reduction in crash rate across production releases</li>
+                    <li><span class="achievement-value">15%</span> increase in ad revenue through custom modules</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="company-inspector" id="company-bracesol" data-company-panel="bracesol" hidden>
+                <div class="career-object-header">
+                  <span class="career-object-icon">BS</span>
+                  <div>
+                    <h3>BraceSolGameStudio.prefab</h3>
+                    <p>Tag: Employer &nbsp;|&nbsp; Layer: ProfessionalExperience</p>
+                  </div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> Transform</div>
+                  <div class="career-property"><span>Company</span><strong>BraceSol Game Studio</strong></div>
+                  <div class="career-property"><span>Role</span><strong>Unity 3D Game Developer</strong></div>
+                  <div class="career-property"><span>Duration</span><strong>Mar 2021 — Aug 2021</strong></div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> CareerExperience.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements">
+                    <li>Shipped two titles from development through release</li>
+                    <li>Managed ANR issues and recurring production bugs</li>
+                    <li>Introduced clearer code standards and reusable practices</li>
+                    <li>Integrated advertising systems into released projects</li>
+                  </ul>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> SystemsDeveloped.cs <span class="component-enabled">✓</span></div>
+                  <div class="career-tags"><span>Full-Cycle Delivery</span><span>ANR Fixes</span><span>Code Standards</span><span>Ads</span></div>
+                </div>
+                <div class="career-component career-results-component">
+                  <div class="career-component-head"><span>▾</span> ResultsAndImpact.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements career-results">
+                    <li><span class="achievement-value">20%</span> improvement in app stability through ANR and bug management</li>
+                    <li><span class="achievement-value">30%</span> improvement in code maintainability through new standards</li>
+                    <li><span class="achievement-value">10%</span> increase in engagement through advertising integration</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="company-inspector" id="company-echno" data-company-panel="echno" hidden>
+                <div class="career-object-header">
+                  <span class="career-object-icon">EI</span>
+                  <div>
+                    <h3>EchnoITSolution.prefab</h3>
+                    <p>Tag: Employer &nbsp;|&nbsp; Layer: ProfessionalExperience</p>
+                  </div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> Transform</div>
+                  <div class="career-property"><span>Company</span><strong>Echno IT Solution</strong></div>
+                  <div class="career-property"><span>Role</span><strong>Unity 3D Game Developer</strong></div>
+                  <div class="career-property"><span>Duration</span><strong>Mar 2018 — Mar 2021</strong></div>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> CareerExperience.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements">
+                    <li>Released multiple original game concepts</li>
+                    <li>Managed publishing, account and upload workflows</li>
+                    <li>Integrated advertising and monetization solutions</li>
+                    <li>Performed cross-platform testing across releases</li>
+                  </ul>
+                </div>
+                <div class="career-component">
+                  <div class="career-component-head"><span>▾</span> SystemsDeveloped.cs <span class="component-enabled">✓</span></div>
+                  <div class="career-tags"><span>Game Concepts</span><span>Publishing</span><span>Monetization</span><span>Cross-Platform QA</span></div>
+                </div>
+                <div class="career-component career-results-component">
+                  <div class="career-component-head"><span>▾</span> ResultsAndImpact.cs <span class="component-enabled">✓</span></div>
+                  <ul class="career-achievements career-results">
+                    <li><span class="achievement-value">15%</span> reduction in account and upload downtime through process fixes</li>
+                    <li><span class="achievement-value">10%</span> improvement in monetization through advertising solutions</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- PACKAGE MANAGER -->
+    <section id="skills" class="section">
+      <div class="wrap">
+        <p class="section-eyebrow">// package manager</p>
+        <h2 class="section-title">Skills, grouped like dependencies</h2>
+
+        <div class="package-manager">
+          <div class="pm-header">
+            <span class="pm-tab pm-tab-active">In Project</span>
+            <span class="pm-search">Search packages</span>
+          </div>
+          <div class="pm-list">
+            <div class="pm-package">
+              <div class="pm-package-head">
+                <span class="pm-icon">◆</span>
+                <div class="pm-titles"><div class="pm-name">Programming &amp; Tools</div><div class="pm-version">6.0.2</div></div>
+                <span class="pm-badge">Installed</span>
+              </div>
+              <ul class="pm-deps"><li>C#</li><li>Unity3D</li><li>Editor Scripting</li><li>DOTS / ECS</li><li>Addressables</li><li>Git</li></ul>
+            </div>
+            <div class="pm-package">
+              <div class="pm-package-head">
+                <span class="pm-icon">◆</span>
+                <div class="pm-titles"><div class="pm-name">Gameplay Systems</div><div class="pm-version">4.1.0</div></div>
+                <span class="pm-badge">Installed</span>
+              </div>
+              <ul class="pm-deps"><li>Physics Simulation</li><li>Gameplay Architecture</li><li>Performance Profiling</li><li>Multiplayer Networking</li></ul>
+            </div>
+            <div class="pm-package">
+              <div class="pm-package-head">
+                <span class="pm-icon">◆</span>
+                <div class="pm-titles"><div class="pm-name">UI / UX</div><div class="pm-version">3.2.1</div></div>
+                <span class="pm-badge">Installed</span>
+              </div>
+              <ul class="pm-deps"><li>UI Framework Implementation</li><li>UX Research</li><li>Performance Optimization</li></ul>
+            </div>
+            <div class="pm-package">
+              <div class="pm-package-head">
+                <span class="pm-icon">◆</span>
+                <div class="pm-titles"><div class="pm-name">AI &amp; Automation</div><div class="pm-version">2.4.0</div></div>
+                <span class="pm-badge">Installed</span>
+              </div>
+              <ul class="pm-deps"><li>ML Integration</li><li>Behaviour Tree Systems</li><li>Test Automation</li><li>Continuous Integration</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMPLIFIED UNITY CONSOLE -->
+    <section id="contact" class="section section-alt">
+      <div class="wrap">
+        <p class="section-eyebrow">// console</p>
+        <h2 class="section-title">Get in touch</h2>
+
+        <div class="console-window">
+          <div class="console-titlebar">Console</div>
+
+          <div class="contact-console-intro">
+            <span class="contact-status-dot" aria-hidden="true"></span>
+            <div>
+              <strong>Available for Unity development opportunities</strong>
+              <p>Choose a contact method below to start a conversation.</p>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <a class="contact-row" href="mailto:yuneebarshad@gmail.com">
+              <span class="contact-icon" aria-hidden="true">@</span>
+              <span class="contact-copy"><small>Email</small><strong>yuneebarshad@gmail.com</strong></span>
+              <span class="contact-action">Send email <b>›</b></span>
+            </a>
+
+            <a class="contact-row" href="tel:+923244557068">
+              <span class="contact-icon" aria-hidden="true">#</span>
+              <span class="contact-copy"><small>Phone</small><strong>+92 324 4557068</strong></span>
+              <span class="contact-action">Call <b>›</b></span>
+            </a>
+
+            <a class="contact-row" href="https://www.linkedin.com/in/yuneebarshad/" target="_blank" rel="noopener">
+              <span class="contact-icon" aria-hidden="true">in</span>
+              <span class="contact-copy"><small>LinkedIn</small><strong>linkedin.com/in/yuneebarshad</strong></span>
+              <span class="contact-action">Open profile <b>›</b></span>
+            </a>
+
+            <a class="contact-row" href="https://github.com/yuneebarshad" target="_blank" rel="noopener">
+              <span class="contact-icon" aria-hidden="true">&lt;/&gt;</span>
+              <span class="contact-copy"><small>GitHub</small><strong>github.com/yuneebarshad</strong></span>
+              <span class="contact-action">View code <b>›</b></span>
+            </a>
+
+            <a class="contact-row" href="Yuneeb_Arshad_CV.pdf" download>
+              <span class="contact-icon" aria-hidden="true">CV</span>
+              <span class="contact-copy"><small>Résumé</small><strong>Yuneeb_Arshad_CV.pdf</strong></span>
+              <span class="contact-action">Download <b>›</b></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 Yuneeb Arshad</span>
+      <span>Designed like Unity. Built for the web.</span>
     </div>
-  </section>
+  </footer>
 
-</main>
-
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <span>© 2026 Yuneeb Arshad</span>
-    <span>Built with Unity know-how, shipped with Git.</span>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
