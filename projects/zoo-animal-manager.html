@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Animal Tycoon - Zoo Craft Game case study by Yuneeb Arshad. Production Unity mobile game featuring gameplay architecture, AI, progression, monetization, JSON persistence, and Android/iOS platform support.">
 <title>Animal Tycoon - Zoo Craft Game — Case Study — Yuneeb Arshad</title>
 <style>
   :root{
@@ -20,7 +21,6 @@
     --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
     --sans: -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
   }
-
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
 
@@ -36,7 +36,6 @@
   }
 
   .wrap{ max-width: 860px; margin: 0 auto; padding: 48px 24px 100px; }
-
   .sitehead{
     position: sticky; top: 0; z-index: 50;
     background: rgba(20,21,26,0.85);
@@ -61,7 +60,6 @@
   @media (max-width: 560px){
     .sitehead-nav{ display: none; }
   }
-
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
     font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
@@ -70,7 +68,6 @@
   .topbar a{ color: var(--blue); text-decoration:none; }
   .topbar a:hover{ text-decoration:underline; }
   .dot{ color: var(--teal); }
-
   .eyebrow{
     font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
     color: var(--teal); margin-bottom: 14px; display:flex; align-items:center; gap:8px;
@@ -86,10 +83,9 @@
   .subtitle{
     color: var(--text-muted);
     font-size: 16.5px;
-    max-width: 62ch;
+    max-width: 66ch;
     margin: 0 0 28px;
   }
-
   .inspector{
     background: var(--bg-panel);
     border: 1px solid var(--border);
@@ -111,7 +107,7 @@
   }
   .inspector-body{ padding: 4px 0; }
   .field-row{
-    display:grid; grid-template-columns: 130px 1fr;
+    display:grid; grid-template-columns: 150px 1fr;
     padding: 10px 16px;
     border-bottom: 1px solid var(--border);
     font-size: 14px;
@@ -123,7 +119,6 @@
   .field-value.live::before{ content:"✓ "; }
   .field-value a{ color: var(--blue); text-decoration:none; font-weight:600; }
   .field-value a:hover{ text-decoration:underline; }
-
   .back-pill{
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--mono); font-size: 13px; font-weight: 600;
@@ -137,7 +132,6 @@
     color: var(--text); border-color: var(--teal);
     transform: translateX(-2px);
   }
-
   .inspector-cta{
     padding: 18px 16px 20px;
     display: flex; justify-content: center;
@@ -150,7 +144,6 @@
     background: var(--bg-field); border: 1px solid var(--border);
     color: var(--text-muted); padding: 3px 9px; border-radius: 4px;
   }
-
   h2{
     font-size: 13px;
     font-family: var(--mono);
@@ -164,13 +157,29 @@
 
   p{ color: var(--text); font-size: 15.5px; }
   p.muted{ color: var(--text-muted); }
-
-  .role-line{
-    font-family: var(--mono); font-size: 12.5px; color: var(--amber);
-    background: rgba(242,163,60,0.08); border: 1px solid rgba(242,163,60,0.25);
-    display:inline-block; padding: 3px 9px; border-radius: 4px; margin-bottom: 14px;
+  .overview-role{
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    color: var(--text);
+    background: rgba(108, 158, 248, 0.08);
+    border: 1px solid rgba(108, 158, 248, 0.22);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 4px 4px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
-
+  .overview-role strong{
+    color: var(--blue);
+    margin-right: 4px;
+  }
+  .gallery-note{
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    margin: -4px 0 14px;
+  }
   .loop{
     display:flex; flex-wrap:wrap; gap:8px; align-items:center;
     font-family: var(--mono); font-size: 13px;
@@ -179,7 +188,6 @@
   }
   .loop span.step{ color: var(--text); background: var(--bg-field); border:1px solid var(--border); padding:5px 10px; border-radius:5px; }
   .loop span.arrow{ color: var(--text-dim); margin: 0 2px; }
-
   details.component{
     background: var(--bg-panel);
     border: 1px solid var(--border);
@@ -211,12 +219,10 @@
     color: var(--teal); font-size: 10px; flex-shrink:0;
   }
   .comp-suffix{ color: var(--text-dim); font-weight: 400; font-family: var(--mono); font-size: 12px; margin-left: auto; }
-
   .component-body{ padding: 16px 18px 20px; border-top: 1px solid var(--border); }
   .component-body p{ margin: 0 0 12px; color: var(--text-muted); font-size: 14.5px; }
   .component-body ul{ margin: 0; padding-left: 18px; }
   .component-body li{ color: var(--text); font-size: 14.5px; margin-bottom: 6px; }
-
   .contrib-list{ margin: 8px 0 0; padding-left: 0; list-style:none; }
   .contrib-list li{
     display:flex; gap:10px; align-items:flex-start;
@@ -228,13 +234,6 @@
     content:"✓"; color: var(--teal); font-family: var(--mono); font-weight:700;
     flex-shrink:0; margin-top:1px;
   }
-
-  .callout{
-    background: var(--bg-panel); border:1px solid var(--border); border-left: 3px solid var(--blue);
-    border-radius: 6px; padding: 16px 18px; margin-top: 10px;
-  }
-  .callout p{ margin:0; color: var(--text); }
-
   .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 40px; }
   .btn{
     font-family: var(--mono); font-size: 13.5px; font-weight:600;
@@ -244,16 +243,15 @@
   .btn-primary{ background: var(--teal); color: #0d1a17; border-color: var(--teal); }
   .btn-ghost{ color: var(--text); background: transparent; }
   .btn-ghost:hover{ background: var(--bg-panel); }
-
   footer{
     margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--border);
     font-family: var(--mono); font-size: 12px; color: var(--text-dim);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
   }
   footer a{ color: var(--text-dim); }
-
   @media (max-width: 560px){
     .field-row{ grid-template-columns: 1fr; gap: 3px; }
+    .comp-suffix{ display:none; }
   }
   .gallery-video{
     position: relative;
@@ -269,7 +267,6 @@
     width: 100%; height: 100%;
     border: 0;
   }
-
   .gallery-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -284,6 +281,7 @@
     border: 1px solid var(--border);
     display: block;
     transition: transform 0.15s ease, border-color 0.15s ease;
+    cursor: zoom-in;
   }
   .gallery-grid img:hover{
     transform: translateY(-2px);
@@ -292,9 +290,6 @@
   @media (min-width: 720px){
     .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
   }
-
-  .gallery-grid img{ cursor: zoom-in; }
-
   .lightbox-overlay{
     position: fixed; inset: 0; background: rgba(8,9,12,0.94);
     display: none; align-items: center; justify-content: center;
@@ -329,16 +324,15 @@
     .lightbox-prev{ left: 8px; }
     .lightbox-next{ right: 8px; }
   }
-
 </style>
 </head>
 <body>
 <header class="sitehead">
   <div class="sitehead-inner">
     <a href="../index.html" class="sitehead-logo">Yuneeb Arshad</a>
-    <nav class="sitehead-nav">
+    <nav class="sitehead-nav" aria-label="Portfolio navigation">
       <a href="../index.html#work">Work</a>
-      <a href="../index.html#log">Experience</a>
+      <a href="../index.html#experience">Experience</a>
       <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
@@ -347,55 +341,62 @@
 <div class="wrap">
 
   <a href="../index.html#work" class="back-pill">&larr; Back to portfolio</a>
-
   <h1>Animal Tycoon - Zoo Craft Game</h1>
   <p class="subtitle">
-    A complete Unity Android zoo management simulation built from scratch, focused on
-    scalable gameplay systems, mobile performance, and production-ready monetization.
+    A production mobile zoo-management game developed in Unity, where I architected and
+    implemented its core gameplay, AI, progression, monetization and persistence systems.
   </p>
 
   <div class="inspector">
     <div class="inspector-header">
-      <span class="script-icon"></span>
+      <span class="script-icon" aria-hidden="true"></span>
       Animal Tycoon - Zoo Craft Game — Details
     </div>
     <div class="inspector-body">
       <div class="field-row">
-        <span class="field-label">Status</span>
+        <span class="field-label">Platforms</span>
+        <span class="field-value">Android / iOS</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Current Status</span>
         <span class="field-value live">Live on Google Play</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">iOS Release</span>
+        <span class="field-value">Previously published</span>
       </div>
       <div class="field-row">
         <span class="field-label">Downloads</span>
         <span class="field-value">1,000,000+</span>
       </div>
       <div class="field-row">
-        <span class="field-label">Rating</span>
-        <span class="field-value">3.7 ★</span>
-      </div>
-      <div class="field-row">
         <span class="field-label">Engine</span>
-        <span class="field-value">Unity 2022.3.62f2</span>
+        <span class="field-value">Unity 2022.3.62f2 LTS</span>
       </div>
       <div class="field-row">
-        <span class="field-label">Platform</span>
-        <span class="field-value">Android</span>
+        <span class="field-label">Studio</span>
+        <span class="field-value">Invouge Technology</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">Role</span>
+        <span class="field-value">Senior Game Developer — architecture &amp; core systems</span>
       </div>
       <div class="field-row">
         <span class="field-label">Tags</span>
         <span class="field-value">
-          <div class="tags">
-            <span class="tag">Unity3D</span>
+          <span class="tags">
             <span class="tag">C#</span>
-            <span class="tag">Android</span>
             <span class="tag">NavMesh</span>
-            <span class="tag">Firebase</span>
+            <span class="tag">Cinemachine</span>
+            <span class="tag">Unity Input System</span>
+            <span class="tag">Firebase Analytics</span>
             <span class="tag">Remote Config</span>
             <span class="tag">AppLovin MAX</span>
             <span class="tag">Unity IAP</span>
             <span class="tag">JSON Save System</span>
             <span class="tag">AI Systems</span>
             <span class="tag">Mobile Optimization</span>
-          </div>
+          </span>
         </span>
       </div>
       <div class="inspector-cta">
@@ -405,17 +406,15 @@
   </div>
 
   <h2>Gallery</h2>
-
+  <p class="gallery-note">Official store screenshots and gameplay footage.</p>
   <div class="gallery-video">
     <iframe
       src="https://www.youtube.com/embed/wSvXRz4s8z4"
       title="Animal Tycoon - Zoo Craft Game gameplay"
-      frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen>
     </iframe>
   </div>
-
   <div class="gallery-grid">
     <img src="images/zoo-1.png" alt="Giraffe exhibit with visitor family feeding animals">
     <img src="images/zoo-2.png" alt="Panda enclosure with a group of visitors watching">
@@ -424,15 +423,15 @@
   </div>
 
   <h2>Overview</h2>
-  <p class="role-line">ROLE: Senior Game Developer — project architecture &amp; core systems</p>
+  <p class="overview-role"><strong>ROLE:</strong> Senior Game Developer — Project Architecture &amp; Core Systems</p>
   <p>
-    A mobile zoo management simulation built from scratch in Unity for Android, where
-    players expand a zoo by unlocking exhibits, purchasing and caring for animals,
-    feeding them through a physics-based interaction system, completing quests, and
-    managing a full in-game economy. I architected the core gameplay systems — exhibit
-    progression, animal AI, visitor navigation, quests, and the currency economy — and
-    integrated third-party SDKs for monetization, analytics, and mobile tooling to
-    bring it to a production-ready, live release.
+    Animal Tycoon is a production mobile zoo-management simulation developed in Unity for Android
+    and iOS. Players expand their zoo by unlocking exhibits, purchasing and caring for animals,
+    feeding them through a physics-based interaction system, completing quests, and managing an
+    in-game economy. I architected and implemented the core gameplay systems, including exhibit
+    progression, animal AI, visitor navigation, quests, economy and persistent game state. I also
+    integrated the production systems for advertising, in-app purchases, analytics, Remote Config
+    and cross-platform mobile support.
   </p>
 
   <h2>Gameplay Loop</h2>
@@ -447,12 +446,12 @@
 
   <h2>Key Highlights</h2>
   <ul class="contrib-list">
-    <li>Built the complete gameplay loop from scratch in Unity, from exhibit unlocking through quest-driven progression.</li>
-    <li>Implemented a persistent, obfuscated local save system for currency, using XOR-style encoding to protect player economy data.</li>
-    <li>Developed AI-driven animals with hunger, survival, and food-detection behavior tied to a physics-based feeding mechanic.</li>
-    <li>Created NavMesh-based visitor NPC movement with obstacle avoidance and collision recovery.</li>
-    <li>Integrated Unity IAP, AppLovin MAX, Firebase Analytics, and Remote Config into a production monetization pipeline, including exponential backoff retry logic on ad requests.</li>
-    <li>Optimized Android performance with device-memory-based quality scaling, tuning camera far clip and LOD bias across low- and mid-range devices.</li>
+    <li>Architected the complete zoo progression and exhibit-management loop, from unlocking enclosures through quest- and level-gated expansion.</li>
+    <li>Developed animal AI with hunger, survival and food-detection behaviour connected to a Rigidbody-based feeding system with projectile-arc aiming.</li>
+    <li>Created NavMesh-based visitor navigation with walk/idle animation states, obstacle avoidance and stuck/collision recovery.</li>
+    <li>Implemented a persistent JSON save and economy system that reconstructs full gameplay state and uses XOR-style obfuscation to discourage casual save-file tampering.</li>
+    <li>Built the monetization and live-operations pipeline with AppLovin MAX, Unity IAP, Firebase Analytics and Remote Config, including exponential-backoff ad retries and purchase restoration.</li>
+    <li>Optimized Android performance using device-memory-based quality scaling and delivered iOS support with App Tracking Transparency and safe-area handling.</li>
   </ul>
 
   <h2>Core Systems</h2>
@@ -460,15 +459,17 @@
   <details class="component" open>
     <summary>
       <span class="comp-check">✓</span>
-      Exhibit &amp; Animal Management
+      Zoo Progression &amp; Exhibit Management
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>Handles unlocking exhibits, purchasing animals, and spawning them into the correct enclosure.</p>
+      <p>Controls the main progression loop from locked zoo areas to active, populated exhibits.</p>
       <ul>
-        <li>Loads and saves exhibit unlock/purchase state from persistent JSON on session start</li>
-        <li>Swaps locked-area prefabs for active arena prefabs at runtime</li>
-        <li>Wires each unlocked exhibit to animal spawn points, food points, and cutscene triggers</li>
+        <li>Unlocks exhibits, processes animal purchases and spawns animals in the correct enclosures</li>
+        <li>Loads and saves exhibit unlock and purchase state through persistent JSON data</li>
+        <li>Replaces locked-area prefabs with active arena prefabs at runtime</li>
+        <li>Connects unlocked exhibits to animal spawn points, food points and cutscene triggers</li>
+        <li>Tracks feeding, cleaning and exhibit-unlock quests, with level-gated access to new animals, exhibits and features</li>
       </ul>
     </div>
   </details>
@@ -476,15 +477,16 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Feeding &amp; Animal AI
+      Animal AI &amp; Physics Feeding
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>A physics-based feeding mechanic paired with hunger-driven animal behavior, rather than a tap-to-feed button.</p>
+      <p>Combines hunger-driven animal behaviour with a physics-based feeding interaction.</p>
       <ul>
-        <li>Cannon-based aiming with projectile arc preview and turret rotation, using Rigidbody physics for the food throw</li>
-        <li>Active food tracking per exhibit, with AI notification when food lands so animals detect and respond to it</li>
-        <li>Hunger and survival values tick down per animal, with feed state and remaining food count persisting across sessions</li>
+        <li>Implements cannon-based aiming, turret rotation and a projectile-arc preview for Rigidbody food throws</li>
+        <li>Tracks active food per exhibit and notifies the relevant animal AI when food lands</li>
+        <li>Runs hunger and survival values per animal so animals detect, approach and consume available food</li>
+        <li>Persists feeding state and remaining food values across sessions</li>
       </ul>
     </div>
   </details>
@@ -492,15 +494,15 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Animal Delivery Puzzle
+      Visitor AI &amp; Navigation
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>A dedicated minigame layered into the delivery/unlock flow, rather than a straight cutscene handoff.</p>
+      <p>Populates the zoo with visitors that move between exhibits and react reliably to the environment.</p>
       <ul>
-        <li>Screw-removal interaction wired from world-space objects into UI-driven completion tracking across each side of the panel</li>
-        <li>Multi-side completion state tracked independently before the delivery is considered resolved</li>
-        <li>Cinemachine camera sequencing moves from the puzzle view into the reveal shot once the puzzle completes</li>
+        <li>Uses NavMeshAgent pathfinding between visitor destinations</li>
+        <li>Triggers walk and idle animation states according to movement</li>
+        <li>Tunes obstacle avoidance and implements stuck/collision recovery</li>
       </ul>
     </div>
   </details>
@@ -508,15 +510,36 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      NPC Visitor System
+      Quest, Tutorial &amp; Retention Systems
+      <span class="comp-suffix">(Script + Integration)</span>
+    </summary>
+    <div class="component-body">
+      <p>Guides players through the first session and supports continued progression and return visits.</p>
+      <ul>
+        <li>Implements a five-stage tutorial with interaction gating so each required action is completed before the next stage</li>
+        <li>Tracks tutorial completion and drop-off through funnel analytics</li>
+        <li>Schedules a multi-stage local-notification campaign through Day 28 to support player retention</li>
+        <li>Includes an always-on gameplay minimap and a separate full-screen map for wider environment navigation</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Economy &amp; JSON Persistence
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>Populates the zoo with visitors that make it feel alive rather than static.</p>
+      <p>Provides a centralized economy and persistence layer shared across progression, rewards and purchases.</p>
       <ul>
-        <li>NavMeshAgent-driven pathing between destinations</li>
-        <li>Animation state triggers for walk/idle transitions</li>
-        <li>Obstacle avoidance tuning and stuck/collision recovery</li>
+        <li>Handles starting cash, currency addition/deduction and a separate ticket currency for zoo entry</li>
+        <li>Persists animals, coins, food, quests, levels and exhibit unlocks through structured JSON data</li>
+        <li>Reconstructs the complete runtime game state when a session starts</li>
+        <li>Uses XOR-style obfuscation to discourage casual modification of local currency data</li>
+        <li>Synchronizes animated coin collection and UI updates using DOTween/LeanTween</li>
+        <li>Routes rewarded-ad and IAP payouts through the same economy layer</li>
+        <li>Supports Silver, Gold and Platinum ticket tiers, with generation values tunable through Remote Config</li>
       </ul>
     </div>
   </details>
@@ -524,83 +547,18 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Quest &amp; Level Progression
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>Ties quests and levels together into the loop that keeps players moving forward.</p>
-      <ul>
-        <li>Quest tracking across feeding, cleaning, and exhibit-unlock tasks</li>
-        <li>Level-gated content unlocks for new exhibits, animals, and features</li>
-        <li>Tutorial flow, an always-on gameplay minimap, and a separate full-screen map for a wider environment overview</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Onboarding &amp; Retention
-      <span class="comp-suffix">(Script + Third-Party Integration)</span>
-    </summary>
-    <div class="component-body">
-      <p>Getting new players through their first session and back for the next one.</p>
-      <ul>
-        <li>Five-stage tutorial flow with interaction gating, so each step must be completed before the next one unlocks</li>
-        <li>Funnel analytics tracking tutorial completion and drop-off per stage</li>
-        <li>Scheduled local notification campaign spanning Day 1, 2, 3, 5, 7 through Day 28 to bring lapsed players back</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Economy &amp; Currency
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>A dedicated economy layer underneath the whole game, not just a coin counter.</p>
-      <ul>
-        <li>Starting cash, currency add/deduct logic, and separate ticket currency for zoo entry</li>
-        <li>Obfuscated local currency saves using XOR-style encoding, protecting player progress from casual tampering</li>
-        <li>Animated coin collection and UI sync using DOTween/LeanTween across multiple panels</li>
-        <li>Rewarded-ad and IAP currency flows feeding directly into the same economy system</li>
-        <li>Ticket currency scales through three tiers (Silver, Gold, Platinum) as the zoo progresses, with the generation rate tunable via Remote Config</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Buggy/Vehicle System
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>A visitor transport feature with its own gameplay presence and a dedicated purchase path — not just background scenery.</p>
-      <ul>
-        <li>Built a drivable/rideable buggy that carries visitors through the zoo, giving players a way to move through and experience the environment beyond walking</li>
-        <li>Implemented as a non-consumable purchase — a one-time unlock rather than a repeatable or currency-based item</li>
-        <li>Integrated into the same Unity IAP and restore-purchase flow used elsewhere in the game, so ownership persists across sessions and devices</li>
-        <li>Cinemachine camera target reassignment when entering/exiting the buggy, so the active view follows whichever the player is controlling</li>
-        <li>Input System rebinding to switch control schemes between on-foot and buggy control</li>
-        <li>Minimap ownership transfer and safe-exit positioning so the player is placed correctly when leaving the vehicle</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Ads System
+      Monetization &amp; Live Operations
       <span class="comp-suffix">(Third-Party Integration)</span>
     </summary>
     <div class="component-body">
-      <p>The ad-revenue path, kept distinct from the purchase and analytics systems below.</p>
+      <p>Connects advertising, purchases, analytics and remotely configurable values into one production pipeline.</p>
       <ul>
-        <li>AppLovin MAX integration across rewarded, interstitial, banner, and app-open ad formats</li>
-        <li>Exponential backoff retry logic on failed ad requests, rather than silently failing or hammering the network on every retry</li>
+        <li>Integrates AppLovin MAX rewarded, interstitial, banner and app-open advertisements</li>
+        <li>Uses exponential-backoff retry handling for failed ad-load requests</li>
+        <li>Implements Unity IAP consumable currency packs and non-consumable unlocks</li>
+        <li>Restores non-consumable purchases after reinstall or device change</li>
+        <li>Uses Firebase Analytics for gameplay events, tutorial funnels and ad-revenue impression logging</li>
+        <li>Uses Remote Config for live-tunable gameplay and monetization values, with Google Play plugin support for store services</li>
       </ul>
     </div>
   </details>
@@ -608,44 +566,17 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      In-App Purchases
-      <span class="comp-suffix">(Third-Party Integration)</span>
-    </summary>
-    <div class="component-body">
-      <p>The paid-unlock path, covering both consumable currency and permanent, one-time purchases.</p>
-      <ul>
-        <li>Unity IAP integration for consumable currency packs</li>
-        <li>Non-consumable purchases including the buggy/vehicle unlock, with restore-purchase handling so ownership isn't lost on reinstall or device change</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Analytics &amp; Remote Config
-      <span class="comp-suffix">(Third-Party Integration)</span>
-    </summary>
-    <div class="component-body">
-      <p>Tracking and live-tunability layered on top of the core game, without touching gameplay code directly.</p>
-      <ul>
-        <li>Firebase Analytics for event tracking and ad revenue impression logging</li>
-        <li>Remote Config for remotely-tunable gameplay and monetization values, and Google Play plugin integration for store-side services</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Save System
+      Vehicle &amp; Input Systems
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>The persistence layer underneath the whole game — what makes it a real mobile game framework rather than a prototype with no memory.</p>
+      <p>Adds a purchasable, driveable visitor buggy with its own camera, input and minimap behaviour.</p>
       <ul>
-        <li>Persistent JSON-based save system spanning animals, coins, food, quests, levels, and exhibit unlocks</li>
-        <li>Structured to load and reconstruct full game state on session start, rather than treating save data as a flat backup file</li>
+        <li>Builds a rideable buggy that transports visitors through the zoo</li>
+        <li>Connects buggy ownership to the Unity IAP non-consumable and restore-purchase flow</li>
+        <li>Reassigns Cinemachine camera targets when entering or exiting the vehicle</li>
+        <li>Switches Unity Input System control schemes between on-foot and buggy movement</li>
+        <li>Transfers minimap ownership and places the player safely when exiting</li>
       </ul>
     </div>
   </details>
@@ -653,14 +584,33 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Android Optimization
+      Animal Delivery Interaction
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>Performance and platform-support work that goes beyond a single target device.</p>
+      <p>Adds an interactive puzzle to the animal-delivery and exhibit-unlock flow.</p>
       <ul>
-        <li>Device-memory-aware quality scaling on Android — shorter camera far clip on 3GB devices, extended range on 4GB+, with LOD bias tuned per device tier</li>
-        <li>Also released on iOS, with App Tracking Transparency compliance and safe-area handling built for notched devices; the iOS listing is currently suspended</li>
+        <li>Connects world-space screw-removal interactions to UI completion tracking</li>
+        <li>Tracks each side of the delivery panel independently before marking the interaction complete</li>
+        <li>Sequences Cinemachine cameras from the puzzle view into the final animal reveal</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
+      Mobile Optimization &amp; Platform Support
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>Adapts visual quality and platform behaviour for production Android and iOS releases.</p>
+      <ul>
+        <li>Scales quality according to available device memory on Android</li>
+        <li>Uses a shorter camera far-clip range on 3 GB devices and an extended range on 4 GB+ devices</li>
+        <li>Tunes LOD bias per device tier to balance scene visibility and performance</li>
+        <li>Implements App Tracking Transparency support on iOS</li>
+        <li>Handles safe areas for notched iPhone and iPad screens</li>
       </ul>
     </div>
   </details>
@@ -676,7 +626,7 @@
 
 </div>
 
-<div class="lightbox-overlay" id="lightboxOverlay">
+<div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
   <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="">
@@ -688,6 +638,7 @@
 (function(){
   var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
   if(!imgs.length) return;
+
   var overlay = document.getElementById('lightboxOverlay');
   var imgEl = document.getElementById('lightboxImg');
   var counter = document.getElementById('lightboxCounter');
@@ -702,18 +653,21 @@
     imgEl.alt = imgs[current].alt;
     counter.textContent = (current + 1) + ' / ' + imgs.length;
   }
+
   function open(i){
     show(i);
     overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
   }
+
   function close(){
     overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
   }
 
   imgs.forEach(function(img, i){
     img.addEventListener('click', function(){ open(i); });
   });
-
   closeBtn.addEventListener('click', close);
   prevBtn.addEventListener('click', function(){ show(current - 1); });
   nextBtn.addEventListener('click', function(){ show(current + 1); });
@@ -728,6 +682,5 @@
   });
 })();
 </script>
-
 </body>
 </html>
