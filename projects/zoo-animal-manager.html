@@ -448,7 +448,7 @@
   <h2>Key Highlights</h2>
   <ul class="contrib-list">
     <li>Built the complete gameplay loop from scratch in Unity, from exhibit unlocking through quest-driven progression.</li>
-    <li>Implemented a persistent, encrypted local save system for currency, using XOR-style encoding to protect player economy data.</li>
+    <li>Implemented a persistent, obfuscated local save system for currency, using XOR-style encoding to protect player economy data.</li>
     <li>Developed AI-driven animals with hunger, survival, and food-detection behavior tied to a physics-based feeding mechanic.</li>
     <li>Created NavMesh-based visitor NPC movement with obstacle avoidance and collision recovery.</li>
     <li>Integrated Unity IAP, AppLovin MAX, Firebase Analytics, and Remote Config into a production monetization pipeline, including exponential backoff retry logic on ad requests.</li>
@@ -492,6 +492,22 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
+      Animal Delivery Puzzle
+      <span class="comp-suffix">(Script)</span>
+    </summary>
+    <div class="component-body">
+      <p>A dedicated minigame layered into the delivery/unlock flow, rather than a straight cutscene handoff.</p>
+      <ul>
+        <li>Screw-removal interaction wired from world-space objects into UI-driven completion tracking across each side of the panel</li>
+        <li>Multi-side completion state tracked independently before the delivery is considered resolved</li>
+        <li>Cinemachine camera sequencing moves from the puzzle view into the reveal shot once the puzzle completes</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
       NPC Visitor System
       <span class="comp-suffix">(Script)</span>
     </summary>
@@ -524,6 +540,22 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
+      Onboarding &amp; Retention
+      <span class="comp-suffix">(Script + Third-Party Integration)</span>
+    </summary>
+    <div class="component-body">
+      <p>Getting new players through their first session and back for the next one.</p>
+      <ul>
+        <li>Five-stage tutorial flow with interaction gating, so each step must be completed before the next one unlocks</li>
+        <li>Funnel analytics tracking tutorial completion and drop-off per stage</li>
+        <li>Scheduled local notification campaign spanning Day 1, 2, 3, 5, 7 through Day 28 to bring lapsed players back</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary>
+      <span class="comp-check">✓</span>
       Economy &amp; Currency
       <span class="comp-suffix">(Script)</span>
     </summary>
@@ -531,9 +563,10 @@
       <p>A dedicated economy layer underneath the whole game, not just a coin counter.</p>
       <ul>
         <li>Starting cash, currency add/deduct logic, and separate ticket currency for zoo entry</li>
-        <li>Encrypted local currency saves using XOR-style encoding, protecting player progress from casual tampering</li>
+        <li>Obfuscated local currency saves using XOR-style encoding, protecting player progress from casual tampering</li>
         <li>Animated coin collection and UI sync using DOTween/LeanTween across multiple panels</li>
         <li>Rewarded-ad and IAP currency flows feeding directly into the same economy system</li>
+        <li>Ticket currency scales through three tiers (Silver, Gold, Platinum) as the zoo progresses, with the generation rate tunable via Remote Config</li>
       </ul>
     </div>
   </details>
@@ -550,6 +583,9 @@
         <li>Built a drivable/rideable buggy that carries visitors through the zoo, giving players a way to move through and experience the environment beyond walking</li>
         <li>Implemented as a non-consumable purchase — a one-time unlock rather than a repeatable or currency-based item</li>
         <li>Integrated into the same Unity IAP and restore-purchase flow used elsewhere in the game, so ownership persists across sessions and devices</li>
+        <li>Cinemachine camera target reassignment when entering/exiting the buggy, so the active view follows whichever the player is controlling</li>
+        <li>Input System rebinding to switch control schemes between on-foot and buggy control</li>
+        <li>Minimap ownership transfer and safe-exit positioning so the player is placed correctly when leaving the vehicle</li>
       </ul>
     </div>
   </details>
