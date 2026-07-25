@@ -993,16 +993,15 @@ button{ color: inherit; }
 /* ===== Simplified Unity Console contact section ===== */
 .contact-console-intro{
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-  padding: 18px;
+  padding: 14px 18px;
   background: #202427;
   border-bottom: 1px solid #111416;
 }
 .contact-status-dot{
   width: 10px;
   height: 10px;
-  margin-top: 5px;
   border-radius: 50%;
   background: var(--teal);
   box-shadow: 0 0 0 4px rgba(62,207,142,0.1);
@@ -1014,11 +1013,6 @@ button{ color: inherit; }
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 500;
-}
-.contact-console-intro p{
-  margin: 5px 0 0;
-  color: #858c91;
-  font-size: 0.75rem;
 }
 .contact-list{ background: #181b1e; }
 .contact-row{
