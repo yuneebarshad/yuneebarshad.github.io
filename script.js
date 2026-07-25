@@ -31,7 +31,6 @@ function selectCompany(companyId, shouldFocusInspector = false) {
   companyInspectors.forEach((panel) => {
     const isActive = panel.dataset.companyPanel === companyId;
     panel.hidden = !isActive;
-    panel.classList.toggle('is-active', isActive);
   });
 
   // On mobile, the Hierarchy and Inspector stack vertically. Scroll to the
