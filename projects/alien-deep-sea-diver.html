@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Senior Unity Developer case study for Alien Deep Sea Diver Game, covering underwater survival systems, oxygen and depth mechanics, inventory, crafting, objectives, progression, JSON persistence, Firebase, AppLovin MAX and Android/iOS production support.">
+<title>Alien Deep Sea Diver Game — Case Study — Yuneeb Arshad</title>
+<style>
+  :root{
+    --bg: #14151a;
+    --bg-panel: #1b1d24;
+    --bg-panel-header: #22252d;
+    --bg-field: #191b21;
+    --border: #2b2e37;
+    --text: #e9eaee;
+    --text-muted: #8b8f9c;
+    --text-dim: #5c6070;
+    --amber: #f2a33c;
+    --teal: #4fc9a8;
+    --blue: #6c9ef8;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+    --sans: -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(79,201,168,0.07), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(108,158,248,0.06), transparent 40%);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+  }
+  .wrap{ max-width: 860px; margin: 0 auto; padding: 48px 24px 100px; }
+  .sitehead{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(20,21,26,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .sitehead-inner{
+    max-width: 860px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .sitehead-logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    color: var(--text); text-decoration: none; letter-spacing: 0.02em;
+  }
+  .sitehead-nav{ display: flex; gap: 24px; }
+  .sitehead-nav a{
+    color: var(--text-muted); text-decoration: none;
+    font-family: var(--sans); font-size: 0.9rem; font-weight: 500;
+  }
+  .sitehead-nav a:hover{ color: var(--text); }
+  @media (max-width: 560px){ .sitehead-nav{ display: none; } }
+  h1{
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+  }
+  .subtitle{
+    color: var(--text-muted);
+    font-size: 16.5px;
+    max-width: 66ch;
+    margin: 0 0 28px;
+  }
+  .back-pill{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--text-muted); text-decoration: none;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 20px;
+    margin-bottom: 32px;
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .back-pill:hover{ color: var(--text); border-color: var(--teal); transform: translateX(-2px); }
+  .inspector{
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .inspector-header{
+    background: var(--bg-panel-header);
+    padding: 12px 16px;
+    display:flex; align-items:center; gap:10px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 13px; color: var(--text-muted);
+  }
+  .script-icon{
+    width:14px; height:14px; border-radius:3px;
+    background: linear-gradient(135deg, var(--teal), #2d8f7a);
+    flex-shrink:0;
+  }
+  .inspector-body{ padding: 4px 0; }
+  .field-row{
+    display:grid; grid-template-columns: 150px 1fr;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .field-row:last-child{ border-bottom:none; }
+  .field-label{ font-family: var(--mono); color: var(--text-dim); font-size: 12.5px; padding-top:1px; }
+  .field-value{ color: var(--text); font-weight: 600; }
+  .field-value.live{ color: var(--teal); }
+  .field-value.live::before{ content:"✓ "; }
+  .inspector-cta{
+    padding: 18px 16px 20px;
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+  }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family: var(--mono); font-size: 12px;
+    background: var(--bg-field); border: 1px solid var(--border);
+    color: var(--text-muted); padding: 3px 9px; border-radius: 4px;
+  }
+  h2{
+    font-size: 13px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin: 56px 0 16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  h2::after{ content:""; flex:1; height:1px; background: var(--border); }
+  p{ color: var(--text); font-size: 15.5px; }
+  .overview-role{
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    color: var(--text);
+    background: rgba(79, 201, 168, 0.08);
+    border: 1px solid rgba(79, 201, 168, 0.22);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 4px 4px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .overview-role strong{ color: var(--teal); margin-right: 4px; }
+  .framework-note{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--bg-panel); border:1px solid var(--border);
+    border-left:3px solid var(--amber); border-radius:6px;
+    padding:14px 18px; margin:18px 0 8px;
+  }
+  .framework-note-icon{ font-size:15px; line-height:1; margin-top:3px; flex-shrink:0; }
+  .framework-note p{ margin:0; color:var(--text-muted); font-size:13.5px; line-height:1.65; }
+  .framework-note strong{ color:var(--text); }
+  .gallery-note{
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    margin: -4px 0 14px;
+  }
+  .gallery-video{
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--border); margin-bottom: 20px;
+  }
+  .gallery-video iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .gallery-grid{
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 16px; margin-bottom: 40px;
+  }
+  .gallery-grid img{
+    width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+    border-radius: 8px; border: 1px solid var(--border); display: block;
+    transition: transform 0.15s ease, border-color 0.15s ease; cursor: zoom-in;
+  }
+  .gallery-grid img:hover{ transform: translateY(-2px); border-color: var(--teal); }
+  @media (min-width: 720px){ .gallery-grid{ grid-template-columns: repeat(3, 1fr); } }
+  .loop{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    font-family: var(--mono); font-size: 13px;
+    background: var(--bg-panel); border:1px solid var(--border);
+    border-radius: 8px; padding: 18px; margin: 8px 0 0;
+  }
+  .loop span.step{ color: var(--text); background: var(--bg-field); border:1px solid var(--border); padding:5px 10px; border-radius:5px; }
+  .loop span.arrow{ color: var(--text-dim); margin: 0 2px; }
+  .contrib-list{ margin: 8px 0 0; padding-left: 0; list-style:none; }
+  .contrib-list li{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size: 14.5px; color: var(--text); margin-bottom: 12px;
+    background: var(--bg-panel); border:1px solid var(--border);
+    border-radius: 7px; padding: 12px 14px;
+  }
+  .contrib-list li::before{
+    content:"✓"; color: var(--teal); font-family: var(--mono); font-weight:700;
+    flex-shrink:0; margin-top:1px;
+  }
+  details.component{
+    background: var(--bg-panel); border: 1px solid var(--border);
+    border-radius: 8px; margin-bottom: 10px; overflow: hidden;
+  }
+  details.component summary{
+    list-style: none; cursor: pointer; padding: 14px 16px;
+    display:flex; align-items:center; gap:10px;
+    background: var(--bg-panel-header); font-weight: 700; font-size: 14.5px;
+  }
+  details.component summary::-webkit-details-marker{ display:none; }
+  details.component summary::before{
+    content:"▸"; color: var(--text-dim); font-size: 11px;
+    transition: transform 0.15s ease; width: 10px;
+  }
+  details.component[open] summary::before{ transform: rotate(90deg); }
+  .comp-check{
+    width:14px; height:14px; border:1.5px solid var(--teal); border-radius:3px;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--teal); font-size: 10px; flex-shrink:0;
+  }
+  .comp-suffix{ color: var(--text-dim); font-weight: 400; font-family: var(--mono); font-size: 12px; margin-left: auto; }
+  .component-body{ padding: 16px 18px 20px; border-top: 1px solid var(--border); }
+  .component-body p{ margin: 0 0 12px; color: var(--text-muted); font-size: 14.5px; }
+  .component-body ul{ margin: 0; padding-left: 18px; }
+  .component-body li{ color: var(--text); font-size: 14.5px; margin-bottom: 6px; }
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 40px; }
+  .btn{
+    font-family: var(--mono); font-size: 13.5px; font-weight:600;
+    padding: 11px 20px; border-radius: 6px; text-decoration:none;
+    border:1px solid var(--border);
+  }
+  .btn-primary{ background: var(--teal); color: #0d1a17; border-color: var(--teal); }
+  .btn-ghost{ color: var(--text); background: transparent; }
+  .btn-ghost:hover{ background: var(--bg-panel); }
+  footer{
+    margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 12px; color: var(--text-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+  footer a{ color: var(--text-dim); }
+  .lightbox-overlay{
+    position: fixed; inset: 0; background: rgba(8,9,12,0.94);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; flex-direction: column;
+  }
+  .lightbox-overlay.active{ display: flex; }
+  .lightbox-img{ max-width: 88vw; max-height: 78vh; border-radius: 8px; border: 1px solid var(--border); }
+  .lightbox-close{
+    position: absolute; top: 20px; right: 28px;
+    font-size: 32px; line-height: 1; color: #fff;
+    background: none; border: none; cursor: pointer;
+  }
+  .lightbox-nav{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-nav:hover{ background: rgba(255,255,255,0.16); }
+  .lightbox-prev{ left: 20px; }
+  .lightbox-next{ right: 20px; }
+  .lightbox-counter{ margin-top: 14px; color: rgba(255,255,255,0.6); font-family: var(--mono); font-size: 13px; }
+  @media (max-width: 560px){
+    .field-row{ grid-template-columns: 1fr; gap: 3px; }
+    .comp-suffix{ display:none; }
+  }
+  @media (max-width: 640px){
+    .lightbox-nav{ width: 38px; height: 38px; font-size: 16px; }
+    .lightbox-prev{ left: 8px; }
+    .lightbox-next{ right: 8px; }
+  }
+</style>
+</head>
+<body>
+<header class="sitehead">
+  <div class="sitehead-inner">
+    <a class="sitehead-logo" href="../index.html">Yuneeb Arshad</a>
+    <nav aria-label="Portfolio navigation" class="sitehead-nav">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back-pill" href="../index.html#work">← Back to portfolio</a>
+
+  <h1>Alien Deep Sea Diver Game</h1>
+  <p class="subtitle">
+    A production Android and iOS underwater survival game where I built the project-specific
+    exploration, oxygen, inventory, crafting, progression, persistence and mobile production systems in Unity.
+  </p>
+
+  <div class="inspector">
+    <div class="inspector-header"><span aria-hidden="true" class="script-icon"></span>Alien Deep Sea Diver Game — Details</div>
+    <div class="inspector-body">
+      <div class="field-row"><span class="field-label">Platforms</span><span class="field-value">Android / iOS</span></div>
+      <div class="field-row"><span class="field-label">Current Status</span><span class="field-value live">Live on Google Play</span></div>
+      <div class="field-row"><span class="field-label">iOS Release</span><span class="field-value">Previously published</span></div>
+      <div class="field-row"><span class="field-label">Downloads</span><span class="field-value">10,000+</span></div>
+      <div class="field-row"><span class="field-label">Engine</span><span class="field-value">Unity 2022.3 LTS</span></div>
+      <div class="field-row"><span class="field-label">Role</span><span class="field-value">Senior Game Developer — project architecture &amp; core systems</span></div>
+      <div class="field-row"><span class="field-label">Starting Point</span><span class="field-value">Custom project with Invector controller integration</span></div>
+      <div class="field-row">
+        <span class="field-label">Tags</span>
+        <span class="field-value"><span class="tags">
+          <span class="tag">C#</span>
+          <span class="tag">URP</span>
+          <span class="tag">Invector Controller</span>
+          <span class="tag">ScriptableObjects</span>
+          <span class="tag">JSON Save System</span>
+          <span class="tag">PlayerPrefs</span>
+          <span class="tag">Firebase Analytics</span>
+          <span class="tag">Remote Config</span>
+          <span class="tag">AppLovin MAX</span>
+          <span class="tag">Tenjin</span>
+          <span class="tag">Unity Timeline</span>
+          <span class="tag">Mobile UI Systems</span>
+        </span></span>
+      </div>
+      <div class="inspector-cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.underwater.world.explore.craft.survive.game&amp;hl=en" target="_blank" rel="noopener">View on Google Play</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>Gallery</h2>
+  <p class="gallery-note">Official store screenshots and gameplay footage.</p>
+  <div class="gallery-video">
+    <iframe src="https://www.youtube.com/embed/T2_-EYL-f7Q" title="Alien Deep Sea Diver Game gameplay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="gallery-grid">
+    <img src="images/deep-sea-1.png" alt="Underwater world exploration in Alien Deep Sea Diver Game">
+    <img src="images/deep-sea-2.png" alt="Oxygen, depth and underwater HUD in Alien Deep Sea Diver Game">
+    <img src="images/deep-sea-3.png" alt="Inventory, crafting and progression gameplay in Alien Deep Sea Diver Game">
+  </div>
+
+  <h2>Overview</h2>
+  <p class="overview-role"><strong>ROLE:</strong>Senior Game Developer — Project Architecture &amp; Core Systems</p>
+  <p>
+    Alien Deep Sea Diver Game is a production Android and iOS underwater survival game developed in Unity.
+    Players explore submerged environments, manage oxygen and depth, gather resources, craft survival equipment,
+    complete objectives and progress through level-based content. I built the project-specific gameplay architecture
+    and systems, including underwater-state handling, oxygen and depth mechanics, inventory, equipment, quick slots,
+    crafting, resource scanning, tasks, objectives, XP progression and persistent save data. I also integrated the
+    mobile production services for advertising, analytics, Remote Config, attribution and platform deployment.
+  </p>
+  <div class="framework-note">
+    <span aria-hidden="true" class="framework-note-icon">⚙</span>
+    <p><strong>Framework note:</strong> I built the project-specific gameplay architecture and systems in Unity, using Invector for the controller foundation and third-party SDKs for mobile production services.</p>
+  </div>
+
+  <h2>Gameplay Loop</h2>
+  <div class="loop">
+    <span class="step">Explore the ocean</span><span class="arrow">→</span>
+    <span class="step">Manage oxygen</span><span class="arrow">→</span>
+    <span class="step">Scan &amp; collect</span><span class="arrow">→</span>
+    <span class="step">Craft equipment</span><span class="arrow">→</span>
+    <span class="step">Complete objectives</span><span class="arrow">→</span>
+    <span class="step">Gain XP &amp; progress</span>
+  </div>
+
+  <h2>Key Highlights</h2>
+  <ul class="contrib-list">
+    <li>Built underwater-state handling with oxygen depletion, depth tracking, drowning feedback and real-time HUD updates.</li>
+    <li>Developed categorized inventory, equipment slots and underwater quick-slot item handling.</li>
+    <li>Implemented ScriptableObject-driven crafting recipes with ingredient validation, resource consumption and crafted-item output.</li>
+    <li>Built task, objective, XP and level-progression systems with prerequisites and persistent completion state.</li>
+    <li>Implemented JSON Save Data and PlayerPrefs persistence for player progression, inventory and objective state.</li>
+    <li>Integrated Firebase Analytics, Remote Config, AppLovin MAX and Tenjin for production mobile support.</li>
+  </ul>
+
+  <h2>Core Systems</h2>
+
+  <details class="component" open>
+    <summary><span class="comp-check">✓</span>Underwater Movement &amp; Dive State<span class="comp-suffix">(Framework Extension + Script)</span></summary>
+    <div class="component-body">
+      <p>Extended the controller foundation with the underwater-state logic required by exploration and survival gameplay.</p>
+      <ul>
+        <li>Tracks when the player enters water and becomes fully submerged</li>
+        <li>Activates underwater gameplay controls, quick slots and HUD elements while diving</li>
+        <li>Changes player interaction behaviour when surfacing or leaving the water</li>
+        <li>Connects underwater state with equipment handling and progression systems</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>Oxygen, Depth &amp; Drowning Feedback<span class="comp-suffix">(Script + UI)</span></summary>
+    <div class="component-body">
+      <p>Built the primary survival layer that measures dive depth and communicates remaining oxygen to the player.</p>
+      <ul>
+        <li>Drains oxygen while the player remains underwater</li>
+        <li>Calculates depth relative to the water surface</li>
+        <li>Updates oxygen sliders, percentage text and depth indicators in real time</li>
+        <li>Triggers low-oxygen and drowning feedback through the gameplay UI</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>Inventory, Gear &amp; Quick Slots<span class="comp-suffix">(Script + ScriptableObjects)</span></summary>
+    <div class="component-body">
+      <p>Implemented categorized item storage and equipment handling for survival tools, resources, food and wearable gear.</p>
+      <ul>
+        <li>Separates equipment, gear, resources and food into defined inventory categories</li>
+        <li>Supports gear slots for suit, fins, oxygen tank, gloves and chip equipment</li>
+        <li>Allows usable underwater items to be assigned to quick slots</li>
+        <li>Connects pickup, equip, drop and held-item behaviour with the world interaction system</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>Crafting &amp; ScriptableObject Recipes<span class="comp-suffix">(Script + ScriptableObjects)</span></summary>
+    <div class="component-body">
+      <p>Built a data-driven crafting system that connects recipe requirements with inventory consumption and progression.</p>
+      <ul>
+        <li>Defines crafted items and ingredient requirements through ScriptableObject recipes</li>
+        <li>Validates resource availability before crafting</li>
+        <li>Consumes required ingredients and adds the crafted result to inventory</li>
+        <li>Updates connected task, objective and feedback systems after crafting</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>Tasks, Objectives, XP &amp; Level Progression<span class="comp-suffix">(Script)</span></summary>
+    <div class="component-body">
+      <p>Implemented guided progression that activates level-specific goals and connects player actions with XP and unlock flow.</p>
+      <ul>
+        <li>Loads tasks and objectives for the active progression level</li>
+        <li>Supports prerequisites, resource collection and crafting objectives</li>
+        <li>Records objective completion and updates task interfaces</li>
+        <li>Awards XP and coordinates pending level-up confirmation before unlocking later content</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>JSON Save Data &amp; PlayerPrefs Persistence<span class="comp-suffix">(Script)</span></summary>
+    <div class="component-body">
+      <p>Used local persistence to restore progression and item state across application sessions.</p>
+      <ul>
+        <li>Stores structured player-level and inventory data through JSON serialization</li>
+        <li>Stores task and objective completion state through PlayerPrefs</li>
+        <li>Restores equipped items, quick-slot selections and progression state during loading</li>
+        <li>Connects save updates with inventory, crafting, scanning and level progression</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>Resource Scanning &amp; HUD Navigation<span class="comp-suffix">(Script + UI)</span></summary>
+    <div class="component-body">
+      <p>Built resource-discovery and navigation feedback to help mobile players locate useful underwater interactables.</p>
+      <ul>
+        <li>Tracks nearby scannable and collectible resources</li>
+        <li>Displays navigation markers and off-screen guidance for relevant world targets</li>
+        <li>Connects scanning state with item discovery and progression</li>
+        <li>Coordinates pickup interactions with inventory and objective updates</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>Story, Timeline &amp; Mobile UI Flow<span class="comp-suffix">(Timeline + UI)</span></summary>
+    <div class="component-body">
+      <p>Implemented the presentation flow that connects story sequences, loading, gameplay and the primary mobile interfaces.</p>
+      <ul>
+        <li>Uses Unity Timeline for staged story and cutscene sequences</li>
+        <li>Coordinates image-based dialogue and gameplay transitions</li>
+        <li>Built main menu, loading, pause, gameplay, inventory, crafting and task interfaces</li>
+        <li>Connects mobile UI state with underwater gameplay and progression</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="component">
+    <summary><span class="comp-check">✓</span>Monetization, Analytics &amp; Remote Config<span class="comp-suffix">(Third-Party Integration + Script)</span></summary>
+    <div class="component-body">
+      <p>Integrated the production services used for advertising, analytics, attribution and remote tuning.</p>
+      <ul>
+        <li>Integrated AppLovin MAX advertising flows for the mobile release</li>
+        <li>Instrumented gameplay and production events through Firebase Analytics</li>
+        <li>Connected selected values with Firebase Remote Config for production tuning</li>
+        <li>Integrated Tenjin attribution and impression-level ad revenue tracking</li>
+        <li>Prepared the project for Android and iOS deployment</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="cta-row"><a class="btn btn-ghost" href="../index.html#work">Back to portfolio</a></div>
+  <footer><span>Yuneeb Arshad — Senior Unity Developer</span><span>Lahore, Pakistan</span></footer>
+</div>
+
+<div aria-hidden="true" class="lightbox-overlay" id="lightboxOverlay">
+  <button aria-label="Close" class="lightbox-close" id="lightboxClose">×</button>
+  <button aria-label="Previous image" class="lightbox-nav lightbox-prev" id="lightboxPrev">❮</button>
+  <img alt="" class="lightbox-img" id="lightboxImg" src="">
+  <button aria-label="Next image" class="lightbox-nav lightbox-next" id="lightboxNext">❯</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+(function(){
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
+  if(!imgs.length) return;
+  var overlay = document.getElementById('lightboxOverlay');
+  var imgEl = document.getElementById('lightboxImg');
+  var counter = document.getElementById('lightboxCounter');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+  var current = 0;
+  function show(i){
+    current = (i + imgs.length) % imgs.length;
+    imgEl.src = imgs[current].src;
+    imgEl.alt = imgs[current].alt;
+    counter.textContent = (current + 1) + ' / ' + imgs.length;
+  }
+  function open(i){ show(i); overlay.classList.add('active'); overlay.setAttribute('aria-hidden', 'false'); }
+  function close(){ overlay.classList.remove('active'); overlay.setAttribute('aria-hidden', 'true'); }
+  imgs.forEach(function(img, i){ img.addEventListener('click', function(){ open(i); }); });
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function(){ show(current - 1); });
+  nextBtn.addEventListener('click', function(){ show(current + 1); });
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!overlay.classList.contains('active')) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowLeft') show(current - 1);
+    if(e.key === 'ArrowRight') show(current + 1);
+  });
+})();
+</script>
+</body>
+</html>
