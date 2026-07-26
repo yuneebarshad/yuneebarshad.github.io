@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Senior Unity Developer case study for Gang Mafia Shooting Crime Game, covering Invector combat customization, territory progression, enemy-wave systems, weapons, gang recruitment, persistence, Addressables, AppLovin MAX, Firebase Analytics and Android/iOS production releases.">
 <title>Gang Mafia Shooting Crime Game — Case Study — Yuneeb Arshad</title>
 <style>
   :root{
@@ -20,7 +21,6 @@
     --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
     --sans: -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
   }
-
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
 
@@ -36,7 +36,6 @@
   }
 
   .wrap{ max-width: 860px; margin: 0 auto; padding: 48px 24px 100px; }
-
   .sitehead{
     position: sticky; top: 0; z-index: 50;
     background: rgba(20,21,26,0.85);
@@ -61,7 +60,6 @@
   @media (max-width: 560px){
     .sitehead-nav{ display: none; }
   }
-
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
     font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
@@ -70,7 +68,6 @@
   .topbar a{ color: var(--blue); text-decoration:none; }
   .topbar a:hover{ text-decoration:underline; }
   .dot{ color: var(--teal); }
-
   .eyebrow{
     font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
     color: var(--teal); margin-bottom: 14px; display:flex; align-items:center; gap:8px;
@@ -86,10 +83,9 @@
   .subtitle{
     color: var(--text-muted);
     font-size: 16.5px;
-    max-width: 62ch;
+    max-width: 66ch;
     margin: 0 0 28px;
   }
-
   .inspector{
     background: var(--bg-panel);
     border: 1px solid var(--border);
@@ -111,7 +107,7 @@
   }
   .inspector-body{ padding: 4px 0; }
   .field-row{
-    display:grid; grid-template-columns: 130px 1fr;
+    display:grid; grid-template-columns: 150px 1fr;
     padding: 10px 16px;
     border-bottom: 1px solid var(--border);
     font-size: 14px;
@@ -123,7 +119,6 @@
   .field-value.live::before{ content:"✓ "; }
   .field-value a{ color: var(--blue); text-decoration:none; font-weight:600; }
   .field-value a:hover{ text-decoration:underline; }
-
   .back-pill{
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--mono); font-size: 13px; font-weight: 600;
@@ -137,10 +132,9 @@
     color: var(--text); border-color: var(--teal);
     transform: translateX(-2px);
   }
-
   .inspector-cta{
     padding: 18px 16px 20px;
-    display: flex; justify-content: center;
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
     border-top: 1px solid var(--border);
   }
 
@@ -150,7 +144,6 @@
     background: var(--bg-field); border: 1px solid var(--border);
     color: var(--text-muted); padding: 3px 9px; border-radius: 4px;
   }
-
   h2{
     font-size: 13px;
     font-family: var(--mono);
@@ -164,28 +157,29 @@
 
   p{ color: var(--text); font-size: 15.5px; }
   p.muted{ color: var(--text-muted); }
-
-  .role-line{
-    font-family: var(--mono); font-size: 12.5px; color: var(--amber);
-    background: rgba(242,163,60,0.08); border: 1px solid rgba(242,163,60,0.25);
-    display:inline-block; padding: 3px 9px; border-radius: 4px; margin-bottom: 14px;
+  .overview-role{
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    color: var(--text);
+    background: rgba(108, 158, 248, 0.08);
+    border: 1px solid rgba(108, 158, 248, 0.22);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 4px 4px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
-
-  .framework-note{
-    display: flex; gap: 12px; align-items: flex-start;
-    background: var(--bg-panel); border: 1px solid var(--border);
-    border-left: 3px solid var(--amber);
-    border-radius: 6px; padding: 14px 18px;
-    margin: 18px 0 8px;
+  .overview-role strong{
+    color: var(--blue);
+    margin-right: 4px;
   }
-  .framework-note-icon{
-    font-size: 15px; line-height: 1; margin-top: 2px; flex-shrink: 0;
+  .gallery-note{
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    margin: -4px 0 14px;
   }
-  .framework-note p{
-    margin: 0; font-size: 13.5px; color: var(--text-dim); line-height: 1.6;
-  }
-  .framework-note strong{ color: var(--text); }
-
   .loop{
     display:flex; flex-wrap:wrap; gap:8px; align-items:center;
     font-family: var(--mono); font-size: 13px;
@@ -194,7 +188,6 @@
   }
   .loop span.step{ color: var(--text); background: var(--bg-field); border:1px solid var(--border); padding:5px 10px; border-radius:5px; }
   .loop span.arrow{ color: var(--text-dim); margin: 0 2px; }
-
   details.component{
     background: var(--bg-panel);
     border: 1px solid var(--border);
@@ -226,12 +219,10 @@
     color: var(--teal); font-size: 10px; flex-shrink:0;
   }
   .comp-suffix{ color: var(--text-dim); font-weight: 400; font-family: var(--mono); font-size: 12px; margin-left: auto; }
-
   .component-body{ padding: 16px 18px 20px; border-top: 1px solid var(--border); }
   .component-body p{ margin: 0 0 12px; color: var(--text-muted); font-size: 14.5px; }
   .component-body ul{ margin: 0; padding-left: 18px; }
   .component-body li{ color: var(--text); font-size: 14.5px; margin-bottom: 6px; }
-
   .contrib-list{ margin: 8px 0 0; padding-left: 0; list-style:none; }
   .contrib-list li{
     display:flex; gap:10px; align-items:flex-start;
@@ -243,13 +234,6 @@
     content:"✓"; color: var(--teal); font-family: var(--mono); font-weight:700;
     flex-shrink:0; margin-top:1px;
   }
-
-  .callout{
-    background: var(--bg-panel); border:1px solid var(--border); border-left: 3px solid var(--blue);
-    border-radius: 6px; padding: 16px 18px; margin-top: 10px;
-  }
-  .callout p{ margin:0; color: var(--text); }
-
   .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 40px; }
   .btn{
     font-family: var(--mono); font-size: 13.5px; font-weight:600;
@@ -259,16 +243,15 @@
   .btn-primary{ background: var(--teal); color: #0d1a17; border-color: var(--teal); }
   .btn-ghost{ color: var(--text); background: transparent; }
   .btn-ghost:hover{ background: var(--bg-panel); }
-
   footer{
     margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--border);
     font-family: var(--mono); font-size: 12px; color: var(--text-dim);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
   }
   footer a{ color: var(--text-dim); }
-
   @media (max-width: 560px){
     .field-row{ grid-template-columns: 1fr; gap: 3px; }
+    .comp-suffix{ display:none; }
   }
   .gallery-video{
     position: relative;
@@ -284,63 +267,29 @@
     width: 100%; height: 100%;
     border: 0;
   }
-
   .gallery-grid{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-    margin-bottom: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
+    margin-bottom: 40px;
   }
-  .gallery-grid::-webkit-scrollbar{ height: 6px; }
-  .gallery-grid::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 3px; }
   .gallery-grid img{
-    flex: 0 0 auto;
-    width: 78%;
-    max-width: 320px;
+    width: 100%; height: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid var(--border);
     display: block;
-    scroll-snap-align: start;
     transition: transform 0.15s ease, border-color 0.15s ease;
+    cursor: zoom-in;
   }
   .gallery-grid img:hover{
     transform: translateY(-2px);
     border-color: var(--teal);
   }
   @media (min-width: 720px){
-    .gallery-grid img{ width: 280px; }
+    .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
   }
-
-  .gallery-slider-wrap{
-    position: relative;
-    margin-bottom: 32px;
-  }
-  .gallery-nav{
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 40px; height: 40px; border-radius: 50%;
-    background: rgba(10,11,14,0.75); border: 1px solid var(--border);
-    color: #fff; font-size: 16px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 2; transition: opacity 0.15s ease, background 0.15s ease;
-  }
-  .gallery-nav:hover{ background: rgba(10,11,14,0.92); }
-  .gallery-nav.is-hidden{ opacity: 0; pointer-events: none; }
-  .gallery-prev{ left: -6px; }
-  .gallery-next{ right: -6px; }
-  @media (max-width: 640px){
-    .gallery-prev{ left: 2px; }
-    .gallery-next{ right: 2px; }
-  }
-
-  .gallery-grid img{ cursor: zoom-in; }
-
   .lightbox-overlay{
     position: fixed; inset: 0; background: rgba(8,9,12,0.94);
     display: none; align-items: center; justify-content: center;
@@ -376,112 +325,177 @@
     .lightbox-next{ right: 8px; }
   }
 
+
+  .framework-note{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-left:3px solid var(--amber);
+    border-radius:6px;
+    padding:14px 18px;
+    margin:18px 0 8px;
+  }
+  .framework-note-icon{
+    font-size:15px;
+    line-height:1;
+    margin-top:3px;
+    flex-shrink:0;
+  }
+  .framework-note p{
+    margin:0;
+    color:var(--text-muted);
+    font-size:13.5px;
+    line-height:1.65;
+  }
+  .framework-note strong{ color:var(--text); }
 </style>
 </head>
 <body>
+
 <header class="sitehead">
   <div class="sitehead-inner">
-    <a href="../index.html" class="sitehead-logo">Yuneeb Arshad</a>
-    <nav class="sitehead-nav">
+    <a class="sitehead-logo" href="../index.html">Yuneeb Arshad</a>
+    <nav aria-label="Portfolio navigation" class="sitehead-nav">
       <a href="../index.html#work">Work</a>
-      <a href="../index.html#log">Experience</a>
+      <a href="../index.html#experience">Experience</a>
       <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
   </div>
 </header>
-<div class="wrap">
 
-  <a href="../index.html#work" class="back-pill">&larr; Back to portfolio</a>
+<div class="wrap">
+  <a class="back-pill" href="../index.html#work">← Back to portfolio</a>
 
   <h1>Gang Mafia Shooting Crime Game</h1>
   <p class="subtitle">
-    A mobile third-person action shooter built in Unity, centered on gang territory
-    control — live on Android.
+    A production Android and iOS third-person action shooter where I built the territory campaign,
+    mission and enemy-wave systems, weapon progression, gang recruitment, persistence,
+    monetization and analytics around the Invector controller and AI foundation.
   </p>
 
   <div class="inspector">
     <div class="inspector-header">
-      <span class="script-icon"></span>
+      <span aria-hidden="true" class="script-icon"></span>
       Gang Mafia Shooting Crime Game — Details
     </div>
+
     <div class="inspector-body">
       <div class="field-row">
-        <span class="field-label">Status</span>
+        <span class="field-label">Platforms</span>
+        <span class="field-value">Android / iOS</span>
+      </div>
+
+      <div class="field-row">
+        <span class="field-label">Current Status</span>
         <span class="field-value live">Live on Google Play</span>
       </div>
+
+      <div class="field-row">
+        <span class="field-label">iOS Release</span>
+        <span class="field-value">Previously published</span>
+      </div>
+
       <div class="field-row">
         <span class="field-label">Downloads</span>
         <span class="field-value">10,000+</span>
       </div>
-      <div class="field-row">
-        <span class="field-label">Rating</span>
-        <span class="field-value">New release — not yet rated</span>
-      </div>
+
       <div class="field-row">
         <span class="field-label">Engine</span>
         <span class="field-value">Unity 2022.3 LTS</span>
       </div>
+
       <div class="field-row">
-        <span class="field-label">Platform</span>
-        <span class="field-value">Android</span>
+        <span class="field-label">Studio</span>
+        <span class="field-value">Invouge Technology</span>
       </div>
+
+      <div class="field-row">
+        <span class="field-label">Role</span>
+        <span class="field-value">Senior Game Developer — gameplay architecture, progression &amp; monetization</span>
+      </div>
+
+      <div class="field-row">
+        <span class="field-label">Starting Point</span>
+        <span class="field-value">Invector controller, shooter &amp; AI foundation</span>
+      </div>
+
       <div class="field-row">
         <span class="field-label">Tags</span>
         <span class="field-value">
-          <div class="tags">
-            <span class="tag">Unity3D</span>
+          <span class="tags">
             <span class="tag">C#</span>
-            <span class="tag">Android</span>
             <span class="tag">Invector Framework</span>
-            <span class="tag">Unity Addressables</span>
-            <span class="tag">Cinemachine</span>
-            <span class="tag">AI Navigation</span>
-            <span class="tag">Firebase Analytics</span>
-            <span class="tag">AppLovin MAX</span>
+            <span class="tag">AI FSM</span>
+            <span class="tag">NavMesh</span>
             <span class="tag">ScriptableObjects</span>
+            <span class="tag">Unity Addressables</span>
             <span class="tag">JSON Save Data</span>
-          </div>
+            <span class="tag">PlayerPrefs</span>
+            <span class="tag">AppLovin MAX</span>
+            <span class="tag">Firebase Analytics</span>
+            <span class="tag">RCC Integration</span>
+            <span class="tag">Android Release</span>
+          </span>
         </span>
       </div>
+
       <div class="inspector-cta">
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.infinity.gang.wars.city.gangster.shooting.crime" target="_blank" rel="noopener">View on Google Play</a>
+        <a class="btn btn-primary"
+           href="https://play.google.com/store/apps/details?id=com.infinity.gang.wars.city.gangster.shooting.crime"
+           target="_blank"
+           rel="noopener">View on Google Play</a>
       </div>
     </div>
   </div>
 
   <h2>Gallery</h2>
-
-  <div class="gallery-slider-wrap">
-    <button class="gallery-nav gallery-prev is-hidden" id="galleryPrev" aria-label="Scroll to previous images">&#10094;</button>
-    <div class="gallery-grid" id="galleryGrid">
-      <img src="images/gang-1.png" alt="Gang Mafia Shooting Crime Game combat screenshot 1">
-      <img src="images/gang-2.png" alt="Gang Mafia Shooting Crime Game combat screenshot 2">
-      <img src="images/gang-3.png" alt="Gang Mafia Shooting Crime Game combat screenshot 3">
-      <img src="images/gang-4.png" alt="Gang Mafia Shooting Crime Game combat screenshot 4">
-      <img src="images/gang-5.png" alt="Gang Mafia Shooting Crime Game combat screenshot 5">
-    </div>
-    <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Scroll to next images">&#10095;</button>
+  <p class="gallery-note">Official store screenshots and gameplay footage.</p>
+  <div class="gallery-video">
+    <iframe
+      src="https://www.youtube.com/embed/8sECjp-murA"
+      title="Gang Mafia Shooting Crime Game gameplay"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="gallery-grid">
+    <img src="images/gang-1.png" alt="Territory map and mission-state interface in Gang Mafia Shooting Crime Game">
+    <img src="images/gang-2.png" alt="Third-person combat and cover gameplay in Gang Mafia Shooting Crime Game">
+    <img src="images/gang-3.png" alt="Enemy-wave combat encounter in Gang Mafia Shooting Crime Game">
+    <img src="images/gang-4.png" alt="Weapon and progression interface in Gang Mafia Shooting Crime Game">
+    <img src="images/gang-5.png" alt="Gang combat and mission gameplay in Gang Mafia Shooting Crime Game">
   </div>
 
   <h2>Overview</h2>
-  <p class="role-line">ROLE: Senior Game Developer — gameplay architecture, progression &amp; monetization</p>
+  <p class="overview-role">
+    <strong>ROLE:</strong>
+    Senior Game Developer — Gameplay Architecture, Progression, AI Integration &amp; Monetization
+  </p>
+
   <p>
-    Gang Mafia Shooting Crime Game is a mobile third-person action shooter centered on
-    gang territory control. Players create their gang, fight through rival-controlled
-    city areas, complete objective-driven combat missions, recruit gang members,
-    upgrade weapons, defeat bosses, and capture new territory through a map-based
-    progression system. I built the game's full system layer on top of the Invector
-    third-person controller framework — combat tuning, mission and territory
-    progression, weapon and recruitment systems, the in-game economy, save
-    persistence, and mobile monetization — and prepared the project for iOS release
-    alongside its Android launch. The game shipped on Android; its iOS listing was
-    released and has since been suspended.
+    Gang Mafia Shooting Crime Game is a production Android and iOS third-person action shooter
+    built around gang territory control and objective-driven combat. Players create a gang,
+    fight through rival-controlled city areas, complete attack, survival, capture, boss and
+    vehicle objectives, recruit companions, upgrade weapons and capture territory through a
+    persistent map-based campaign. I designed and implemented the project-specific territory
+    campaign, reusable mission and enemy-wave architecture, weapon purchasing and upgrades,
+    gang-member recruitment, economy, hybrid JSON and PlayerPrefs persistence, Addressable
+    runtime content flow, AppLovin MAX monetization, Firebase Analytics and mobile release preparation.
   </p>
 
   <div class="framework-note">
-    <span class="framework-note-icon">⚙</span>
-    <p><strong>Note on frameworks:</strong> the third-person shooter/controller foundation uses the Invector asset, customized for this project's combat and camera behavior. Everything else — progression, missions, economy, monetization, and save systems — was built from scratch for this game, including Android release build preparation.</p>
+    <span aria-hidden="true" class="framework-note-icon">⚙</span>
+    <p>
+      <strong>Framework note:</strong>
+      Invector provided the baseline third-person controller, shooter and AI foundations.
+      I customized its combat and camera behaviour, then built the project-specific progression,
+      missions, wave orchestration, weapon economy, gang recruitment, persistence, monetization,
+      analytics and release systems around that foundation.
+    </p>
   </div>
 
   <h2>Gameplay Loop</h2>
@@ -494,17 +508,15 @@
     <span class="step">Capture territory</span>
   </div>
 
-  <h2>Key Contributions</h2>
+  <h2>Key Highlights</h2>
   <ul class="contrib-list">
-    <li>Built the game's full system layer on top of the Invector third-person framework, including combat tuning, aiming, shooting, reload logic, and ragdoll hit reactions.</li>
-    <li>Designed a territory-based progression system across 3 rival gangs, with named locations, boss levels, and locked/unlocked area states.</li>
-    <li>Implemented multiple mission types — attack waves, survival objectives, capture-point missions, boss fights, and vehicle-style gameplay — rather than one repeated mission structure.</li>
-    <li>Built a weapon system covering multiple gun categories with individual damage, magazine size, reload time, fire rate, and upgrade costs.</li>
-    <li>Designed a gang member recruitment system with named, recruitable characters, each with distinct stats and level-based unlock requirements.</li>
-    <li>Added JSON and PlayerPrefs-based save systems covering levels, weapons, gang members, economy, and onboarding progress.</li>
-    <li>Used Unity Addressables to dynamically load UI screens — map, gun selection, pause menu, level complete, boss eliminated, and capture success/failure.</li>
-    <li>Integrated AppLovin MAX mediation for banner, interstitial, rewarded, and app-open ads, alongside Firebase Analytics for ad impression and revenue tracking.</li>
-    <li>Prepared and shipped an iOS build (version 1.1.4) alongside the Android release; the iOS listing is currently suspended.</li>
+    <li>Designed a data-driven territory campaign with 11 missions across three rival gangs, including attack, survival, capture, boss and vehicle-based objectives.</li>
+    <li>Extended Invector’s shooter foundation with custom target detection, aim-state feedback, reload orchestration, ammunition onboarding, runtime weapon-stat injection, camera/FOV firing feedback and HUD integration.</li>
+    <li>Built reusable enemy-wave orchestration that loads enemies through local Addressables and assigns health, damage, accuracy, weapons, combat distance, cover settings and Invector FSM behaviour from configurable profiles.</li>
+    <li>Implemented six active upgradeable weapons across SMG, assault-rifle and shotgun categories, with six progression tiers controlling damage, magazine capacity, reload time, fire interval, accuracy and upgrade cost.</li>
+    <li>Built persistent gang-member recruitment with level-gated unlocks, companion spawning and individual health interfaces.</li>
+    <li>Implemented hybrid local persistence using JSON for structured territory, weapon and gang-member state, with PlayerPrefs for cash, XP, health, selections and onboarding flags.</li>
+    <li>Integrated Unity Addressables, RCC vehicle mechanics, AppLovin MAX and Firebase Analytics, and prepared production releases for Android and iOS.</li>
   </ul>
 
   <h2>Core Systems</h2>
@@ -512,15 +524,18 @@
   <details class="component" open>
     <summary>
       <span class="comp-check">✓</span>
-      Combat System
-      <span class="comp-suffix">(Script)</span>
+      Invector Combat &amp; Camera Customization
+      <span class="comp-suffix">(Framework Extension + Script)</span>
     </summary>
     <div class="component-body">
-      <p>Built on top of the Invector third-person controller framework, tuned and extended for this game's specific combat feel.</p>
+      <p>Extended Invector’s controller, shooter and AI foundations with the project-specific combat behaviour and presentation required by the game.</p>
       <ul>
-        <li>Player aiming, shooting, reload logic, and ammo handling, with weapon switching across multiple gun types</li>
-        <li>Camera/FOV shake and slow-motion tuning layered on top of the base Invector controller</li>
-        <li>Ragdoll hit reactions on enemies for physical, responsive combat feedback</li>
+        <li>Implemented camera-based target raycasting and custom aim-state feedback</li>
+        <li>Coordinated aim-in, aim-out, firing and reload presentation with the combat flow</li>
+        <li>Implemented ammunition capacity, pickups, onboarding and reload control</li>
+        <li>Injected purchased weapon statistics into the active Invector weapon at runtime</li>
+        <li>Added camera position and FOV feedback during firing and connected combat state with the HUD</li>
+        <li>Integrated enemy ragdoll and hit-direction support with the damage pipeline</li>
       </ul>
     </div>
   </details>
@@ -528,15 +543,18 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Territory &amp; Mission Progression
-      <span class="comp-suffix">(Script)</span>
+      Territory Campaign &amp; Mission Progression
+      <span class="comp-suffix">(Script + ScriptableObjects)</span>
     </summary>
     <div class="component-body">
-      <p>A map-based structure where progress is measured in territory captured, not just levels cleared.</p>
+      <p>Built a reusable mission architecture and used it to design and implement 11 campaign missions across three rival-gang territories.</p>
       <ul>
-        <li>Three rival gang territories, each with named locations and a distinct boss level</li>
-        <li>Locked/unlocked area states tracked per territory, gating progression as areas are captured</li>
-        <li>Mission rewards and capture states tied directly into the overall progression structure</li>
+        <li>Designed and implemented 11 campaign missions across three rival-gang territories</li>
+        <li>Implemented locked, active and completed mission states with cross-territory unlocking after boss completion</li>
+        <li>Configured attack, survival, capture, boss and vehicle-based mission structures</li>
+        <li>Connected mission rewards, cash, XP and territory ownership with the progression flow</li>
+        <li>Implemented capture missions where completed combat objectives activate the final capture location</li>
+        <li>Integrated RCC vehicle health, collision damage and mission completion into vehicle objectives</li>
       </ul>
     </div>
   </details>
@@ -544,15 +562,18 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Mission Variety
-      <span class="comp-suffix">(Script)</span>
+      Enemy AI &amp; Wave Orchestration
+      <span class="comp-suffix">(Script + AI FSM)</span>
     </summary>
     <div class="component-body">
-      <p>Multiple distinct mission structures rather than one repeated combat loop reskinned across levels.</p>
+      <p>Built a reusable encounter layer around local Addressables and Invector FSM AI so mission content could change through configuration rather than duplicated controllers.</p>
       <ul>
-        <li>Attack-wave missions and survival objectives with escalating enemy pressure</li>
-        <li>Capture-point missions with win/loss states tied to holding territory</li>
-        <li>Boss fights and vehicle-style missions for structural variety across the territory map</li>
+        <li>Loads enemy and boss prefabs through local Unity Addressables</li>
+        <li>Controls wave timing, spawn points, survival conditions and boss-wave completion</li>
+        <li>Assigns health, damage, accuracy, reload timing, weapon type and combat range at runtime</li>
+        <li>Applies configurable cover distance, navigation and Invector FSM behaviour profiles</li>
+        <li>Supports difficulty variation through reusable enemy skill-profile assets</li>
+        <li>Coordinates enemy completion, health-pickup spawning and progression callbacks</li>
       </ul>
     </div>
   </details>
@@ -560,14 +581,18 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Weapon System
-      <span class="comp-suffix">(Script)</span>
+      Weapon Progression &amp; Economy
+      <span class="comp-suffix">(Script + Addressables)</span>
     </summary>
     <div class="component-body">
-      <p>A named, statted weapon roster rather than a single generic "damage number" per gun.</p>
+      <p>Implemented a configurable purchase, equipment and upgrade system connected directly to the active combat weapon.</p>
       <ul>
-        <li>Multiple gun categories — SMGs, assault rifles, pistols, and shotguns — each with individual damage, magazine size, reload time, and fire rate</li>
-        <li>Per-weapon upgrade costs and progression, tied into the game's overall economy</li>
+        <li>Configured six active progression weapons across SMG, assault-rifle and shotgun categories</li>
+        <li>Implemented purchase, equip, switch and upgrade states</li>
+        <li>Built six upgrade tiers per weapon for damage, capacity, reload time, fire interval and accuracy</li>
+        <li>Connected upgrade pricing with the game economy and mission rewards</li>
+        <li>Loads purchased player weapons through local Addressables at runtime</li>
+        <li>Persists ownership, equipped state and upgrade progress through structured JSON data</li>
       </ul>
     </div>
   </details>
@@ -575,14 +600,17 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Gang Member Recruitment
-      <span class="comp-suffix">(Script)</span>
+      Gang Recruitment &amp; Companion System
+      <span class="comp-suffix">(Script + AI Integration)</span>
     </summary>
     <div class="component-body">
-      <p>Recruitable characters with their own identity and stats, not a single interchangeable "hire crew" button.</p>
+      <p>Built a persistent companion system that connects progression-gated recruitment with runtime combat support.</p>
       <ul>
-        <li>Named recruitable gang members, each with distinct damage and accuracy stats</li>
-        <li>Level-gated unlock requirements per recruit, with persistent recruit state saved across sessions</li>
+        <li>Implemented three recruitable gang members with level-gated unlock requirements</li>
+        <li>Stores unlocked and recruited states across sessions</li>
+        <li>Spawns selected companions into supported combat missions</li>
+        <li>Connects companion damage and accuracy values with runtime combat behaviour</li>
+        <li>Provides independent health interfaces for active gang members</li>
       </ul>
     </div>
   </details>
@@ -590,14 +618,18 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Save &amp; Persistence
+      Hybrid JSON &amp; PlayerPrefs Persistence
       <span class="comp-suffix">(Script)</span>
     </summary>
     <div class="component-body">
-      <p>Keeps territory progress, weapon upgrades, and recruited gang members intact across sessions.</p>
+      <p>Used a hybrid local persistence architecture that separates structured progression data from lightweight scalar values.</p>
       <ul>
-        <li>JSON-based save data covering completed, locked, and unlocked levels per territory</li>
-        <li>PlayerPrefs-based persistence for weapons, gang members, economy, and onboarding state</li>
+        <li>Stores mission completion and lock states in structured level JSON data</li>
+        <li>Stores weapon ownership, upgrades and equipped status in dedicated weapon JSON data</li>
+        <li>Stores gang-member unlock and recruitment states in dedicated recruitment JSON data</li>
+        <li>Uses PlayerPrefs for gang name, cash, XP, player health, onboarding flags and selected indices</li>
+        <li>Restores persistent manager state during initialization and across scene changes</li>
+        <li>Maintains default first-launch values and existing player progression</li>
       </ul>
     </div>
   </details>
@@ -605,14 +637,17 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Addressables UI Loading
-      <span class="comp-suffix">(Script)</span>
+      Unity Addressables &amp; Mobile UI
+      <span class="comp-suffix">(Script + UI)</span>
     </summary>
     <div class="component-body">
-      <p>Dynamic UI loading rather than baking every screen into a single upfront build.</p>
+      <p>Used local Unity Addressables to keep runtime UI and gameplay dependencies modular without claiming remote content delivery.</p>
       <ul>
-        <li>Unity Addressables used to load map, gun selection, and pause menu screens on demand</li>
-        <li>Level complete, boss eliminated, and capture success/failure screens loaded the same way, keeping the UI layer decoupled from the core build</li>
+        <li>Loads map, weapon selection and pause screens at runtime</li>
+        <li>Loads level-complete, failure, boss-eliminated and capture-result interfaces through the same flow</li>
+        <li>Instantiates and releases player weapons, enemy archetypes and boss prefabs on demand</li>
+        <li>Reduces direct scene references to runtime-created interface and gameplay assets</li>
+        <li>Built mobile interfaces with uGUI and TextMeshPro for map, progression, recruitment and combat flow</li>
       </ul>
     </div>
   </details>
@@ -620,18 +655,21 @@
   <details class="component">
     <summary>
       <span class="comp-check">✓</span>
-      Monetization &amp; Analytics
-      <span class="comp-suffix">(Third-Party Integration)</span>
+      Monetization &amp; Firebase Analytics
+      <span class="comp-suffix">(Third-Party Integration + Script)</span>
     </summary>
     <div class="component-body">
-      <p>Production ad monetization paired with revenue tracking, not just ads bolted on without visibility into performance.</p>
+      <p>Integrated production advertising flows with validated gameplay rewards and impression-level revenue analytics.</p>
       <ul>
-        <li>AppLovin MAX mediation across banner, interstitial, rewarded, and app-open ad formats</li>
-        <li>Firebase Analytics connected for ad impression and revenue event tracking</li>
+        <li>Integrated AppLovin MAX banner, interstitial and rewarded advertisements</li>
+        <li>Implemented interstitial frequency controls and rewarded-ad completion validation</li>
+        <li>Connected rewarded flows with double rewards, cash recovery and supported progression actions</li>
+        <li>Implemented loading states and exponential retry handling for failed ad requests</li>
+        <li>Restores audio, joystick input and gameplay callbacks after advertisement completion</li>
+        <li>Logs impression-level revenue to Firebase Analytics with network, format, ad unit, revenue and currency data</li>
       </ul>
     </div>
   </details>
-
 
   <div class="cta-row">
     <a class="btn btn-ghost" href="../index.html#work">Back to portfolio</a>
@@ -641,14 +679,13 @@
     <span>Yuneeb Arshad — Senior Unity Developer</span>
     <span>Lahore, Pakistan</span>
   </footer>
-
 </div>
 
-<div class="lightbox-overlay" id="lightboxOverlay">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+<div aria-hidden="true" class="lightbox-overlay" id="lightboxOverlay">
+  <button aria-label="Close" class="lightbox-close" id="lightboxClose">×</button>
+  <button aria-label="Previous image" class="lightbox-nav lightbox-prev" id="lightboxPrev">❮</button>
+  <img alt="" class="lightbox-img" id="lightboxImg" src="">
+  <button aria-label="Next image" class="lightbox-nav lightbox-next" id="lightboxNext">❯</button>
   <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
@@ -656,6 +693,7 @@
 (function(){
   var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
   if(!imgs.length) return;
+
   var overlay = document.getElementById('lightboxOverlay');
   var imgEl = document.getElementById('lightboxImg');
   var counter = document.getElementById('lightboxCounter');
@@ -670,18 +708,21 @@
     imgEl.alt = imgs[current].alt;
     counter.textContent = (current + 1) + ' / ' + imgs.length;
   }
+
   function open(i){
     show(i);
     overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
   }
+
   function close(){
     overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
   }
 
   imgs.forEach(function(img, i){
     img.addEventListener('click', function(){ open(i); });
   });
-
   closeBtn.addEventListener('click', close);
   prevBtn.addEventListener('click', function(){ show(current - 1); });
   nextBtn.addEventListener('click', function(){ show(current + 1); });
@@ -696,37 +737,5 @@
   });
 })();
 </script>
-
-<script>
-(function(){
-  var grid = document.getElementById('galleryGrid');
-  var prevBtn = document.getElementById('galleryPrev');
-  var nextBtn = document.getElementById('galleryNext');
-  if(!grid || !prevBtn || !nextBtn) return;
-
-  function scrollAmount(){
-    var firstImg = grid.querySelector('img');
-    return firstImg ? firstImg.getBoundingClientRect().width + 16 : 300;
-  }
-
-  function updateButtons(){
-    var maxScroll = grid.scrollWidth - grid.clientWidth;
-    prevBtn.classList.toggle('is-hidden', grid.scrollLeft <= 4);
-    nextBtn.classList.toggle('is-hidden', grid.scrollLeft >= maxScroll - 4);
-  }
-
-  prevBtn.addEventListener('click', function(){
-    grid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-  });
-  nextBtn.addEventListener('click', function(){
-    grid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-  });
-
-  grid.addEventListener('scroll', updateButtons);
-  window.addEventListener('resize', updateButtons);
-  updateButtons();
-})();
-</script>
-
 </body>
 </html>
