@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Technical case study of Internet Cafe Empire, a shipped Unity idle-management game for Android and iOS. Covers framework extension, progression, quests, live events, monetization, analytics and backward-compatible JSON save migration developed by Senior Game Developer Yuneeb Arshad." name="description"/>
 <title>Internet Cafe Empire — Case Study — Yuneeb Arshad</title>
 <style>
   :root{
@@ -20,7 +22,6 @@
     --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
     --sans: -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
   }
-
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
 
@@ -36,7 +37,6 @@
   }
 
   .wrap{ max-width: 860px; margin: 0 auto; padding: 48px 24px 100px; }
-
   .sitehead{
     position: sticky; top: 0; z-index: 50;
     background: rgba(20,21,26,0.85);
@@ -61,20 +61,19 @@
   @media (max-width: 560px){
     .sitehead-nav{ display: none; }
   }
-
-  .back-pill{
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 13px; font-weight: 600;
-    color: var(--text-muted); text-decoration: none;
-    background: var(--bg-panel); border: 1px solid var(--border);
-    padding: 8px 16px; border-radius: 20px;
-    margin-bottom: 32px;
-    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
+    margin-bottom: 40px; flex-wrap: wrap; gap:10px;
   }
-  .back-pill:hover{
-    color: var(--text); border-color: var(--teal);
-    transform: translateX(-2px);
+  .topbar a{ color: var(--blue); text-decoration:none; }
+  .topbar a:hover{ text-decoration:underline; }
+  .dot{ color: var(--teal); }
+  .eyebrow{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
+    color: var(--teal); margin-bottom: 14px; display:flex; align-items:center; gap:8px;
   }
+  .eyebrow::before{ content:"●"; font-size: 9px; }
 
   h1{
     font-size: clamp(28px, 5vw, 42px);
@@ -85,10 +84,9 @@
   .subtitle{
     color: var(--text-muted);
     font-size: 16.5px;
-    max-width: 62ch;
+    max-width: 66ch;
     margin: 0 0 28px;
   }
-
   .inspector{
     background: var(--bg-panel);
     border: 1px solid var(--border);
@@ -110,7 +108,7 @@
   }
   .inspector-body{ padding: 4px 0; }
   .field-row{
-    display:grid; grid-template-columns: 130px 1fr;
+    display:grid; grid-template-columns: 150px 1fr;
     padding: 10px 16px;
     border-bottom: 1px solid var(--border);
     font-size: 14px;
@@ -122,7 +120,19 @@
   .field-value.live::before{ content:"✓ "; }
   .field-value a{ color: var(--blue); text-decoration:none; font-weight:600; }
   .field-value a:hover{ text-decoration:underline; }
-
+  .back-pill{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--text-muted); text-decoration: none;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 20px;
+    margin-bottom: 32px;
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .back-pill:hover{
+    color: var(--text); border-color: var(--teal);
+    transform: translateX(-2px);
+  }
   .inspector-cta{
     padding: 18px 16px 20px;
     display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
@@ -135,7 +145,6 @@
     background: var(--bg-field); border: 1px solid var(--border);
     color: var(--text-muted); padding: 3px 9px; border-radius: 4px;
   }
-
   h2{
     font-size: 13px;
     font-family: var(--mono);
@@ -149,13 +158,29 @@
 
   p{ color: var(--text); font-size: 15.5px; }
   p.muted{ color: var(--text-muted); }
-
-  .role-line{
-    font-family: var(--mono); font-size: 12.5px; color: var(--amber);
-    background: rgba(242,163,60,0.08); border: 1px solid rgba(242,163,60,0.25);
-    display:inline-block; padding: 3px 9px; border-radius: 4px; margin-bottom: 14px;
+  .overview-role{
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    color: var(--text);
+    background: rgba(108, 158, 248, 0.08);
+    border: 1px solid rgba(108, 158, 248, 0.22);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 4px 4px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
-
+  .overview-role strong{
+    color: var(--blue);
+    margin-right: 4px;
+  }
+  .gallery-note{
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    margin: -4px 0 14px;
+  }
   .loop{
     display:flex; flex-wrap:wrap; gap:8px; align-items:center;
     font-family: var(--mono); font-size: 13px;
@@ -164,7 +189,6 @@
   }
   .loop span.step{ color: var(--text); background: var(--bg-field); border:1px solid var(--border); padding:5px 10px; border-radius:5px; }
   .loop span.arrow{ color: var(--text-dim); margin: 0 2px; }
-
   details.component{
     background: var(--bg-panel);
     border: 1px solid var(--border);
@@ -196,12 +220,10 @@
     color: var(--teal); font-size: 10px; flex-shrink:0;
   }
   .comp-suffix{ color: var(--text-dim); font-weight: 400; font-family: var(--mono); font-size: 12px; margin-left: auto; }
-
   .component-body{ padding: 16px 18px 20px; border-top: 1px solid var(--border); }
   .component-body p{ margin: 0 0 12px; color: var(--text-muted); font-size: 14.5px; }
   .component-body ul{ margin: 0; padding-left: 18px; }
   .component-body li{ color: var(--text); font-size: 14.5px; margin-bottom: 6px; }
-
   .contrib-list{ margin: 8px 0 0; padding-left: 0; list-style:none; }
   .contrib-list li{
     display:flex; gap:10px; align-items:flex-start;
@@ -213,7 +235,6 @@
     content:"✓"; color: var(--teal); font-family: var(--mono); font-weight:700;
     flex-shrink:0; margin-top:1px;
   }
-
   .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 40px; }
   .btn{
     font-family: var(--mono); font-size: 13.5px; font-weight:600;
@@ -223,14 +244,16 @@
   .btn-primary{ background: var(--teal); color: #0d1a17; border-color: var(--teal); }
   .btn-ghost{ color: var(--text); background: transparent; }
   .btn-ghost:hover{ background: var(--bg-panel); }
-
   footer{
     margin-top: 70px; padding-top: 24px; border-top: 1px solid var(--border);
     font-family: var(--mono); font-size: 12px; color: var(--text-dim);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
   }
   footer a{ color: var(--text-dim); }
-
+  @media (max-width: 560px){
+    .field-row{ grid-template-columns: 1fr; gap: 3px; }
+    .comp-suffix{ display:none; }
+  }
   .gallery-video{
     position: relative;
     width: 100%;
@@ -245,7 +268,6 @@
     width: 100%; height: 100%;
     border: 0;
   }
-
   .gallery-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -260,6 +282,7 @@
     border: 1px solid var(--border);
     display: block;
     transition: transform 0.15s ease, border-color 0.15s ease;
+    cursor: zoom-in;
   }
   .gallery-grid img:hover{
     transform: translateY(-2px);
@@ -268,12 +291,6 @@
   @media (min-width: 720px){
     .gallery-grid{ grid-template-columns: repeat(4, 1fr); }
   }
-
-  @media (max-width: 560px){
-    .field-row{ grid-template-columns: 1fr; gap: 3px; }
-  }
-  .gallery-grid img{ cursor: zoom-in; }
-
   .lightbox-overlay{
     position: fixed; inset: 0; background: rgba(8,9,12,0.94);
     display: none; align-items: center; justify-content: center;
@@ -308,290 +325,127 @@
     .lightbox-prev{ left: 8px; }
     .lightbox-next{ right: 8px; }
   }
-
 </style>
 </head>
 <body>
 <header class="sitehead">
-  <div class="sitehead-inner">
-    <a href="../index.html" class="sitehead-logo">Yuneeb Arshad</a>
-    <nav class="sitehead-nav">
-      <a href="../index.html#work">Work</a>
-      <a href="../index.html#log">Experience</a>
-      <a href="../index.html#skills">Skills</a>
-      <a href="../index.html#contact">Contact</a>
-    </nav>
-  </div>
+<div class="sitehead-inner">
+<a class="sitehead-logo" href="../index.html">Yuneeb Arshad</a>
+<nav aria-label="Portfolio navigation" class="sitehead-nav">
+<a href="../index.html#work">Work</a>
+<a href="../index.html#experience">Experience</a>
+<a href="../index.html#skills">Skills</a>
+<a href="../index.html#contact">Contact</a>
+</nav>
+</div>
 </header>
 <div class="wrap">
-
-  <a href="../index.html#work" class="back-pill">&larr; Back to portfolio</a>
-
-  <h1>Internet Cafe Empire</h1>
-  <p class="subtitle">
-    A mobile idle tycoon game where players build, upgrade, and manage a growing
-    internet cafe — live on both Android and iOS.
-  </p>
-
-  <div class="inspector">
-    <div class="inspector-header">
-      <span class="script-icon"></span>
+<a class="back-pill" href="../index.html#work">← Back to portfolio</a>
+<h1>Internet Cafe Empire</h1>
+<p class="subtitle">A released Android and iOS idle-management game where I reworked levels 2 and 3, built live-event, rewarded-video and IAP systems, integrated production SDKs, and protected existing players through backward-compatible JSON save migration.</p>
+<div class="inspector">
+<div class="inspector-header">
+<span aria-hidden="true" class="script-icon"></span>
       Internet Cafe Empire — Details
     </div>
-    <div class="inspector-body">
-      <div class="field-row">
-        <span class="field-label">Status</span>
-        <span class="field-value live">Live on Android &amp; iOS</span>
-      </div>
-      <div class="field-row">
-        <span class="field-label">Downloads</span>
-        <span class="field-value">10,000+ (Android)</span>
-      </div>
-      <div class="field-row">
-        <span class="field-label">Rating</span>
-        <span class="field-value">New release — not yet rated</span>
-      </div>
-      <div class="field-row">
-        <span class="field-label">Engine</span>
-        <span class="field-value">Unity3D</span>
-      </div>
-      <div class="field-row">
-        <span class="field-label">Platform</span>
-        <span class="field-value">Android &amp; iOS</span>
-      </div>
-      <div class="field-row">
-        <span class="field-label">Tags</span>
-        <span class="field-value">
-          <div class="tags">
-            <span class="tag">Unity3D</span>
-            <span class="tag">C#</span>
-            <span class="tag">Android</span>
-            <span class="tag">iOS</span>
-            <span class="tag">Unity IAP</span>
-            <span class="tag">Firebase Analytics</span>
-            <span class="tag">AppLovin MAX</span>
-            <span class="tag">Tenjin</span>
-            <span class="tag">ScriptableObjects</span>
-            <span class="tag">JSON Save Data</span>
-            <span class="tag">Mobile UI/UX</span>
-          </div>
-        </span>
-      </div>
-      <div class="inspector-cta">
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.internet.cafe.simulator.games.free&hl=en" target="_blank" rel="noopener">View on Google Play</a>
-        <a class="btn btn-primary" href="https://apps.apple.com/us/app/internet-cafe-empire/id6751887337" target="_blank" rel="noopener">View on App Store</a>
-      </div>
-    </div>
-  </div>
-
-  <h2>Gallery</h2>
-
-  <div class="gallery-video">
-    <iframe
-      src="https://www.youtube.com/embed/sB79duEJvvc"
-      title="Internet Cafe Empire gameplay"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-  <div class="gallery-grid">
-    <img src="images/cafe-1.png" alt="Internet Cafe Empire gameplay screenshot 1">
-    <img src="images/cafe-2.png" alt="Internet Cafe Empire gameplay screenshot 2">
-    <img src="images/cafe-3.png" alt="Internet Cafe Empire gameplay screenshot 3">
-    <img src="images/cafe-4.png" alt="Internet Cafe Empire gameplay screenshot 4">
-  </div>
-
-  <h2>Overview</h2>
-  <p class="role-line">ROLE: Senior Game Developer — production systems &amp; live-ops</p>
-  <p>
-    Internet Cafe Empire is a mobile idle tycoon game where players build, upgrade,
-    and manage a growing internet cafe — unlocking rooms, hiring staff, collecting
-    income, completing guided quests, and reacting to live gameplay events. I joined
-    as senior Unity developer on an existing idle-game framework and was responsible
-    for extending it into a production-ready, live-service title: reworking core
-    progression, building the quest and retention systems, integrating monetization
-    and analytics, and adding migration logic to protect existing players through
-    major content changes.
-  </p>
-
-  <h2>Gameplay Loop</h2>
-  <div class="loop">
-    <span class="step">Earn cash</span><span class="arrow">→</span>
-    <span class="step">Unlock room</span><span class="arrow">→</span>
-    <span class="step">Upgrade &amp; hire staff</span><span class="arrow">→</span>
-    <span class="step">Complete quest</span><span class="arrow">→</span>
-    <span class="step">Handle live event</span><span class="arrow">→</span>
-    <span class="step">Expand cafe</span>
-  </div>
-
-  <h2>Key Contributions</h2>
-  <ul class="contrib-list">
-    <li>Reworked level 2 and level 3 progression, adding new arcade rooms, racing rooms, utilities, token loaders, and area-unlock milestones.</li>
-    <li>Built a level-based quest system with persistent progress tracking, guided objectives, camera focus, and runtime-injected quests for thief and feedback events.</li>
-    <li>Implemented rewarded video systems across upgrade bonuses, level-up rewards, daily reward doubling, cash boxes, vehicle trials, and bouncer unlocks, including rotating spawn points and cooldown handling.</li>
-    <li>Integrated Unity IAP with product catalog support, purchase tracking, restore-purchase flow, reward granting, permanent unlocks, and premium/no-ads logic.</li>
-    <li>Added Firebase Analytics across sessions, progression, ad events, IAP offers, purchases, and gameplay milestones.</li>
-    <li>Developed migration systems that safely map legacy save and quest data into the reworked level structure, preventing broken progression for existing players.</li>
-    <li>Added a daily reward calendar, character/skin selection with paid and permanent unlocks, UI polish, utility interactions, and event-driven gameplay for feedback, garbage man, and thief encounters.</li>
-  </ul>
-
-  <h2>Core Systems</h2>
-
-  <details class="component" open>
-    <summary>
-      <span class="comp-check">✓</span>
-      Progression &amp; Level Rework
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>Reworked the game's mid-to-late progression to support new content without breaking existing player state — this is where the groundwork for the Migration System below was laid.</p>
-      <ul>
-        <li>Reworked Level 2 progression, adding arcade rooms, racing rooms, a token loader, and the related unlock and upgrade milestones tied to that new content</li>
-        <li>Adjusted Level 3 quest and room mappings specifically so that players with existing saves would continue correctly once the new structure shipped, rather than treating backward compatibility as an afterthought</li>
-        <li>Updated area and room unlock milestones across both levels to align with the reworked progression pacing</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Quest System
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>Guides players toward their next useful action and keeps progress persistent across sessions.</p>
-      <ul>
-        <li>Level-based quest loading with persistent progress tracking and camera focus on the active objective</li>
-        <li>Runtime-injected quests for live events such as thief and feedback encounters</li>
-        <li>Quest sequencing that surfaces one clear next objective at a time, rather than presenting an open, unordered task list</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Rewarded Video System
-      <span class="comp-suffix">(Third-Party Integration)</span>
-    </summary>
-    <div class="component-body">
-      <p>A rotating, ownership-aware rewarded ad system rather than a single generic "watch ad" button.</p>
-      <ul>
-        <li>Built a rotating rewarded-item pool spawning around unlocked areas, with cooldown handling so the same offer doesn't repeat back-to-back</li>
-        <li>Reward variety spans cash boxes, surprise boxes, vehicle trials, and bouncer unlocks, alongside standard upgrade and level-up bonuses</li>
-        <li>Implemented ownership-aware rotation logic — once a player has purchased an item outright, it's automatically removed from the ad rotation instead of continuing to offer something they already own</li>
-        <li>Rewarded ads also power daily reward doubling, tying the ad system directly into the retention loop</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      In-App Purchases
-      <span class="comp-suffix">(Third-Party Integration)</span>
-    </summary>
-    <div class="component-body">
-      <p>The paid-revenue path, built alongside — not instead of — the ad system above.</p>
-      <ul>
-        <li>Integrated Unity IAP with a full product catalog, covering consumable and permanent purchase types</li>
-        <li>Built restore-purchase handling so returning players don't lose access to prior purchases on a new device or reinstall</li>
-        <li>Implemented purchase tracking and reward granting, connecting each completed purchase to the correct in-game unlock</li>
-        <li>Added premium/no-ads logic as a distinct purchase path, separate from the consumable packs</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Character Selection
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>A distinct paid-content system, separate from the core IAP catalog above — this is unlock/ownership logic tied to cosmetic choice, not consumable currency.</p>
-      <ul>
-        <li>Built a character/skin selection system offering multiple playable character options beyond the default</li>
-        <li>Implemented both paid and permanent unlock paths, so a purchased character stays owned across sessions rather than being a temporary or consumable unlock</li>
-        <li>Tied character selection into the same ownership-tracking logic used elsewhere in the game's ad and purchase systems, keeping unlock state consistent across systems</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Analytics &amp; Attribution
-      <span class="comp-suffix">(Third-Party Integration)</span>
-    </summary>
-    <div class="component-body">
-      <p>Tracks player behavior and monetization performance across the live game.</p>
-      <ul>
-        <li>Firebase Analytics covering sessions, progression, ad events, IAP offers, purchases, and gameplay milestones</li>
-        <li>Tenjin attribution integrated alongside Firebase for install and campaign tracking</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Migration System
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>A safety net built specifically to protect players who were already mid-progression when level 2 and level 3 were reworked — this is the kind of system that matters most in a live game, since breaking existing players' saves is one of the fastest ways to tank retention and reviews.</p>
-      <ul>
-        <li>Reads a player's existing save on load and maps legacy quest completion and level-progress data into the reworked level 2/3 structure, instead of resetting or overwriting what they'd already earned</li>
-        <li>Preserves already-unlocked rooms, completed quests, and currency progress across the restructuring, so returning players don't lose progress they'd already made before the update shipped</li>
-        <li>Handles save fields that didn't exist in the old data structure gracefully, so older saves don't break or crash against the new format</li>
-        <li>Runs as a one-time check per save file rather than repeating on every session, keeping it lightweight after the initial migration</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="component">
-    <summary>
-      <span class="comp-check">✓</span>
-      Retention &amp; Player Experience
-      <span class="comp-suffix">(Script)</span>
-    </summary>
-    <div class="component-body">
-      <p>The layer of engagement systems that brings players back and keeps sessions feeling fresh, without relying on paid unlocks.</p>
-      <ul>
-        <li>Daily reward calendar with double-claim through gems or rewarded ads</li>
-        <li>UI polish and utility interactions supporting the core loop</li>
-        <li>Event-driven gameplay for feedback, garbage man, and thief encounters, keeping sessions from feeling repetitive</li>
-      </ul>
-    </div>
-  </details>
-
-  <div class="cta-row">
-    <a class="btn btn-ghost" href="../index.html#work">Back to portfolio</a>
-  </div>
-
-  <footer>
-    <span>Yuneeb Arshad — Senior Unity Developer</span>
-    <span>Lahore, Pakistan</span>
-  </footer>
-
+<div class="inspector-body">
+<div class="field-row">
+<span class="field-label">Platforms</span>
+<span class="field-value">Android / iOS</span>
+</div>
+<div class="field-row">
+<span class="field-label">Current Status</span>
+<span class="field-value live">Live on Google Play &amp; App Store</span>
+</div>
+<div class="field-row">
+<span class="field-label">Android Downloads</span>
+<span class="field-value">50,000+</span>
+</div>
+<div class="field-row">
+<span class="field-label">Engine</span>
+<span class="field-value">Unity 2022 LTS</span>
+</div>
+<div class="field-row">
+<span class="field-label">Studio</span>
+<span class="field-value">Invouge Technology</span>
+</div>
+<div class="field-row">
+<span class="field-label">Role</span>
+<span class="field-value">Senior Game Developer — framework extension &amp; production systems</span>
+</div>
+<div class="field-row">
+<span class="field-label">Starting Point</span>
+<span class="field-value">Licensed Perfect Hotel framework</span>
 </div>
 
-<div class="lightbox-overlay" id="lightboxOverlay">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
-  <div class="lightbox-counter" id="lightboxCounter"></div>
+<div class="field-row">
+<span class="field-label">Tags</span>
+<span class="field-value">
+<span class="tags"><span class="tag">C#</span><span class="tag">Observer Pattern</span><span class="tag">Unity IAP</span><span class="tag">AppLovin MAX</span><span class="tag">Firebase Analytics</span><span class="tag">Remote Config</span><span class="tag">Tenjin</span><span class="tag">JSON Save Data</span><span class="tag">Save Migration</span><span class="tag">Rewarded Video Systems</span><span class="tag">Live Events</span><span class="tag">Mobile UI Systems</span></span>
+</span>
 </div>
+<div class="inspector-cta">
+<a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.internet.cafe.simulator.games.free&amp;hl=en" rel="noopener" target="_blank">View on Google Play</a>
+<a class="btn btn-primary" href="https://apps.apple.com/us/app/internet-cafe-empire/id6751887337" rel="noopener" target="_blank">View on App Store</a>
+</div>
+</div>
+</div>
+<h2>Gallery</h2>
+<p class="gallery-note">Official store screenshots and gameplay footage.</p>
+<div class="gallery-video">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" src="https://www.youtube.com/embed/sB79duEJvvc" title="Internet Cafe Empire gameplay">
+</iframe>
+</div>
+<div class="gallery-grid">
+<img alt="Internet Cafe Empire gameplay screenshot showing the cafe-management environment" src="images/cafe-1.png"/>
+<img alt="Internet Cafe Empire gameplay screenshot showing upgraded gaming areas" src="images/cafe-2.png"/>
+<img alt="Internet Cafe Empire gameplay screenshot showing customer and staff activity" src="images/cafe-3.png"/>
+<img alt="Internet Cafe Empire gameplay screenshot showing expanded cafe content" src="images/cafe-4.png"/>
+</div>
+<h2>Overview</h2>
+<p class="overview-role"><strong>ROLE:</strong> Senior Game Developer — Framework Extension, Production Systems &amp; LiveOps</p>
+<p>Internet Cafe Empire is a released Android and iOS idle-management game built on the licensed Perfect Hotel framework as its starting foundation. I adapted the inherited hotel-management structure into an internet-cafe experience while preserving its Observer Pattern and existing system relationships. My work included a complete rework of levels 2 and 3; implementing level-based quests and mobile UI flows; building rewarded-video spawning and reward logic for the scooter, roller skates, bouncer, money bag and magnet boost; implementing purchase and persistent-ownership flows with Unity IAP; coordinating thief, feedback and garbage-man events; integrating AppLovin MAX, Firebase, Remote Config and Tenjin; and developing backward-compatible JSON save migration and reconciliation for existing players.</p>
+<h2>Gameplay Loop</h2>
+<div class="loop">
+<span class="step">Earn cash</span><span class="arrow">→</span>
+<span class="step">Unlock room</span><span class="arrow">→</span>
+<span class="step">Upgrade &amp; hire staff</span><span class="arrow">→</span>
+<span class="step">Complete quest</span><span class="arrow">→</span>
+<span class="step">Handle live event</span><span class="arrow">→</span>
+<span class="step">Expand cafe</span>
+</div>
+<h2>Key Highlights</h2>
+<ul class="contrib-list"><li>Adapted the licensed Perfect Hotel foundation into an internet-cafe management game while preserving the existing Observer Pattern and system relationships.</li><li>Completely reworked levels 2 and 3, including progression, rooms, staff, utilities and internet-cafe content for arcade, racing, console and VR areas.</li><li>Implemented level-based quests and mobile UI flows for progression, events, rewarded videos, purchases, utilities and boosts.</li><li>Built thief, feedback and garbage-man event systems with their gameplay state, UI flow, triggers and rewards.</li><li>Built rewarded-video spawning and reward logic for the scooter, roller skates, bouncer, money bag and magnet boost, connected with permanent IAP ownership.</li><li>Integrated Unity IAP, AppLovin MAX, Firebase Analytics, Remote Config and Tenjin across monetization, analytics, tuning and attribution flows.</li><li>Developed backward-compatible JSON save migration and reconciliation to preserve existing player progression, quests, owned content and updated level state.</li></ul>
+<h2>Core Systems</h2><details class="component" open=""><summary><span class="comp-check">✓</span> Framework Adaptation &amp; Observer Pattern <span class="comp-suffix">(Architecture + Script)</span></summary><div class="component-body"><p>Extended an inherited production framework while preserving the Observer Pattern and the existing relationships between gameplay data, views and UI.</p><ul><li>Worked inside the licensed Perfect Hotel foundation instead of replacing the existing architecture</li><li>Preserved the Observer Pattern used to synchronize game state, views and interface updates</li><li>Connected the new level 2 and level 3 systems to the existing observable data flow</li><li>Extended inherited systems without destabilizing the original management loop</li><li>Maintained compatibility between new internet-cafe features and existing framework behaviour</li></ul></div></details><details class="component"><summary><span class="comp-check">✓</span> Level 2 &amp; Level 3 Complete Rework <span class="comp-suffix">(Script + Configuration)</span></summary><div class="component-body"><p>Completely reworked the second and third production levels and adapted their progression and content into an internet-cafe experience.</p><ul><li>Reworked level 2 and level 3 progression, unlock flow and gameplay structure</li><li>Added and connected arcade machines, racing simulators, console areas and VR content</li><li>Updated room, staff and utility interactions for the new level content</li><li>Reworked unlock milestones and cafe-specific progression requirements</li><li>Integrated the new level state with the existing Observer Pattern and persistent save data</li></ul></div></details><details class="component"><summary><span class="comp-check">✓</span> Quest &amp; Mobile UI Systems <span class="comp-suffix">(Script + UI)</span></summary><div class="component-body"><p>Implemented quest progression and the mobile interfaces required to guide players through the reworked levels and production systems.</p><ul><li>Implemented level-based quest loading and persistent quest progress</li><li>Connected quests with progression, rooms, staff, utilities and event objectives</li><li>Built mobile UI flows for quests, events, rewarded videos, purchases, utilities and boosts</li><li>Implemented responsive interface behaviour for mobile screen layouts</li><li>Created user-flow handling that keeps objectives, rewards and ownership state clear to the player</li></ul></div></details><details class="component"><summary><span class="comp-check">✓</span> Thief, Feedback &amp; Garbage Events <span class="comp-suffix">(Script + UI)</span></summary><div class="component-body"><p>Built the project’s recurring thief, feedback and garbage-man event flows and connected them with gameplay, UI and rewards.</p><ul><li>Implemented event triggers and state handling for thief, feedback and garbage-man encounters</li><li>Connected event state with the relevant interface, gameplay objectives and reward flow</li><li>Managed the start, active and completion states of each event</li><li>Integrated event progress with level and quest systems where required</li><li>Returned the player cleanly to normal gameplay after each event finishes</li></ul></div></details><details class="component"><summary><span class="comp-check">✓</span> Rewarded Video Spawning &amp; Utility Rewards <span class="comp-suffix">(Script + AppLovin MAX)</span></summary><div class="component-body"><p>Built rewarded-video spawning and reward routing for temporary utilities, movement bonuses and gameplay boosts.</p><ul><li>Implemented rewarded-video spawning logic and configured when reward opportunities become available</li><li>Connected successful AppLovin MAX callbacks with the correct gameplay reward</li><li>Implemented rewarded access for the scooter, roller skates and bouncer</li><li>Implemented rewarded money-bag and magnet-boost flows</li><li>Checks permanent ownership so already purchased benefits are not offered incorrectly through rewarded videos</li></ul></div></details><details class="component"><summary><span class="comp-check">✓</span> Unity IAP &amp; Persistent Ownership <span class="comp-suffix">(Third-Party Integration + Script)</span></summary><div class="component-body"><p>Implemented in-app purchasing and persistent ownership flows for permanent utilities, boosts and production monetization content.</p><ul><li>Integrated Unity IAP with the project’s product and reward flow</li><li>Implemented purchase handling for permanent utilities and gameplay benefits</li><li>Connected purchases for the scooter, roller skates, bouncer, money bag and magnet-related content where applicable</li><li>Stores persistent ownership so purchased benefits remain available across sessions</li><li>Coordinates permanent IAP ownership with temporary rewarded-video access</li></ul></div></details><details class="component"><summary><span class="comp-check">✓</span> AppLovin, Firebase, Remote Config &amp; Tenjin <span class="comp-suffix">(Third-Party Integration)</span></summary><div class="component-body"><p>Integrated the production SDKs used for rewarded advertising, gameplay analytics, remote tuning and attribution.</p><ul><li>Integrated AppLovin MAX rewarded-video loading, callbacks and reward delivery</li><li>Instrumented gameplay and monetization events with Firebase Analytics</li><li>Integrated Firebase Remote Config for remotely controlled production values</li><li>Integrated Tenjin for install and campaign attribution</li><li>Connected SDK results with the game’s UI, rewards and persistent state</li></ul></div></details><details class="component"><summary><span class="comp-check">✓</span> JSON Save Data &amp; Backward-Compatible Migration <span class="comp-suffix">(Script)</span></summary><div class="component-body"><p>Protected existing player progress while levels 2 and 3, quests, rewards and ownership systems changed in live updates.</p><ul><li>Maintains persistent progression through dedicated JSON save data</li><li>Implemented version-aware, one-time migration and reconciliation for legacy level 2 and level 3 saves</li><li>Preserves quest progress, unlocked content, owned utilities and relevant gameplay state</li><li>Handles fields and structures that did not exist in older save versions</li><li>Prevents migration logic from applying repeatedly after a successful update</li></ul></div></details>
 
+
+
+
+
+
+
+
+
+<div class="cta-row">
+<a class="btn btn-ghost" href="../index.html#work">Back to portfolio</a>
+</div>
+<footer>
+<span>Yuneeb Arshad — Senior Unity Developer</span>
+<span>Lahore, Pakistan</span>
+</footer>
+</div>
+<div aria-hidden="true" class="lightbox-overlay" id="lightboxOverlay">
+<button aria-label="Close" class="lightbox-close" id="lightboxClose">×</button>
+<button aria-label="Previous image" class="lightbox-nav lightbox-prev" id="lightboxPrev">❮</button>
+<img alt="" class="lightbox-img" id="lightboxImg" src=""/>
+<button aria-label="Next image" class="lightbox-nav lightbox-next" id="lightboxNext">❯</button>
+<div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
 <script>
 (function(){
   var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
   if(!imgs.length) return;
+
   var overlay = document.getElementById('lightboxOverlay');
   var imgEl = document.getElementById('lightboxImg');
   var counter = document.getElementById('lightboxCounter');
@@ -606,18 +460,21 @@
     imgEl.alt = imgs[current].alt;
     counter.textContent = (current + 1) + ' / ' + imgs.length;
   }
+
   function open(i){
     show(i);
     overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
   }
+
   function close(){
     overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
   }
 
   imgs.forEach(function(img, i){
     img.addEventListener('click', function(){ open(i); });
   });
-
   closeBtn.addEventListener('click', close);
   prevBtn.addEventListener('click', function(){ show(current - 1); });
   nextBtn.addEventListener('click', function(){ show(current + 1); });
@@ -632,6 +489,5 @@
   });
 })();
 </script>
-
 </body>
 </html>
