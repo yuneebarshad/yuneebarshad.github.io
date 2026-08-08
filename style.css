@@ -352,6 +352,8 @@ a{ color: inherit; }
 .pw-thumb-cafe{ background: linear-gradient(135deg, #1A2233, #24304A 60%, #33466B); }
 .pw-thumb-gang{ background: linear-gradient(135deg, #2E1414, #4A1F1F 60%, #6B2C2C); }
 .pw-thumb-deepsea{ background: linear-gradient(135deg, #092533, #0E4258 58%, #167A91); }
+.pw-thumb-deepdig{ background: linear-gradient(135deg, #241A10, #4A3420 58%, #8A6232); }
+.pw-thumb-deepdig span{ font-size: 1.3rem; font-weight: 700; color: rgba(255,255,255,0.92); letter-spacing: 0.08em; }
 .pw-dirty-live{ color: var(--teal); font-size: 0.7rem; }
 .pw-icon{
   position: absolute; top: 50%; left: 50%;
