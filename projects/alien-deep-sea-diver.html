@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Senior Unity Developer case study for Alien Deep Sea Diver Game, covering underwater survival systems, oxygen and depth mechanics, inventory, crafting, objectives, progression, JSON persistence, Firebase, AppLovin MAX and Android/iOS production support.">
+<meta name="description" content="Senior Unity Developer case study for Alien Deep Sea Diver Game, covering interface-based interaction architecture, ScriptableObject-driven survival and crafting systems, a 52-state onboarding FSM, inventory, scanning, progression, JSON persistence, mobile rendering and production SDK integrations.">
 <title>Alien Deep Sea Diver Game — Case Study — Yuneeb Arshad</title>
 <style>
   :root{
@@ -291,8 +291,8 @@
 
   <h1>Alien Deep Sea Diver Game</h1>
   <p class="subtitle">
-    A production Android and iOS underwater survival game where I built the project-specific
-    exploration, oxygen, inventory, crafting, progression, persistence and mobile production systems in Unity.
+    A production Android and iOS underwater survival and crafting game where I built the game-specific
+    systems layer around Invector, including interaction, inventory, scanning, crafting, progression, persistence and mobile production integrations.
   </p>
 
   <div class="inspector">
@@ -301,25 +301,28 @@
       <div class="field-row"><span class="field-label">Platforms</span><span class="field-value">Android / iOS</span></div>
       <div class="field-row"><span class="field-label">Current Status</span><span class="field-value live">Live on Google Play</span></div>
       <div class="field-row"><span class="field-label">iOS Release</span><span class="field-value">Previously published</span></div>
-      <div class="field-row"><span class="field-label">Downloads</span><span class="field-value">10,000+</span></div>
-      <div class="field-row"><span class="field-label">Engine</span><span class="field-value">Unity 2022.3 LTS</span></div>
-      <div class="field-row"><span class="field-label">Role</span><span class="field-value">Senior Game Developer — project architecture &amp; core systems</span></div>
-      <div class="field-row"><span class="field-label">Starting Point</span><span class="field-value">Custom project with Invector controller integration</span></div>
+      <div class="field-row"><span class="field-label">Downloads</span><span class="field-value">10,000+ Android</span></div>
+      <div class="field-row"><span class="field-label">Engine</span><span class="field-value">Unity 2022.3.62f2 LTS</span></div>
+      <div class="field-row"><span class="field-label">Rendering</span><span class="field-value">Universal Render Pipeline 14.0.12</span></div>
+      <div class="field-row"><span class="field-label">Role</span><span class="field-value">Senior Game Developer — Survival Systems, Progression &amp; Mobile Production</span></div>
+      <div class="field-row"><span class="field-label">Foundation</span><span class="field-value">Invector locomotion &amp; swimming</span></div>
       <div class="field-row">
         <span class="field-label">Tags</span>
         <span class="field-value"><span class="tags">
           <span class="tag">C#</span>
+          <span class="tag">Unity 2022 LTS</span>
           <span class="tag">URP</span>
-          <span class="tag">Invector Controller</span>
+          <span class="tag">Invector</span>
           <span class="tag">ScriptableObjects</span>
-          <span class="tag">JSON Save System</span>
-          <span class="tag">PlayerPrefs</span>
+          <span class="tag">C# Interfaces</span>
+          <span class="tag">Finite State Machine</span>
+          <span class="tag">JSON Save Data</span>
+          <span class="tag">Inventory Systems</span>
+          <span class="tag">Crafting Systems</span>
           <span class="tag">Firebase Analytics</span>
           <span class="tag">Remote Config</span>
           <span class="tag">AppLovin MAX</span>
           <span class="tag">Tenjin</span>
-          <span class="tag">Unity Timeline</span>
-          <span class="tag">Mobile UI Systems</span>
         </span></span>
       </div>
       <div class="inspector-cta">
@@ -340,156 +343,165 @@
   </div>
 
   <h2>Overview</h2>
-  <p class="overview-role"><strong>ROLE:</strong> Senior Game Developer — Project Architecture &amp; Core Systems</p>
+  <p class="overview-role"><strong>ROLE:</strong> Senior Game Developer — Survival Systems, Progression &amp; Mobile Production</p>
   <p>
-    Alien Deep Sea Diver Game is a production Android and iOS underwater survival game developed in Unity.
-    Players explore submerged environments, manage oxygen and depth, gather resources, craft survival equipment,
-    complete objectives and progress through level-based content. I built the project-specific gameplay architecture
-    and systems, including underwater-state handling, oxygen and depth mechanics, inventory, equipment, quick slots,
-    crafting, resource scanning, tasks, objectives, XP progression and persistent save data. I also integrated the
-    mobile production services for advertising, analytics, Remote Config, attribution and platform deployment.
+    Alien Deep Sea Diver Game is a production mobile underwater survival and crafting game developed in Unity for Android and iOS.
+    I integrated Invector as the locomotion and swimming foundation, then built the project-specific gameplay layer around it, including
+    interface-based interactions, underwater survival, inventory and quick slots, resource scanning, ScriptableObject-driven crafting,
+    tasks and objectives, XP progression, persistent save data, mobile UI and production SDK integrations. The project also features a
+    52-state guided onboarding sequence that teaches the complete survival and crafting loop before transitioning into unrestricted exploration.
   </p>
   <div class="framework-note">
     <span aria-hidden="true" class="framework-note-icon">⚙</span>
-    <p><strong>Framework note:</strong> I built the project-specific gameplay architecture and systems in Unity, using Invector for the controller foundation and third-party SDKs for mobile production services.</p>
+    <p><strong>Framework note:</strong> Invector provides the locomotion, swimming, stamina/health and input foundation. I kept the game-specific systems separate and extended that base with custom survival, interaction, inventory, scanning, crafting, progression, persistence and UI systems. Stylized Water 2 and Sickscore HUD Navigation are integrated third-party foundations.</p>
   </div>
 
   <h2>Gameplay Loop</h2>
   <div class="loop">
-    <span class="step">Explore the ocean</span><span class="arrow">→</span>
-    <span class="step">Manage oxygen</span><span class="arrow">→</span>
-    <span class="step">Scan &amp; collect</span><span class="arrow">→</span>
-    <span class="step">Craft equipment</span><span class="arrow">→</span>
-    <span class="step">Complete objectives</span><span class="arrow">→</span>
-    <span class="step">Gain XP &amp; progress</span>
+    <span class="step">Crash &amp; repair escape pod</span><span class="arrow">→</span>
+    <span class="step">Learn diving &amp; oxygen</span><span class="arrow">→</span>
+    <span class="step">Explore underwater</span><span class="arrow">→</span>
+    <span class="step">Scan unknown resources</span><span class="arrow">→</span>
+    <span class="step">Gather materials</span><span class="arrow">→</span>
+    <span class="step">Craft survival equipment</span><span class="arrow">→</span>
+    <span class="step">Complete tasks &amp; objectives</span><span class="arrow">→</span>
+    <span class="step">Earn XP &amp; level up</span><span class="arrow">→</span>
+    <span class="step">Unlock new world content</span>
   </div>
 
   <h2>Key Highlights</h2>
   <ul class="contrib-list">
-    <li>Built underwater-state handling with oxygen depletion, depth tracking, drowning feedback and real-time HUD updates.</li>
-    <li>Developed categorized inventory, equipment slots and underwater quick-slot item handling.</li>
-    <li>Implemented ScriptableObject-driven crafting recipes with ingredient validation, resource consumption and crafted-item output.</li>
-    <li>Built task, objective, XP and level-progression systems with prerequisites and persistent completion state.</li>
-    <li>Implemented JSON Save Data and PlayerPrefs persistence for player progression, inventory and objective state.</li>
-    <li>Integrated Firebase Analytics, Remote Config, AppLovin MAX and Tenjin for production mobile support.</li>
+    <li>Architected an interface-based raycast interaction system for pickup, use, scanning, equipment and crafting.</li>
+    <li>Built a ScriptableObject-driven survival and crafting architecture for items, recipes, tasks, objectives and progression content.</li>
+    <li>Engineered a 52-state onboarding finite-state machine covering movement, escape-pod repair, underwater survival, crafting, inventory and progression.</li>
+    <li>Developed an instance-based inventory and equipment system with persistent item IDs, five quick slots and typed gear slots.</li>
+    <li>Implemented persistent resource scanning, recipe-driven crafting and event-based task, objective and XP progression.</li>
+    <li>Integrated AppLovin MAX, Firebase Analytics and Remote Config, Tenjin attribution, ATT handling and mobile-focused URP underwater rendering.</li>
   </ul>
 
   <h2>Core Systems</h2>
 
   <details class="component" open>
-    <summary><span class="comp-check">✓</span>Underwater Movement &amp; Dive State<span class="comp-suffix">(Framework Extension + Script)</span></summary>
+    <summary><span class="comp-check">✓</span>Invector Integration &amp; Underwater Survival<span class="comp-suffix">(Framework Extension + Script)</span></summary>
     <div class="component-body">
-      <p>Extended the controller foundation with the underwater-state logic required by exploration and survival gameplay.</p>
+      <p>Extended Invector's locomotion and swimming foundation with a custom underwater survival layer connected through event-driven gameplay integration.</p>
       <ul>
-        <li>Tracks when the player enters water and becomes fully submerged</li>
-        <li>Activates underwater gameplay controls, quick slots and HUD elements while diving</li>
-        <li>Changes player interaction behaviour when surfacing or leaving the water</li>
-        <li>Connects underwater state with equipment handling and progression systems</li>
+        <li>Connects custom systems to Invector swimming, stamina/health, mobile input and water-state events</li>
+        <li>Drains oxygen while the player is submerged and provides protected tutorial oxygen behaviour</li>
+        <li>Calculates depth relative to the submersion point and reports ascent/descent direction</li>
+        <li>Updates oxygen, depth, quick-slot and HUD behaviour from underwater state changes</li>
+        <li>Provides low-oxygen and drowning visual feedback through the gameplay HUD</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>Oxygen, Depth &amp; Drowning Feedback<span class="comp-suffix">(Script + UI)</span></summary>
+    <summary><span class="comp-check">✓</span>Interface-Based Interaction Architecture<span class="comp-suffix">(C# Interfaces + Raycasting)</span></summary>
     <div class="component-body">
-      <p>Built the primary survival layer that measures dive depth and communicates remaining oxygen to the player.</p>
+      <p>Architected a shared camera-raycast interaction pipeline so the player controller can work with different object types through reusable C# interfaces instead of hard-coded per-object logic.</p>
       <ul>
-        <li>Drains oxygen while the player remains underwater</li>
-        <li>Calculates depth relative to the water surface</li>
-        <li>Updates oxygen sliders, percentage text and depth indicators in real time</li>
-        <li>Triggers low-oxygen and drowning feedback through the gameplay UI</li>
+        <li>Uses interfaces including IPickable, IUsable, ICraftable, IScannable, IEquippable and IDisplayable</li>
+        <li>Supports contextual Pick Up, Hold, Use, Craft and Drop actions through the same targeting flow</li>
+        <li>Allows new interactive objects to expose capabilities without changing the central player-targeting code</li>
+        <li>Supports press/release interactions for hold-based mechanics such as scanning and wire repair</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>Inventory, Gear &amp; Quick Slots<span class="comp-suffix">(Script + ScriptableObjects)</span></summary>
+    <summary><span class="comp-check">✓</span>52-State Onboarding &amp; Escape-Pod Repair<span class="comp-suffix">(Finite State Machine + Gameplay)</span></summary>
     <div class="component-body">
-      <p>Implemented categorized item storage and equipment handling for survival tools, resources, food and wearable gear.</p>
+      <p>Engineered a 52-state guided onboarding flow that teaches the complete survival loop while temporarily controlling input, UI and environment state.</p>
       <ul>
-        <li>Separates equipment, gear, resources and food into defined inventory categories</li>
-        <li>Supports gear slots for suit, fins, oxygen tank, gloves and chip equipment</li>
-        <li>Allows usable underwater items to be assigned to quick slots</li>
-        <li>Connects pickup, equip, drop and held-item behaviour with the world interaction system</li>
+        <li>Covers movement, camera control, targeting, oxygen, swimming, gathering, crafting, inventory, quick slots and level progression</li>
+        <li>Dynamically attaches focused tutorial helpers and advances through gameplay events and callbacks</li>
+        <li>Restricts unrelated controls, highlights required UI, activates triggers and coordinates timed tutorial transitions</li>
+        <li>Includes particle-collision fire suppression with progressive VFX feedback and task completion</li>
+        <li>Includes an interruptible hold-to-repair wire interaction with animator-driven progress, rewind behaviour, audio and persistent repair state</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>Crafting &amp; ScriptableObject Recipes<span class="comp-suffix">(Script + ScriptableObjects)</span></summary>
+    <summary><span class="comp-check">✓</span>Inventory, Equipment &amp; Quick Slots<span class="comp-suffix">(Script + ScriptableObjects + UI)</span></summary>
     <div class="component-body">
-      <p>Built a data-driven crafting system that connects recipe requirements with inventory consumption and progression.</p>
+      <p>Developed an instance-based inventory architecture for equipment, gear, resources and food, with persistent item identity and mobile equipment workflows.</p>
       <ul>
-        <li>Defines crafted items and ingredient requirements through ScriptableObject recipes</li>
-        <li>Validates resource availability before crafting</li>
-        <li>Consumes required ingredients and adds the crafted result to inventory</li>
-        <li>Updates connected task, objective and feedback systems after crafting</li>
+        <li>Assigns unique per-instance IDs to acquired items and publishes inventory change events</li>
+        <li>Separates Equipment, Gear, Resources and Food into category-specific inventory views</li>
+        <li>Provides five configurable underwater quick slots for usable equipment</li>
+        <li>Supports typed Suit, Fins, Oxygen Tank, Gloves and Chip gear slots with drag-and-drop validation</li>
+        <li>Instantiates selected tool prefabs in the player's hand and supports dropping items back into the world</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>Tasks, Objectives, XP &amp; Level Progression<span class="comp-suffix">(Script)</span></summary>
+    <summary><span class="comp-check">✓</span>Resource Scanning &amp; HUD Navigation<span class="comp-suffix">(Gameplay + Third-Party HUD Integration)</span></summary>
     <div class="component-body">
-      <p>Implemented guided progression that activates level-specific goals and connects player actions with XP and unlock flow.</p>
+      <p>Built a persistent resource-discovery mechanic and connected it with level-aware underwater navigation feedback.</p>
       <ul>
-        <li>Loads tasks and objectives for the active progression level</li>
-        <li>Supports prerequisites, resource collection and crafting objectives</li>
-        <li>Records objective completion and updates task interfaces</li>
-        <li>Awards XP and coordinates pending level-up confirmation before unlocking later content</li>
+        <li>Requires the scanner to be assigned to and selected from a quick slot before use</li>
+        <li>Uses camera raycasting and a four-second hold interaction that resets if the target is lost</li>
+        <li>Persists scanned item IDs and unlocks names, descriptions and normal pickup behaviour for matching resource types</li>
+        <li>Displays scan progress and discovered-item detail UI</li>
+        <li>Integrates Sickscore HUD Navigation for distance-gated resource markers alongside compass, radar and minimap presentation</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>JSON Save Data &amp; PlayerPrefs Persistence<span class="comp-suffix">(Script)</span></summary>
+    <summary><span class="comp-check">✓</span>ScriptableObject Crafting Architecture<span class="comp-suffix">(Script + ScriptableObjects + Presentation)</span></summary>
     <div class="component-body">
-      <p>Used local persistence to restore progression and item state across application sessions.</p>
+      <p>Built a data-driven crafting pipeline that connects recipe data, inventory validation, progression and an animated 3D crafting-station presentation.</p>
       <ul>
-        <li>Stores structured player-level and inventory data through JSON serialization</li>
-        <li>Stores task and objective completion state through PlayerPrefs</li>
-        <li>Restores equipped items, quick-slot selections and progression state during loading</li>
-        <li>Connects save updates with inventory, crafting, scanning and level progression</li>
+        <li>Defines recipe results, ingredient quantities, categories and task mappings through ScriptableObjects</li>
+        <li>Validates required materials, consumes the correct quantities and adds the crafted result to inventory</li>
+        <li>Builds recipe and ingredient UI from data and reflects current material availability</li>
+        <li>Transitions the camera to the crafting station and coordinates animation, particles, sound and dissolve effects</li>
+        <li>Spawns an interactive crafted-item presentation whose pickup completes the mapped task without duplicating inventory output</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>Resource Scanning &amp; HUD Navigation<span class="comp-suffix">(Script + UI)</span></summary>
+    <summary><span class="comp-check">✓</span>Tasks, Objectives &amp; XP Progression<span class="comp-suffix">(Event-Driven Progression)</span></summary>
     <div class="component-body">
-      <p>Built resource-discovery and navigation feedback to help mobile players locate useful underwater interactables.</p>
+      <p>Implemented separate persistent tasks and ordered objectives, then connected them to XP, level confirmation and level-specific world activation.</p>
       <ul>
-        <li>Tracks nearby scannable and collectible resources</li>
-        <li>Displays navigation markers and off-screen guidance for relevant world targets</li>
-        <li>Connects scanning state with item discovery and progression</li>
-        <li>Coordinates pickup interactions with inventory and objective updates</li>
+        <li>Tasks represent persistent goals and award XP, while objectives provide immediate ordered instructions</li>
+        <li>Supports objective prerequisites, priorities, resource-gathering tracking and craft-completion tracking</li>
+        <li>Persists task completion and updates progression through gameplay and inventory events</li>
+        <li>Uses pending level-up confirmation before replacing tasks and activating the next level's world content</li>
+        <li>Coordinates authored progression across five content levels with level-specific resources and dialogue</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>Story, Timeline &amp; Mobile UI Flow<span class="comp-suffix">(Timeline + UI)</span></summary>
+    <summary><span class="comp-check">✓</span>JSON Save Data &amp; Persistent State<span class="comp-suffix">(Serialization + PlayerPrefs)</span></summary>
     <div class="component-body">
-      <p>Implemented the presentation flow that connects story sequences, loading, gameplay and the primary mobile interfaces.</p>
+      <p>Implemented local persistence across structured JSON saves and smaller PlayerPrefs-backed progression flags.</p>
       <ul>
-        <li>Uses Unity Timeline for staged story and cutscene sequences</li>
-        <li>Coordinates image-based dialogue and gameplay transitions</li>
-        <li>Built main menu, loading, pause, gameplay, inventory, crafting and task interfaces</li>
-        <li>Connects mobile UI state with underwater gameplay and progression</li>
+        <li>Persists inventory entries, equipment state, quick slots, gear slots and scanned item IDs through JSON</li>
+        <li>Persists player level and remaining XP in structured save data</li>
+        <li>Stores task completion, objective history, tutorial completion and escape-pod repair state through smaller persistent flags</li>
+        <li>Uses stable item IDs to reconstruct ScriptableObject-backed runtime items across sessions</li>
+        <li>Connects save updates with inventory, discovery and progression systems</li>
       </ul>
     </div>
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>Monetization, Analytics &amp; Remote Config<span class="comp-suffix">(Third-Party Integration + Script)</span></summary>
+    <summary><span class="comp-check">✓</span>Mobile UI, Rendering &amp; Production SDKs<span class="comp-suffix">(UI + URP + SDK Integration)</span></summary>
     <div class="component-body">
-      <p>Integrated the production services used for advertising, analytics, attribution and remote tuning.</p>
+      <p>Integrated the mobile UI, rendering and production-service layer around the core gameplay systems.</p>
       <ul>
-        <li>Integrated AppLovin MAX advertising flows for the mobile release</li>
-        <li>Instrumented gameplay and production events through Firebase Analytics</li>
-        <li>Connected selected values with Firebase Remote Config for production tuning</li>
-        <li>Integrated Tenjin attribution and impression-level ad revenue tracking</li>
-        <li>Prepared the project for Android and iOS deployment</li>
+        <li>Built contextual mobile HUD flows for interaction, inventory, crafting, tasks, XP, scanning, oxygen, depth, pause and failure states</li>
+        <li>Configured URP 14.0.12 with Stylized Water 2 underwater rendering and a lower-cost iOS quality profile that reduces HDR, MSAA, shadows and lighting costs while retaining required depth/opaque textures</li>
+        <li>Integrated AppLovin MAX interstitial and MREC advertising with active placement timing and retry handling</li>
+        <li>Integrated Firebase Analytics and Remote Config for ad lifecycle telemetry and remotely configurable ad timing</li>
+        <li>Integrated Tenjin attribution, iOS App Tracking Transparency handling, Meta SDK initialization and iOS post-build processing</li>
       </ul>
     </div>
   </details>
