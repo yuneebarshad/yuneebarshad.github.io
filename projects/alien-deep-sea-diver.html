@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Senior Unity Developer case study for Alien Deep Sea Diver Game, covering interface-based interaction architecture, ScriptableObject-driven survival and crafting systems, a 52-state onboarding FSM, inventory, scanning, progression, JSON persistence, mobile rendering and production SDK integrations.">
+<meta name="description" content="Senior Unity Developer case study for Alien Deep Sea Diver Game, covering interface-based interaction architecture, ScriptableObject-driven survival and crafting systems, a structured onboarding FSM, inventory, scanning, progression, JSON persistence, mobile rendering and production SDK integrations.">
 <title>Alien Deep Sea Diver Game — Case Study — Yuneeb Arshad</title>
 <style>
   :root{
@@ -349,7 +349,7 @@
     I integrated Invector as the locomotion and swimming foundation, then built the project-specific gameplay layer around it, including
     interface-based interactions, underwater survival, inventory and quick slots, resource scanning, ScriptableObject-driven crafting,
     tasks and objectives, XP progression, persistent save data, mobile UI and production SDK integrations. The project also features a
-    52-state guided onboarding sequence that teaches the complete survival and crafting loop before transitioning into unrestricted exploration.
+    guided onboarding sequence that teaches the complete survival and crafting loop before transitioning into unrestricted exploration.
   </p>
   <div class="framework-note">
     <span aria-hidden="true" class="framework-note-icon">⚙</span>
@@ -373,7 +373,7 @@
   <ul class="contrib-list">
     <li>Architected an interface-based raycast interaction system for pickup, use, scanning, equipment and crafting.</li>
     <li>Built a ScriptableObject-driven survival and crafting architecture for items, recipes, tasks, objectives and progression content.</li>
-    <li>Engineered a 52-state onboarding finite-state machine covering movement, escape-pod repair, underwater survival, crafting, inventory and progression.</li>
+    <li>Engineered a guided onboarding finite-state machine covering movement, escape-pod repair, underwater survival, crafting, inventory and progression.</li>
     <li>Developed an instance-based inventory and equipment system with persistent item IDs, five quick slots and typed gear slots.</li>
     <li>Implemented persistent resource scanning, recipe-driven crafting and event-based task, objective and XP progression.</li>
     <li>Integrated AppLovin MAX, Firebase Analytics and Remote Config, Tenjin attribution, ATT handling and mobile-focused URP underwater rendering.</li>
@@ -409,9 +409,9 @@
   </details>
 
   <details class="component">
-    <summary><span class="comp-check">✓</span>52-State Onboarding &amp; Escape-Pod Repair<span class="comp-suffix">(Finite State Machine + Gameplay)</span></summary>
+    <summary><span class="comp-check">✓</span>Onboarding FSM &amp; Escape-Pod Repair<span class="comp-suffix">(Finite State Machine + Gameplay)</span></summary>
     <div class="component-body">
-      <p>Engineered a 52-state guided onboarding flow that teaches the complete survival loop while temporarily controlling input, UI and environment state.</p>
+      <p>Engineered a state-driven guided onboarding flow that teaches the complete survival loop while temporarily controlling input, UI and environment state.</p>
       <ul>
         <li>Covers movement, camera control, targeting, oxygen, swimming, gathering, crafting, inventory, quick slots and level progression</li>
         <li>Dynamically attaches focused tutorial helpers and advances through gameplay events and callbacks</li>
